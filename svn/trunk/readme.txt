@@ -3,9 +3,9 @@ Contributors: hyvor, supunkavinda
 Tags: comments, hyvor, reactions, plugin, embedded
 Donate Link: https://paypal.me/HyvorTalk
 Requires at least: 4.4
-Tested up to: 5.2.4
+Tested up to: 5.3.2
 Stable tag: 1.1.1
-Requires PHP: 5.3.2
+Requires PHP: 5.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,7 +42,6 @@ The official wordpress plugin for Hyvor Talk, the optimum way to add comments to
 * Supports text formattings like bold, italic, underline and inline codes. (Markdown-like)
 * Developers can write comments with code highlighting. 24 programming languages are supported.
 * Choose emojis among more than 1000 and add them into your comments.
-* Real-Time updates. All the comments, replies, reactions, and votes are real-time.
 
 See how to write [awesome comments](https://talk.hyvor.com/documentation/commenting/awesome-comments).
 
