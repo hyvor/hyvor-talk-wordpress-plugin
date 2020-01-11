@@ -57,3 +57,12 @@ $hyvorTalk = new HyvorTalk\HyvorTalk();
 	Set the website ID to use in future
 */
 define('HYVOR_TALK_WEBSITE_ID', $hyvorTalk -> websiteId);
+
+
+/**
+ * Used Options
+ * 	
+ * 		hyvor_talk_website_id  - the Website ID
+ * 		hyvor_talk_loading_mode - loading mode
+ * 
+ */
