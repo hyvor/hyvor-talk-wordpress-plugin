@@ -96,8 +96,6 @@ Hyvor Talk offers a generous free plan. If you are just getting started, you can
 * See monthly usage stats from the console.
 * Add SSO if needed.
 
-<img src="https://i.imgur.com/hmZVC6r.png" alt="Hyvor Talk Customizing Comments Plugin" />
-
 = Features for commenting =
 
 * Supports markdown features: bold, italic, underline, lists, images, links, and inline codes.
