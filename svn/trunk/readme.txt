@@ -173,6 +173,10 @@ In the WordPress admin panel,
 
 == Change Log ==
 
+= 1.1.2 =
+* Bug fixed in comment count
+* Multi language support added (Beta)
+
 = 1.1.1 = 
 * Bug Fixed in the page
 
