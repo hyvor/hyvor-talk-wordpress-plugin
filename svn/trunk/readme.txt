@@ -2,7 +2,7 @@
 Contributors: hyvor, supunkavinda 
 Tags: comments, comment, ajax comments, reactions, spam, notifications, disqus, embedded
 Donate Link: https://paypal.me/HyvorTalk
-Requires at least: 4.4
+Requires at least: 4.6
 Tested up to: 5.3.2
 Stable tag: 1.1.2
 Requires PHP: 5.4

@@ -24,7 +24,7 @@ $selectedOption = 'selected="selected"';
 
 			<div class="dual-item">
 				
-				<div class="dual-item-left">Website ID</div>
+				<div class="dual-item-left"><?= __('Website ID', 'hyvor-talk') ?></div>
 
 				<div class="dual-item-right">
 
@@ -33,20 +33,34 @@ $selectedOption = 'selected="selected"';
 					<?php if (!$websiteId) : ?>
 
 						<div class="talk-message">
-							<strong>Important!</strong> Add your website ID to configure Hyvor Talk with Wordpress. It can be found from the Hyvor Talk console. 
+							<strong>
+								<?= __('Important!', 'hyvor-takl') ?>
+							</strong>
+							<?= __('Add your website ID to configure Hyvor Talk with Wordpress. It can be found from the Hyvor Talk console.', 'hyvor-talk') ?> 
 						</div>
 
 						<p class="help">
-							<a class="margin-link" href="https://talk.hyvor.com/console/new-website" target="_blank">Create New Website</a>
-							<a href="https://talk.hyvor.com/console/general?action=choose-website" target="_blank">Get My Website's ID</a>
+							<a 
+								class="margin-link" 
+								href="https://talk.hyvor.com/console/account/add-website" target="_blank">
+								<?= __('Create New Website', 'hyvor-talk') ?>
+							</a>
+							<a 
+								href="https://talk.hyvor.com/console/moderate/general" 
+								target="_blank">
+								<?= __('Get My Website ID', 'hyvor-talk') ?>
+							</a>
 						</p>
 
 					<?php else : ?>
 
-						<p class="help">The ID given by Hyvor Talk. 
-						<a 
-						target="_blank" 
-						href="https://talk.hyvor.com/console/account/add-website">Create New Website ID</a></p>
+						<p class="help"><?= __('The ID given by Hyvor Talk.') ?>
+							<a 
+								target="_blank" 
+								href="https://talk.hyvor.com/console/account/add-website">
+								<?= __('Create New Website ID', 'hyvor-talk') ?>
+							</a>
+						</p>
 
 					<?php endif; ?>
 
@@ -57,7 +71,7 @@ $selectedOption = 'selected="selected"';
 			<?php if ($websiteId) : ?>
 				<div class="dual-item">
 					
-					<div class="dual-item-left">Loading Mode</div>
+					<div class="dual-item-left"><?= __('Loading Mode', 'hyvor-talk') ?></div>
 
 					<div class="dual-item-right">
 						<select id="ht-loading-mode-select">
@@ -65,22 +79,26 @@ $selectedOption = 'selected="selected"';
 								value="default" 
 								<?= $loadingMode !== "scroll" && $loadingMode !== "click" ? 
 								$selectedOption : '' ?>
-							>on load</option>
+							><?= __('on load', 'hyvor-talk') ?></option>
 							<option 
 								value="scroll"
 								<?= $loadingMode === "scroll" ? $selectedOption : '' ?>
-							>on scroll</option>
+							><?= __('on scroll', 'hyvor-talk') ?></option>
 							<option 
 								value="click"
 								<?= $loadingMode === "click" ? $selectedOption : '' ?>
-							>on button click</option>
+							><?= __('on button click', 'hyvor-talk') ?></option>
 						</select>
 					</div>
 				</div>
 			<?php endif; ?>
 
 			<div class="save-button-view">
-				<span class="button-filled" onclick="hyvorTalk.saveSettings()"><?= $websiteId ? 'CHANGE' : 'SAVE' ?></span>
+				<span 
+					class="button-filled" 
+					onclick="hyvorTalk.saveSettings()">
+					<?= $websiteId ? __('CHANGE', 'hyvor-talk') : __('SAVE', 'hyvor-talk') ?>
+				</span>
 			</div>
 
 

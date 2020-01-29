@@ -17,7 +17,7 @@ $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 
 		<div style="text-align:center">
 			<button id="hyvor-talk-load-button">
-				Load Comments
+				<?= __('Load Comments') ?>
 			</button>
 		</div>
 

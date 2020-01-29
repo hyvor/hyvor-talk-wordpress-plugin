@@ -79,13 +79,14 @@ class Admin {
 
 			$links[] = 
 				'<a href="' . esc_url(get_admin_url( null, 'admin.php?page=hyvor-talk' ) ) . '">' .
-	                ($this -> websiteId === null ? 'Install' : 'Configure' ) .
+					($this -> websiteId === null ? 
+						__('Install', 'hyvor-talk') : 
+						__('Configure', 'hyvor-talk') ) .
 	            '</a>';
 			 
 		}
 
 		return $links;
-		
 
 	}
 
@@ -157,7 +158,7 @@ class Admin {
         remove_menu_page( 'edit-comments.php' );
 
         add_menu_page(
-            'Hyvor Talk - The Best Commenting Plugin For Your Website',
+            'Hyvor Talk - ' . __('The Best Commenting Platform For Your Website', 'hyvor-talk'),
             'Hyvor Talk',
             'moderate_comments',
             'hyvor-talk',
@@ -200,7 +201,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-general',
-				'title' => 'General Settings',
+				'title' => __('General Settings', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('moderate', 'general', true),
 				'meta' => [
 					'target' => '_blank'
@@ -210,7 +211,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-appearance',
-				'title' => 'Change Appearance',
+				'title' => __('Change Appearance', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('moderate', 'appearance', true),
 				'meta' => [
 					'target' => '_blank'
@@ -220,7 +221,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-community',
-				'title' => 'Community Settings',
+				'title' => __('Community Settings', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('moderate', 'community', true),
 				'meta' => [
 					'target' => '_blank'
@@ -230,7 +231,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-pages',
-				'title' => 'Pages',
+				'title' => __('Pages', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('moderate', 'pages', true),
 				'meta' => [
 					'target' => '_blank'
@@ -240,7 +241,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-comments',
-				'title' => 'Comments',
+				'title' => __('Comments', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('moderate', 'comments', true),
 				'meta' => [
 					'target' => '_blank'
@@ -250,7 +251,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-people',
-				'title' => 'People',
+				'title' => __('People', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('moderate', 'people', true),
 				'meta' => [
 					'target' => '_blank'
@@ -260,7 +261,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-subscription',
-				'title' => 'Subscription',
+				'title' => __('Subscription', 'hyvor-talk'),
 				'href' => $this -> getConsoleURL('account', 'subscription', true),
 				'meta' => [
 					'target' => '_blank'
@@ -273,7 +274,7 @@ class Admin {
 			$wpAdminBar -> add_node(array (
 				'parent' => 'hyvor-talk',
 				'id' => 'hyvor-talk-add-website',
-				'title' => 'Configure Hyvor Talk',
+				'title' => __('Configure', 'hyvor-talk') . ' Hyvor Talk',
 				'href' => admin_url( 'admin.php?page=hyvor-talk')
 			));
 

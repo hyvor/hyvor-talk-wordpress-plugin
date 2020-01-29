@@ -3,14 +3,15 @@
 * @package HyvorTalk
 */
 /*
-Plugin Name: Hyvor Talk Comments
+Plugin Name: Comments by Hyvor Talk
 Plugin URI: https://talk.hyvor.com
-Description: The official wordpress plugin for Hyvor Talk, the optimum way to add comments to your website.
+Description: The official WordPress plugin for Hyvor Talk, The Best Commenting Platform For Your Website
 Version: 1.1.1
 Author: Hyvor
 Author URI: https://hyvor.com
-License: GPLv2 or later 
+License: GPLv2 or later
 Text Domain: hyvor-talk
+Domain Path: /languages
 */
 
 /*
