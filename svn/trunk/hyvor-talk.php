@@ -47,7 +47,7 @@ if (!defined('HYVOR_TALK_DIR_URL'))
 // the unique WP identifier of the plugin
 define('HYVOR_TALK_IDENTIFIER', 'hyvor-talk');
 // the version of the plugin
-define('HYVOR_TALK_VERSION', '1.1.1');
+define('HYVOR_TALK_VERSION', '1.1.2');
 
 require HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk.php'; 
 
@@ -57,6 +57,18 @@ $hyvorTalk = new HyvorTalk\HyvorTalk();
 	Set the website ID to use in future
 */
 define('HYVOR_TALK_WEBSITE_ID', $hyvorTalk -> websiteId);
+
+/**
+ * Where the configurations are saved
+ * Can be accessed via all the included files
+ */
+$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = [
+	'websiteId' => null,
+	'identifier' => null,
+	'title' => '',
+	'url' => '',
+	'loadMode' => ''
+];
 
 
 /**

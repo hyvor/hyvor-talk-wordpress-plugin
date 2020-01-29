@@ -114,7 +114,9 @@ class HyvorTalk {
 
 		add_filter('comments_number', array ($webpage, 'getCommentsCountTemplate'));
 		add_filter('comments_template', array($webpage, 'getCommentsPluginTemplate'));
-		add_action('wp_enqueue_scripts', array ($webpage, 'addCommentsCountScript'));
+
+		add_action('wp_footer', array ($webpage, 'addCommentsCountScript'));
+
 		$this -> webpage = $webpage;
 
 	}

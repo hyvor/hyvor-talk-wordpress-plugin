@@ -9,11 +9,8 @@
  * @subpackage HyvorTalk/html
  */
 
-$webpage = new HyvorTalk\WebPage(null, null, HYVOR_TALK_WEBSITE_ID);
-$webpage -> setEmbedVariables();
-$var = $webpage -> embedVariables;
+$var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 ?>
-
 <div class="comments-area">
 
 	<?php if ($var['loadMode'] === "click") : ?>
@@ -28,14 +25,4 @@ $var = $webpage -> embedVariables;
 
 	<div id="hyvor-talk-view"></div>
 </div>
-<script type="text/javascript">
-	var HYVOR_TALK_WEBSITE = <?= $var['websiteId'] ?>; // DO NOT CHANGE THIS
-	var HYVOR_TALK_CONFIG = {
-		url: "<?= $var['url'] ?>", // THE CANONICAL URL OF THE WEBPAGE
-		id: "<?= $var['identifier'] ?>", // UNIQUE ID TO IDENTIFY THE PAGE
-		title: "<?= $var['title'] ?>",
-		loadMode: "<?= $var['loadMode'] ?>",
-		clickId: "hyvor-talk-load-button"
-	};
-</script>
-<script type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>

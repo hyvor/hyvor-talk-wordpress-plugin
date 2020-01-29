@@ -34,8 +34,15 @@ class WebPage {
 	/**
 	* Embed variables are set here
 	* @since 1.0
+	* removed @since 1.1.1
 	*/
-	public $embedVariables; 
+	// public $embedVariables; 
+
+	/**
+	 * If the config variables are added.
+	 * @since 1.1.2
+	 */
+	public $setEmbedVariablesCalled = false;
 
 
 	public function __construct($pluginIdentifier, $pluginVersion, $websiteId) {
@@ -44,7 +51,6 @@ class WebPage {
 		$this -> pluginIdentifier = $pluginIdentifier;
 		$this -> pluginVersion = $pluginVersion;
 		$this -> websiteId = $websiteId;
-		$this -> wpPost = $post;
 
 	}
 
@@ -54,9 +60,11 @@ class WebPage {
 	*/
 	public function getCommentsPluginTemplate() {
 
-		if ($this -> isPluginLoadable()) 
+		if ($this -> isPluginLoadable())  {
+			$this -> setEmbedVariables();
 			return HYVOR_TALK_DIR_PATH . '/html/embed.php';
-
+		}
+		
 	}
 
 	/**
@@ -67,7 +75,7 @@ class WebPage {
 		global $post;
 
 		if ($this -> isCommentCountsLoadable())
-			return "<span data-talk-id={$this -> getIdentifier($post)}>{$text}</span>";
+			return "<span data-talk-id={$this -> getIdentifier($post)}></span>";
 		else	
 			return $text;
 
@@ -75,24 +83,10 @@ class WebPage {
 
 	public function addCommentsCountScript() {
 
-		if (!$this -> isCommentCountsLoadable())
-			return;
-
-		wp_enqueue_script(
-			$this -> pluginIdentifier . '-comment-count',				// identifier
-			HYVOR_TALK_DIR_URL . 'static/comment-count.js',		// URL
-			array(),								// Dependencies
-			$this -> pluginVersion,					// Version
-			'all'									// Media written for (ex: 640px)
-		);
-
-		wp_localize_script( 
-			$this -> pluginIdentifier . '-comment-count',		// identifier
-			'hyvorTalkCommentCountConfig', 						// JS variable name
-			array(
-				'websiteId' => $this -> websiteId,				// data
-			)
-		 );
+		if ($this -> isCommentCountsLoadable()) {
+			$this -> setEmbedVariables();
+			include HYVOR_TALK_DIR_PATH . '/html/count.php';
+		}
 
 	}
 
@@ -101,7 +95,12 @@ class WebPage {
 	*/
 	public function setEmbedVariables() {
 
-		$this -> embedVariables = array(
+		if ($this -> setEmbedVariablesCalled)
+			return;
+
+		$this -> setEmbedVariablesCalled = true;
+
+		$configVarsJS = array(
 			'websiteId' => $this -> getWebsiteId(),
 			'identifier' => $this -> getIdentifier(),
 			'title' => $this -> getTitle(),
@@ -109,6 +108,9 @@ class WebPage {
 			'loadMode' => HyvorTalk::getLoadingMode()
 		);
 
+		$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = $configVarsJS;
+
+		include_once HYVOR_TALK_DIR_PATH . '/html/variables.php';
 	}
 
 	public function isPluginLoadable() {
@@ -182,10 +184,8 @@ class WebPage {
 	* If post is not set gets the current page
 	* @return int 	identifier  Very unique identifier for the current webpage
 	*/
-	public function getIdentifier($post = null) {
-
-		if (is_null($post))
-			$post = $this -> wpPost;
+	public function getIdentifier() {
+		global $post;
 
 		// a trick to make it really unique
 		return $post -> ID . ':' . $post -> guid; 
@@ -197,7 +197,9 @@ class WebPage {
 	* @return string 	title
 	*/
 	public function getTitle() {
-		$title = get_the_title($this -> wpPost);
+		global $post;
+
+		$title = get_the_title($post);
 		$title = strip_tags($title);
 		$title = trim($title);
 		return $title;
@@ -208,7 +210,9 @@ class WebPage {
 	* @return string Canontical URL of the page
 	*/
 	public function getURL() {
-		return get_permalink($this -> wpPost);
+		global $post;
+
+		return get_permalink($post);
 	}
 
 
