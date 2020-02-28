@@ -68,8 +68,17 @@ $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = [
 	'identifier' => null,
 	'title' => '',
 	'url' => '',
-	'loadMode' => ''
+	'loadMode' => '',
 ];
+
+
+
+/* add_action( 'plugins_loaded', function() {
+	$user = wp_get_current_user();
+	var_dump($user);
+	die;
+}); */
+
 
 
 /**
@@ -77,5 +86,6 @@ $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = [
  * 	
  * 		hyvor_talk_website_id  - the Website ID
  * 		hyvor_talk_loading_mode - loading mode
- * 
+ * 		hyvor_talk_sso_id
+ * 		hyvor_talk_sso_private_key
  */

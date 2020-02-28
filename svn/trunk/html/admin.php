@@ -8,6 +8,8 @@ use HyvorTalk\HyvorTalk as HyvorTalk;
 
 $websiteId = $this -> websiteId;
 $loadingMode = HyvorTalk::getLoadingMode();
+$ssoId = HyvorTalk::getSSOId();
+$ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
 $selectedOption = 'selected="selected"';
 ?>
 
@@ -91,6 +93,33 @@ $selectedOption = 'selected="selected"';
 						</select>
 					</div>
 				</div>
+
+				<div class="dual-item">
+					<div class="dual-item-left"><?= __('Single Sign-On', 'hyvor-talk') ?></div>
+
+					<div class="dual-item-right">
+						<input	
+							placeholder="SSO Id"
+							type="text" 
+							name="talk-sso-id" 
+							id="talk-sso-id-input" 
+							class="input-item" 
+							value="<?= $ssoId ?? '' ?>">
+						<input
+							placeholder="SSO Private Key"
+							type="text" 
+							name="talk-sso-private-key" 
+							id="talk-sso-private-key-input" 
+							class="input-item" 
+							value="<?= $ssoPrivateKey ?? '' ?>">
+
+						<p class="help">
+							<a target="_blank" href="https://talk.hyvor.com/documentation/sso/introduction"><?= __('Learn more about SSO', 'hyvor-talk') ?></a>
+						</p>
+					</div>
+				</div>
+
+
 			<?php endif; ?>
 
 			<div class="save-button-view">

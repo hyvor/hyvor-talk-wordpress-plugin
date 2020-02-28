@@ -10,6 +10,27 @@
  */
 
 $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
+
+
+// SSO
+/**
+ * $ssoData = [
+ * 	'userData' => [
+ * 		'id' =>
+ * 		'name' => 
+ * 		'picture' =>
+ * 		'url' =>
+ * 	];
+ * 	'id' => 
+ * 	'privateKey' => 
+ * ]
+ */
+$ssoData =  !empty($var['sso']) ? $var['sso'] : null;
+
+if ($ssoData) {
+	$ssoEncodedUserData = base64_encode(json_encode($ssoData['userData']));
+	$ssoHash = hash_hmac('sha1', $ssoEncodedUserData, $ssoData['privateKey']);
+}
 ?>
 
 <script type="text/javascript">
@@ -21,4 +42,15 @@ $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 		loadMode: "<?= $var['loadMode'] ?>",
 		clickId: "hyvor-talk-load-button"
 	};
+
+	<?php if ($ssoData) : ?>
+		HYVOR_TALK_CONFIG.sso = {
+			id: <?= $ssoData['id'] ?>,
+			hash: "<?= $ssoHash ?>",
+			userData: "<?= $ssoEncodedUserData ?>",
+			loginURL: "<?= wp_login_url(get_permalink()) ?>",
+			signupURL: "<?= wp_registration_url() ?? '' ?>"
+		}
+	<?php endif; ?>
+
 </script>

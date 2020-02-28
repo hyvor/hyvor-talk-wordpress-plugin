@@ -2,10 +2,7 @@
 	The Javascript handler for 
 */
 
-var hyvorTalk = (function() {
-
-	// helper
-	var $ = hy.$;
+var hyvorTalk = (function($) {
 
 	/*
 		These variables are set at HyvorTalk\Admin -> addScripts()
@@ -18,7 +15,7 @@ var hyvorTalk = (function() {
 
 		var data = {};
 
-		var websiteID = hy(":talk-website-id-input").value();
+		var websiteID = $("#talk-website-id-input").val();
 		if (websiteID) 
 			data.websiteId = websiteID;
 
@@ -27,6 +24,14 @@ var hyvorTalk = (function() {
 
 		if (loadingMode)
 			data.loadingMode = loadingMode;
+
+		// sso
+		var ssoId = $.trim($("#talk-sso-id-input").val());
+		if (ssoId)
+			data.ssoId = ssoId;
+		var ssoPrivateKey = $.trim($("#talk-sso-private-key-input").val());
+		if (ssoPrivateKey)
+			data.ssoPrivateKey = ssoPrivateKey;
 
 		// nothing to update
 		if (data === {})
@@ -38,12 +43,10 @@ var hyvorTalk = (function() {
 		data.security = nonce;
 
 		$.ajax({
-			file: ajaxURL,
+			url: ajaxURL,
 			method: "POST",
 			data: data,
-			success: function() {
-				
-				var json = $.jsonDecode(this.responseText);
+			success: function(json) {
 				if (json && json.status === true)
 					location.reload();
 
@@ -56,4 +59,4 @@ var hyvorTalk = (function() {
 		saveSettings: saveSettings
 	}
 
-})();
+})( jQuery );

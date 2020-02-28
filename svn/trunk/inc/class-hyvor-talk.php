@@ -40,6 +40,19 @@ class HyvorTalk {
 	 */
 	const LOADING_MODE_OPTION_NAME = 'hyvor_talk_loading_mode';
 
+	/**
+	 * @since 1.2
+	 * @var int SSO_ID_OPTION_NAME SSO ID
+	 */
+	const SSO_ID_OPTION_NAME = 'hyvor_talk_sso_id';
+	
+	/**
+	 * @since 1.2
+	 * @var int SSO_ID_OPTION_NAME SSO ID
+	 */
+	const SSO_PRIVATE_KEY_OPTION_NAME = 'hyvor_talk_sso_private_key';
+
+
 	/** 
 	* Sets the identifier 
 	* Sets (or Gets) the website ID
@@ -139,15 +152,37 @@ class HyvorTalk {
 	}
 
 	/**
-	 * Updates the website ID
+	 * @return int sso ID
 	 */
+	public static function getSSOId() {
+		$ssoId = get_option( self::SSO_ID_OPTION_NAME );
+		return $ssoId ? (int) $ssoId : null;
+	}
+
+	/**
+	 * @return string SSO Private Key
+	 */
+	public static function getSSOPrivateKey() {
+		$privateKey = get_option( self::SSO_PRIVATE_KEY_OPTION_NAME );
+		return $privateKey ? $privateKey : null;
+	}
+
+	// Updates the website ID
 	public static function setWebsiteId(int $websiteId) {
 		update_option( self::WEBSITE_ID_OPTION_NAME, $websiteId );
 	}
-	/**
-	 * Updates the loading mode
-	 */
+	// Updates the loading mode
 	public static function setLoadingMode(string $mode) {
 		update_option( self::LOADING_MODE_OPTION_NAME, $mode );
 	}
+	// updates the sso ID
+	public static function setSSOId(int $ssoId) {
+		update_option( self::SSO_ID_OPTION_NAME, $ssoId );
+	}
+	// updates the SSO Private Key
+	public static function setSSOPrivateKey(string $key) {
+		update_option( self::SSO_PRIVATE_KEY_OPTION_NAME, $key );
+	}
+
+
 }

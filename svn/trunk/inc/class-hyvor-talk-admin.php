@@ -114,21 +114,12 @@ class Admin {
 	* @since 1.0 
 	*/
 	public function addScripts() {
-
-		# hyvorin library
-        wp_enqueue_script(
-        	$this -> pluginIdentifier . '-hyvorin',				// identifier
-        	HYVOR_TALK_DIR_URL . 'static/hyvorin-2.0.js',		// URL
-        	array(),								// Dependencies
-        	$this -> pluginVersion,					// Version
-        	'all'									// Media written for (ex: 640px)
-        );
-
+		
         # admin js
         wp_enqueue_script(
         	$this -> pluginIdentifier . '-admin',				// identifier
         	HYVOR_TALK_DIR_URL . 'static/admin.js',		// URL
-        	array(),								// Dependencies
+        	array('jquery'),								// Dependencies
         	$this -> pluginVersion,					// Version
         	'all'									// Media written for (ex: 640px)
         );
@@ -299,6 +290,12 @@ class Admin {
 
 		if ( isset($_POST['loadingMode']) )
 			HyvorTalk::setLoadingMode( $_POST['loadingMode'] );
+
+		if ( isset($_POST['ssoId']) )
+			HyvorTalk::setSSOId( $_POST['ssoId'] );
+
+		if ( isset($_POST['ssoPrivateKey']) )
+			HyvorTalk::setSSOPrivateKey( $_POST['ssoPrivateKey'] );
 
 		$this -> a_finish();
 

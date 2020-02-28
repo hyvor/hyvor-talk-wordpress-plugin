@@ -108,9 +108,37 @@ class WebPage {
 			'loadMode' => HyvorTalk::getLoadingMode()
 		);
 
+		// SSO Start
+		$ssoId = HyvorTalk::getSSOId();
+		$ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
+		if ( !empty($ssoId) && !empty($ssoPrivateKey) ) {
+			$userData = $this -> getSSOUserData();
+			$configVarsJS['sso'] = [
+				'userData' => $userData,
+				'id' => $ssoId,
+				'privateKey' => $ssoPrivateKey
+			];
+		}
+		
+		// set global var
 		$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = $configVarsJS;
 
 		include_once HYVOR_TALK_DIR_PATH . '/html/variables.php';
+	}
+
+	private function getSSOUserData() {
+		$user = wp_get_current_user();
+
+		if ($user -> ID == 0)
+			return [];
+		else 
+			return [
+				'id' => $user -> ID,
+				'name' => $user -> display_name,
+				'email' => $user -> user_email,
+				'picture' => get_avatar_url($user -> ID),
+				'url' => $user -> url
+			];
 	}
 
 	public function isPluginLoadable() {
