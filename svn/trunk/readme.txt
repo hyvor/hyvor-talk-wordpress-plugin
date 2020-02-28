@@ -142,7 +142,7 @@ Yes. See the [official guide](https://talk.hyvor.com/documentation/importing/wor
 At the moment, you can't. But, we are discussing if we will add this feature in the future. Stay connected with us on our support group for the latest announcements.
 
 = Do you support SSO? =
-Yes. At the moment, you have to manually set it up. Our WordPress plugin will soon support it. 
+Yes. You can set it up with a few clicks. [See the tutorial](https://talk.hyvor.com/documentation/sso/set-up-wordpress).
 
 = What happens if I deactivate Hyvor Talk on my website? = 
 You won't see comments plugin anymore on your website. But, you can add it anytime again. Then, you will see your earlier comments.
