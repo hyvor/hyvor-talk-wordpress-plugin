@@ -27,11 +27,9 @@ var hyvorTalk = (function($) {
 
 		// sso
 		var ssoId = $.trim($("#talk-sso-id-input").val());
-		if (ssoId)
-			data.ssoId = ssoId;
+		data.ssoId = ssoId;
 		var ssoPrivateKey = $.trim($("#talk-sso-private-key-input").val());
-		if (ssoPrivateKey)
-			data.ssoPrivateKey = ssoPrivateKey;
+		data.ssoPrivateKey = ssoPrivateKey;
 
 		// nothing to update
 		if (data === {})

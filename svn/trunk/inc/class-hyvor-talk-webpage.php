@@ -215,8 +215,25 @@ class WebPage {
 	public function getIdentifier() {
 		global $post;
 
-		// a trick to make it really unique
-		return $post -> ID . ':' . $post -> guid; 
+		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';
+
+		/**
+		 * After importing from other third party, 
+		 * HYVOR_TALK_ID_TYPE should be set to URL
+		 * Then, the permalink is used
+		 */
+		switch ($type) {
+			case 'url':
+				$id = get_permalink($post);
+				break;
+			default:
+				// a trick to make it really unique
+				$id = $post -> ID . ':' . $post -> guid;
+				break;
+		}
+
+
+		return $id;
 	}
 
 

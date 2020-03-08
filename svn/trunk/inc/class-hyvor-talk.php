@@ -168,19 +168,19 @@ class HyvorTalk {
 	}
 
 	// Updates the website ID
-	public static function setWebsiteId(int $websiteId) {
+	public static function setWebsiteId($websiteId) {
 		update_option( self::WEBSITE_ID_OPTION_NAME, $websiteId );
 	}
 	// Updates the loading mode
-	public static function setLoadingMode(string $mode) {
+	public static function setLoadingMode($mode) {
 		update_option( self::LOADING_MODE_OPTION_NAME, $mode );
 	}
 	// updates the sso ID
-	public static function setSSOId(int $ssoId) {
+	public static function setSSOId($ssoId) {
 		update_option( self::SSO_ID_OPTION_NAME, $ssoId );
 	}
 	// updates the SSO Private Key
-	public static function setSSOPrivateKey(string $key) {
+	public static function setSSOPrivateKey($key) {
 		update_option( self::SSO_PRIVATE_KEY_OPTION_NAME, $key );
 	}
 
