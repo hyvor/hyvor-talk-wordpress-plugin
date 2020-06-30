@@ -45,7 +45,6 @@ if ($ssoData) {
 
 	<?php if ($ssoData) : ?>
 		HYVOR_TALK_CONFIG.sso = {
-			id: <?= $ssoData['id'] ?>,
 			hash: "<?= $ssoHash ?>",
 			userData: "<?= $ssoEncodedUserData ?>",
 			loginURL: "<?= wp_login_url(get_permalink()) ?>",

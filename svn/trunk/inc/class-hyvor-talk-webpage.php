@@ -137,7 +137,7 @@ class WebPage {
 				'name' => $user -> display_name,
 				'email' => $user -> user_email,
 				'picture' => get_avatar_url($user -> ID),
-				'url' => $user -> url
+				'url' => get_author_posts_url( $user -> ID )
 			];
 	}
 

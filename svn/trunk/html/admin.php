@@ -98,13 +98,6 @@ $selectedOption = 'selected="selected"';
 					<div class="dual-item-left"><?= __('Single Sign-On', 'hyvor-talk') ?></div>
 
 					<div class="dual-item-right">
-						<input	
-							placeholder="SSO Id"
-							type="text" 
-							name="talk-sso-id" 
-							id="talk-sso-id-input" 
-							class="input-item" 
-							value="<?= $ssoId ?? '' ?>">
 						<input
 							placeholder="SSO Private Key"
 							type="text" 

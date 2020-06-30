@@ -1,10 +1,9 @@
 === Comments by Hyvor Talk ===
 Contributors: hyvor, supunkavinda 
-Tags: comments, comment, ajax comments, reactions, spam, notifications, disqus, embedded
-Donate Link: https://paypal.me/HyvorTalk
+Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
-Tested up to: 5.3.2
-Stable tag: 1.2.1
+Tested up to: 5.4.2
+Stable tag: 1.2.2
 Requires PHP: 5.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -129,10 +128,6 @@ No. Hyvor Talk is ad-free and privacy-focused. We don't place any other company'
 
 Comments are saved on our databases and backed up frequently to an external server. So, your comments are safe!
 
-= Who owns the comments? =
-
-The commenter owns the comment. He can edit or delete his comment, and moderators has no access to a comment deleted by the commenter. If a moderator deletes a comment from the website, the commenter can still see it but can't restore it (Only moderator can). 
-
 = Can I import my existing WordPress comments into Hyvor Talk? = 
 
 Yes. See the [official guide](https://talk.hyvor.com/documentation/importing/wordpress)
@@ -172,6 +167,10 @@ In the WordPress admin panel,
 
 
 == Change Log ==
+
+= 1.2.2 =
+* SSO ID removed
+* SSO uses the user profile as the user's URL
 
 = 1.2.1 =
 * Custom identifiers added (To support third-party importing)

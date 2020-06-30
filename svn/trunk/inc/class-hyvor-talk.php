@@ -175,10 +175,6 @@ class HyvorTalk {
 	public static function setLoadingMode($mode) {
 		update_option( self::LOADING_MODE_OPTION_NAME, $mode );
 	}
-	// updates the sso ID
-	public static function setSSOId($ssoId) {
-		update_option( self::SSO_ID_OPTION_NAME, $ssoId );
-	}
 	// updates the SSO Private Key
 	public static function setSSOPrivateKey($key) {
 		update_option( self::SSO_PRIVATE_KEY_OPTION_NAME, $key );

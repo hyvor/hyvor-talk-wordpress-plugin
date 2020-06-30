@@ -291,9 +291,6 @@ class Admin {
 		if ( isset($_POST['loadingMode']) )
 			HyvorTalk::setLoadingMode( $_POST['loadingMode'] );
 
-		if ( isset($_POST['ssoId']) )
-			HyvorTalk::setSSOId( $_POST['ssoId'] );
-
 		if ( isset($_POST['ssoPrivateKey']) )
 			HyvorTalk::setSSOPrivateKey( $_POST['ssoPrivateKey'] );
 
