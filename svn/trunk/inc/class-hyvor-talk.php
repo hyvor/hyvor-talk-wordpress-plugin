@@ -39,12 +39,6 @@ class HyvorTalk {
 	 * @var string  LOADING_MODE_OPTION_NAME 	WP Option name for the loading mode
 	 */
 	const LOADING_MODE_OPTION_NAME = 'hyvor_talk_loading_mode';
-
-	/**
-	 * @since 1.2
-	 * @var int SSO_ID_OPTION_NAME SSO ID
-	 */
-	const SSO_ID_OPTION_NAME = 'hyvor_talk_sso_id';
 	
 	/**
 	 * @since 1.2

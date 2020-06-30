@@ -194,5 +194,5 @@ In the WordPress admin panel,
 
 == Upgrade Notice ==
 
-= 1.1.1 = 
-This version fixed a bug in adding website ID. Upgrading is required!
+= 1.2.2 =
+This is a minor fix for latest updates on Single Sign-on. If you use SSO with WordPress, we highly recommend you to upgrade to the latest version.
