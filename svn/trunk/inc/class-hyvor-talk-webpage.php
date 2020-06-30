@@ -109,13 +109,11 @@ class WebPage {
 		);
 
 		// SSO Start
-		$ssoId = HyvorTalk::getSSOId();
 		$ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
-		if ( !empty($ssoId) && !empty($ssoPrivateKey) ) {
+		if ( !empty($ssoPrivateKey) ) {
 			$userData = $this -> getSSOUserData();
 			$configVarsJS['sso'] = [
 				'userData' => $userData,
-				'id' => $ssoId,
 				'privateKey' => $ssoPrivateKey
 			];
 		}

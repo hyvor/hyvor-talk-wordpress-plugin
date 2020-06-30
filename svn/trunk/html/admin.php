@@ -8,7 +8,6 @@ use HyvorTalk\HyvorTalk as HyvorTalk;
 
 $websiteId = $this -> websiteId;
 $loadingMode = HyvorTalk::getLoadingMode();
-$ssoId = HyvorTalk::getSSOId();
 $ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
 $selectedOption = 'selected="selected"';
 ?>

@@ -145,13 +145,6 @@ class HyvorTalk {
 		return $mode ? $mode : 'default';
 	}
 
-	/**
-	 * @return int sso ID
-	 */
-	public static function getSSOId() {
-		$ssoId = get_option( self::SSO_ID_OPTION_NAME );
-		return $ssoId ? (int) $ssoId : null;
-	}
 
 	/**
 	 * @return string SSO Private Key
