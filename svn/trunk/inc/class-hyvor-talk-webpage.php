@@ -59,7 +59,6 @@ class WebPage {
 	* @since 1.0
 	*/
 	public function getCommentsPluginTemplate() {
-
 		if ($this -> isPluginLoadable())  {
 			$this -> setEmbedVariables();
 			return HYVOR_TALK_DIR_PATH . '/html/embed.php';
@@ -85,7 +84,7 @@ class WebPage {
 
 		if ($this -> isCommentCountsLoadable()) {
 			$this -> setEmbedVariables();
-			include HYVOR_TALK_DIR_PATH . '/html/count.php';
+			include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
 		}
 
 	}
@@ -120,8 +119,6 @@ class WebPage {
 		
 		// set global var
 		$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = $configVarsJS;
-
-		include_once HYVOR_TALK_DIR_PATH . '/html/variables.php';
 	}
 
 	private function getSSOUserData() {

@@ -10,5 +10,7 @@
  * 
  * Adds Hyvor Talk comment count script to WordPress
  */
+
+include_once 'variables.php';
 ?>
 <script async type="text/javascript" src="//talk.hyvor.com/web-api/count/"></script>
