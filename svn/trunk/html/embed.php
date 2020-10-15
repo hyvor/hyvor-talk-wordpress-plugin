@@ -11,7 +11,7 @@
 
 $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 
-include_once 'variables.php';
+include 'variables.php';
 ?>
 <div class="comments-area">
 
