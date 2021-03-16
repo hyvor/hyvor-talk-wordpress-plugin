@@ -48,7 +48,7 @@ if (!defined('HYVOR_TALK_DIR_URL'))
 // the unique WP identifier of the plugin
 define('HYVOR_TALK_IDENTIFIER', 'hyvor-talk');
 // the version of the plugin
-define('HYVOR_TALK_VERSION', '1.2.2');
+define('HYVOR_TALK_VERSION', '1.2.5');
 
 require HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk.php'; 
 
