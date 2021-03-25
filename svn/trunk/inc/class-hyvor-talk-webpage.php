@@ -221,6 +221,9 @@ class WebPage {
 			case 'url':
 				$id = get_permalink($post);
 				break;
+			case 'id':
+				$id = $post -> ID;
+				break;
 			default:
 				// a trick to make it really unique
 				$id = $post -> ID . ':' . $post -> guid;
