@@ -1,3 +1,5 @@
+To test, download WordPress source code into the wordpress folder.
+
 * cd wordpress
 * php -S 127.0.0.1:8000
 * Install WordPress

@@ -137,12 +137,12 @@ class Admin {
         remove_menu_page( 'edit-comments.php' );
 
         add_menu_page(
-            'Hyvor Talk - ' . __('The Best Commenting Platform For Your Website', 'hyvor-talk'),
+            'Hyvor Talk Comments',
             'Hyvor Talk',
             'moderate_comments',
             'hyvor-talk',
             array( $this, 'createView'),
-            $this -> icon,
+            'dashicons-admin-comments',
             24
         );
 	}
@@ -166,98 +166,12 @@ class Admin {
 
 		$wpAdminBar -> remove_node('comments');
 
-		// parent
+		/* // parent
 		$wpAdminBar -> add_node(array (
 			'id' => 'hyvor-talk',
-			'title' => $this -> iconSpan . 'Hyvor Talk',
+			'title' => 'Hyvor Talk',
 			'href' => admin_url( 'admin.php?page=hyvor-talk' )
-		));
-
-
-		if ($this -> websiteId || true) {
-
-			// children
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-general',
-				'title' => __('General Settings', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('moderate', 'general', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-appearance',
-				'title' => __('Change Appearance', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('moderate', 'appearance', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-community',
-				'title' => __('Community Settings', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('moderate', 'community', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-pages',
-				'title' => __('Pages', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('moderate', 'pages', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-comments',
-				'title' => __('Comments', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('moderate', 'comments', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-people',
-				'title' => __('People', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('moderate', 'people', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-subscription',
-				'title' => __('Subscription', 'hyvor-talk'),
-				'href' => $this -> getConsoleURL('account', 'subscription', true),
-				'meta' => [
-					'target' => '_blank'
-				]
-			));
-
-
-		} else {
-
-			$wpAdminBar -> add_node(array (
-				'parent' => 'hyvor-talk',
-				'id' => 'hyvor-talk-add-website',
-				'title' => __('Configure', 'hyvor-talk') . ' Hyvor Talk',
-				'href' => admin_url( 'admin.php?page=hyvor-talk')
-			));
-
-		}
+		));*/
 
 		
 
@@ -305,28 +219,6 @@ class Admin {
 		echo json_encode($return);
 		die;
 
-	}
-
-	/*
-	* AJAX FUNCTIONS END
-	***********/
-
-
-	/**
-	* @since 1.0
-	* @var string 	$page 	the page of the console (ex: general)
-	* @var boolean  $addWebsiteId 	whether add the website or not
-	* @return string  	processed URL
-	*/
-	private function getConsoleURL($mainSection = '', $page = '', $addWebsiteId = false) {
-
-		return 
-			$this -> consoleURL .
-			$mainSection .
-			( $mainSection ? '/' : '' ) .
-			$page . 
-			($addWebsiteId && $this -> websiteId ? '/' . $this -> websiteId : '');
-			
 	}
 
 }

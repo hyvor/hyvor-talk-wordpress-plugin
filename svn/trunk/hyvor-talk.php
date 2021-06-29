@@ -63,13 +63,7 @@ define('HYVOR_TALK_WEBSITE_ID', $hyvorTalk -> websiteId);
  * Where the configurations are saved
  * Can be accessed via all the included files
  */
-$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = [
-	'websiteId' => null,
-	'identifier' => null,
-	'title' => '',
-	'url' => '',
-	'loadMode' => '',
-];
+$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = null;
 
 
 /**

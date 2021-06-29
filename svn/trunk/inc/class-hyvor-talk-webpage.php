@@ -31,20 +31,6 @@ class WebPage {
 	public $websiteId;
 
 
-	/**
-	* Embed variables are set here
-	* @since 1.0
-	* removed @since 1.1.1
-	*/
-	// public $embedVariables; 
-
-	/**
-	 * If the config variables are added.
-	 * @since 1.1.2
-	 */
-	public $setEmbedVariablesCalled = false;
-
-
 	public function __construct($pluginIdentifier, $pluginVersion, $websiteId) {
 		global $post; 
 
@@ -60,7 +46,7 @@ class WebPage {
 	*/
 	public function getCommentsPluginTemplate() {
 		if ($this -> isPluginLoadable())  {
-			$this -> setEmbedVariables();
+			$this -> setEmbedVariables(true);
 			return HYVOR_TALK_DIR_PATH . '/html/embed.php';
 		}
 		
@@ -74,8 +60,8 @@ class WebPage {
 		global $post;
 
 		if ($this -> isCommentCountsLoadable())
-			return "<span data-talk-id={$this -> getIdentifier($post)}></span>";
-		else	
+			return "<span data-talk-id=\"{$this -> getIdentifier($post)}\"></span>";
+		else
 			return $text;
 
 	}
@@ -83,7 +69,7 @@ class WebPage {
 	public function addCommentsCountScript() {
 
 		if ($this -> isCommentCountsLoadable()) {
-			$this -> setEmbedVariables();
+			$this -> setEmbedVariables(false);
 			include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
 		}
 
@@ -92,33 +78,46 @@ class WebPage {
 	/**
 	* Sets embed variables to use in JS
 	*/
-	public function setEmbedVariables() {
-
-		if ($this -> setEmbedVariablesCalled)
-			return;
-
-		$this -> setEmbedVariablesCalled = true;
-
-		$configVarsJS = array(
-			'websiteId' => $this -> getWebsiteId(),
-			'identifier' => $this -> getIdentifier(),
-			'title' => $this -> getTitle(),
-			'url' => $this -> getURL(),
-			'loadMode' => HyvorTalk::getLoadingMode()
-		);
-
-		// SSO Start
-		$ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
-		if ( !empty($ssoPrivateKey) ) {
-			$userData = $this -> getSSOUserData();
-			$configVarsJS['sso'] = [
-				'userData' => $userData,
-				'privateKey' => $ssoPrivateKey
-			];
+	public function setEmbedVariables($isForEmbed, $identifier = null) {
+		if (!isset($GLOBALS['HYVOR_TALK_PLUGIN_WEBSITE_ID'])) {
+			$GLOBALS['HYVOR_TALK_PLUGIN_WEBSITE_ID'] = $this->getWebsiteId();
 		}
-		
-		// set global var
-		$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = $configVarsJS;
+
+		if ($isForEmbed && !isset($GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'])) {
+			$configVarsJS = array(
+				'identifier' => $identifier !== null ? $identifier : $this -> getIdentifier(),
+				'title' => $this -> getTitle(),
+				'url' => $this -> getURL(),
+				'loadMode' => HyvorTalk::getLoadingMode()
+			);
+	
+			// SSO Start
+			$ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
+			if ( !empty($ssoPrivateKey) ) {
+				$userData = $this -> getSSOUserData();
+				$configVarsJS['sso'] = [
+					'userData' => $userData,
+					'privateKey' => $ssoPrivateKey
+				];
+			}
+			$GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'] = $configVarsJS;
+		}
+	}
+
+	public function shortCodeComments($attr) {
+		$this->setEmbedVariables(true, isset($attr['id']) ? $attr['id'] : null);
+		$content = include HYVOR_TALK_DIR_PATH . '/html/embed.php';
+		return $content;
+	}
+
+	public function shortCodeCount($attr) {
+		$this->setEmbedVariables(false);
+		include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
+
+		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "data-talk-mode=\"number\"" : '';
+
+		$content = "<span data-talk-id=\"{$attr['id']}\" $mode></span>";
+		return $content;
 	}
 
 	private function getSSOUserData() {
@@ -210,7 +209,13 @@ class WebPage {
 	public function getIdentifier() {
 		global $post;
 
-		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';
+		if ($this->getWebsiteId() > 4464) {
+			if (get_post_type() !== 'post')
+				return false;
+			return $post->ID;
+		}
+
+		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';		
 
 		/**
 		 * After importing from other third party, 

@@ -122,6 +122,9 @@ class HyvorTalk {
 		add_filter('comments_number', array ($webpage, 'getCommentsCountTemplate'));
 		add_filter('comments_template', array($webpage, 'getCommentsPluginTemplate'));
 
+		add_shortcode('hyvor-talk-comments', array($webpage, 'shortCodeComments'));
+		add_shortcode('hyvor-talk-comments-count', array($webpage, 'shortCodeCount'));
+
 		add_action('wp_footer', array ($webpage, 'addCommentsCountScript'));
 
 		$this -> webpage = $webpage;

@@ -27,4 +27,4 @@ include 'variables.php';
 
 	<div id="hyvor-talk-view"></div>
 </div>
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
+<script async type="text/javascript" src="//talk.hyvor.com/web-api/embed.js"></script>

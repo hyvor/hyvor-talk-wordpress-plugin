@@ -47,7 +47,7 @@ $selectedOption = 'selected="selected"';
 								<?= __('Create New Website', 'hyvor-talk') ?>
 							</a>
 							<a 
-								href="https://talk.hyvor.com/console/moderate/general" 
+								href="https://talk.hyvor.com/console/moderate/install" 
 								target="_blank">
 								<?= __('Get My Website ID', 'hyvor-talk') ?>
 							</a>
@@ -55,7 +55,7 @@ $selectedOption = 'selected="selected"';
 
 					<?php else : ?>
 
-						<p class="help"><?= __('The ID given by Hyvor Talk.') ?>
+						<p class="help"><?= __('Your Website ID') ?>
 							<a 
 								target="_blank" 
 								href="https://talk.hyvor.com/console/account/add-website">
@@ -106,7 +106,7 @@ $selectedOption = 'selected="selected"';
 							value="<?= $ssoPrivateKey ?? '' ?>">
 
 						<p class="help">
-							<a target="_blank" href="https://talk.hyvor.com/documentation/sso/introduction"><?= __('Learn more about SSO', 'hyvor-talk') ?></a>
+							To set up WordPress login, turn on Single Sign-on (Stateless type) from the Console and paste the Private key here. <a target="_blank" href="https://talk.hyvor.com/docs/sso"><?= __('Learn more about SSO', 'hyvor-talk') ?></a>
 						</p>
 					</div>
 				</div>
