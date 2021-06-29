@@ -50,19 +50,7 @@ class Admin {
 		$this -> websiteId = $websiteId;
 
 		$this -> consoleURL = 'https://talk.hyvor.com/console/';
-
-		# use /talk-icon-bw.svg for the black and white icon
-		$iconPath =  'static/talk-icon.svg';
-		$iconSVGFile = HYVOR_TALK_DIR_PATH . $iconPath;
-
-        $this -> icon = file_exists($iconSVGFile) ? file_get_contents($iconSVGFile) : 'dashicons-admin-comments';
-        $this -> iconSpan = '<span class="ab-icon" style="
-				float:left; width:22px !important; height:22px !important;
-			    margin-left: 5px !important; margin-top: 6px !important;
-			    background-image:url(\''. $this -> icon . '\')!important;
-			    background-size:20px;
-			    background-repeat:no-repeat;
-			    "></span>';
+        $this -> iconSpan = '<i class="ab-icon dashicons-admin-comments"></i>';
 	}
 
 
