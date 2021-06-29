@@ -1,0 +1,9 @@
+* cd wordpress
+* php -S 127.0.0.1:8000
+* Install WordPress
+* Install Hyvor Talk plugin
+* ln -s svn/trunk wordpress/wp-content/plugins/hyvor-talk
+
+When you update the plugin, run this to update wordpress plugin
+
+cp svn/trunk wordpress/wp-content/plugins/hyvor-talk
