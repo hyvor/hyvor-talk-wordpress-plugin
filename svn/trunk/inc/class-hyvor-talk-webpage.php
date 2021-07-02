@@ -209,7 +209,7 @@ class WebPage {
 	public function getIdentifier() {
 		global $post;
 
-		if ($this->getWebsiteId() > 4464) {
+		if ($this->getWebsiteId() > 4500) {
 			if (get_post_type() !== 'post')
 				return false;
 			return $post->ID;
