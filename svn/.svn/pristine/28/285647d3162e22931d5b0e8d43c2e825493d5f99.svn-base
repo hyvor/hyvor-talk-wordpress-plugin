@@ -1,0 +1,90 @@
+#hyvor-talk-admin * {
+	box-sizing:border-box;
+}
+.talk-title-img {
+	vertical-align:middle;
+}
+.talk-title {
+	vertical-align:middle;
+	font-size:20px;
+	font-weight:600;
+	margin-left:10px;
+}
+
+.talk-native-panel {
+	padding:20px;
+	background-color:white;
+	box-shadow:0 0 20px rgba(0,0,0,0.06);
+	border-radius:5px;
+}
+
+#hyvor-talk-admin .dual-item {
+	padding:15px;
+	padding-bottom:0px;
+}
+#hyvor-talk-admin .dual-item:after {
+	content:"";
+	clear:both;
+	display:table;
+}
+#hyvor-talk-admin .dual-item-left {
+	float:left;
+	width:25%;
+	text-align:right;
+	padding:10px;
+	padding-right:15px;
+	font-weight:600;
+}
+#hyvor-talk-admin .dual-item-right {
+	float:right;
+	width:75%;
+	position:relative;
+}
+#hyvor-talk-admin .dual-item-right.padded {
+	padding:10px 0;
+}
+#hyvor-talk-admin .dual-item-right.top-padded {
+	padding-top:10px;
+}
+
+#hyvor-talk-admin .input-item {
+    width: 100%;
+    border: 1px solid #eee;
+	padding: 4px 20px;
+	margin-bottom:4px;
+    border-radius: 20px;
+    box-shadow:none;
+}
+
+#hyvor-talk-admin .save-button-view {
+    padding: 15px;
+    text-align: center;
+}
+
+#hyvor-talk-admin .button-filled {
+    position: relative;
+    display: inline-block;
+    padding: 10px 35px;
+    border-radius: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: .4s;
+    background-color: #ffd969;
+    white-space: nowrap;
+}
+
+
+.talk-message {
+	padding:15px;
+	margin:10px 0;
+	background-color:#0073aa;
+	color:white;
+	border-radius:5px;
+}
+
+.margin-link {
+	margin-right:5px;
+}
