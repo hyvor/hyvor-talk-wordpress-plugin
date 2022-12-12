@@ -119,6 +119,7 @@ class HyvorTalk {
 
 		$webpage = new WebPage($this -> pluginIdentifier, $this -> pluginVersion, $this -> websiteId);
 
+        add_filter('pre_render_block', array($webpage, 'getCommentsPluginTemplateForBlock'), 10, 2);
 		add_filter('comments_number', array ($webpage, 'getCommentsCountTemplate'));
 		add_filter('comments_template', array($webpage, 'getCommentsPluginTemplate'));
 

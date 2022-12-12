@@ -3,8 +3,8 @@ Contributors: hyvor, supunkavinda
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
 Tested up to: 6.1.1
-Stable tag: 1.2.6
-Requires PHP: 5.4
+Stable tag: 1.2.7
+Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,9 @@ In the WordPress admin panel,
 
 
 == Change Log ==
+
+= 1.2.7 =
+* Added support for Block-based themes
 
 = 1.2.6 =
 * New logo

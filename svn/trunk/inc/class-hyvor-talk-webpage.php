@@ -44,13 +44,30 @@ class WebPage {
 	* adds the Hyvor Talk plugin into the webpage if it is loadable
 	* @since 1.0
 	*/
-	public function getCommentsPluginTemplate() {
-		if ($this -> isPluginLoadable())  {
-			$this -> setEmbedVariables(true);
-			return HYVOR_TALK_DIR_PATH . '/html/embed.php';
-		}
-		
-	}
+	public function getCommentsPluginTemplate()
+    {
+        if ($this->isPluginLoadable()) {
+            $this->setEmbedVariables(true);
+            return HYVOR_TALK_DIR_PATH . '/html/embed.php';
+        }
+
+    }
+
+    public function getCommentsPluginTemplateForBlock($preRender, $parsedBlock) {
+
+        if ($parsedBlock['blockName'] === 'core/comments' && $this -> isPluginLoadable()) {
+            $this -> setEmbedVariables(true);
+
+            ob_start();
+            include(HYVOR_TALK_DIR_PATH . '/html/embed.php');
+            $content = ob_get_contents();
+            ob_end_clean();
+
+            return $content;
+        }
+
+    }
+
 
 	/**
 	 * updates comments counts 
@@ -238,6 +255,7 @@ class WebPage {
 
 		return $id;
 	}
+
 
 
 	/**
