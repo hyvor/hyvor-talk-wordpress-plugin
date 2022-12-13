@@ -19,7 +19,7 @@ include 'variables.php';
 
 		<div style="text-align:center">
 			<button id="hyvor-talk-load-button">
-				<?= __('Load Comments') ?>
+				<?php echo __('Load Comments') ?>
 			</button>
 		</div>
 

@@ -15,7 +15,7 @@ $selectedOption = 'selected="selected"';
 <div id="hyvor-talk-admin">
 
 	<div class="wrap">
-		<img src="<?= HYVOR_TALK_DIR_URL ?>static/talk-logo.png" width="40" class="talk-title-img">
+		<img src="<?php echo esc_url(HYVOR_TALK_DIR_URL) ?>static/talk-logo.png" width="40" class="talk-title-img">
 		<span class="talk-title">Hyvor Talk</span>
 	</div>
 	
@@ -25,41 +25,41 @@ $selectedOption = 'selected="selected"';
 
 			<div class="dual-item">
 				
-				<div class="dual-item-left"><?= __('Website ID', 'hyvor-talk') ?></div>
+				<div class="dual-item-left"><?php echo __('Website ID', 'hyvor-talk') ?></div>
 
 				<div class="dual-item-right">
 
-					<input type="text" name="talk-website-id" id="talk-website-id-input" class="input-item" value="<?= $websiteId ? $websiteId : '' ?>">
+					<input type="text" name="talk-website-id" id="talk-website-id-input" class="input-item" value="<?php echo $websiteId ? $websiteId : '' ?>">
 
 					<?php if (!$websiteId) : ?>
 
 						<div class="talk-message">
 							<strong>
-								<?= __('Important!', 'hyvor-takl') ?>
+								<?php echo __('Important!', 'hyvor-takl') ?>
 							</strong>
-							<?= __('Add your website ID to configure Hyvor Talk with Wordpress. It can be found from the Hyvor Talk console.', 'hyvor-talk') ?> 
+							<?php echo __('Add your website ID to configure Hyvor Talk with Wordpress. It can be found from the Hyvor Talk console.', 'hyvor-talk') ?> 
 						</div>
 
 						<p class="help">
 							<a 
 								class="margin-link" 
 								href="https://talk.hyvor.com/console/account/add-website" target="_blank">
-								<?= __('Create New Website', 'hyvor-talk') ?>
+								<?php echo __('Create New Website', 'hyvor-talk') ?>
 							</a>
 							<a 
 								href="https://talk.hyvor.com/console/moderate/install" 
 								target="_blank">
-								<?= __('Get My Website ID', 'hyvor-talk') ?>
+								<?php echo __('Get My Website ID', 'hyvor-talk') ?>
 							</a>
 						</p>
 
 					<?php else : ?>
 
-						<p class="help"><?= __('Your Website ID') ?>
+						<p class="help"><?php echo __('Your Website ID') ?>
 							<a 
 								target="_blank" 
 								href="https://talk.hyvor.com/console/account/add-website">
-								<?= __('Create New Website ID', 'hyvor-talk') ?>
+								<?php echo __('Create New Website ID', 'hyvor-talk') ?>
 							</a>
 						</p>
 
@@ -72,29 +72,29 @@ $selectedOption = 'selected="selected"';
 			<?php if ($websiteId) : ?>
 				<div class="dual-item">
 					
-					<div class="dual-item-left"><?= __('Loading Mode', 'hyvor-talk') ?></div>
+					<div class="dual-item-left"><?php echo __('Loading Mode', 'hyvor-talk') ?></div>
 
 					<div class="dual-item-right">
 						<select id="ht-loading-mode-select">
 							<option 
 								value="default" 
-								<?= $loadingMode !== "scroll" && $loadingMode !== "click" ? 
-								$selectedOption : '' ?>
-							><?= __('on load', 'hyvor-talk') ?></option>
+								<?php echo $loadingMode !== "scroll" && $loadingMode !== "click" ? 
+								esc_html($selectedOption) : '' ?>
+							><?php echo __('on load', 'hyvor-talk') ?></option>
 							<option 
 								value="scroll"
-								<?= $loadingMode === "scroll" ? $selectedOption : '' ?>
-							><?= __('on scroll', 'hyvor-talk') ?></option>
+								<?php echo $loadingMode === "scroll" ? esc_html($selectedOption) : '' ?>
+							><?php echo __('on scroll', 'hyvor-talk') ?></option>
 							<option 
 								value="click"
-								<?= $loadingMode === "click" ? $selectedOption : '' ?>
-							><?= __('on button click', 'hyvor-talk') ?></option>
+								<?php echo $loadingMode === "click" ? esc_html($selectedOption) : '' ?>
+							><?php echo __('on button click', 'hyvor-talk') ?></option>
 						</select>
 					</div>
 				</div>
 
 				<div class="dual-item">
-					<div class="dual-item-left"><?= __('Single Sign-On', 'hyvor-talk') ?></div>
+					<div class="dual-item-left"><?php echo __('Single Sign-On', 'hyvor-talk') ?></div>
 
 					<div class="dual-item-right">
 						<input
@@ -103,10 +103,10 @@ $selectedOption = 'selected="selected"';
 							name="talk-sso-private-key" 
 							id="talk-sso-private-key-input" 
 							class="input-item" 
-							value="<?= $ssoPrivateKey ?? '' ?>">
+							value="<?php echo esc_attr($ssoPrivateKey ?? '') ?>">
 
 						<p class="help">
-							To set up WordPress login, turn on Single Sign-on (Stateless type) from the Console and paste the Private key here. <a target="_blank" href="https://talk.hyvor.com/docs/sso"><?= __('Learn more about SSO', 'hyvor-talk') ?></a>
+							To set up WordPress login, turn on Single Sign-on (Stateless type) from the Console and paste the Private key here. <a target="_blank" href="https://talk.hyvor.com/docs/sso"><?php echo __('Learn more about SSO', 'hyvor-talk') ?></a>
 						</p>
 					</div>
 				</div>
@@ -118,7 +118,7 @@ $selectedOption = 'selected="selected"';
 				<span 
 					class="button-filled" 
 					onclick="hyvorTalk.saveSettings()">
-					<?= $websiteId ? __('CHANGE', 'hyvor-talk') : __('SAVE', 'hyvor-talk') ?>
+					<?php echo $websiteId ? __('CHANGE', 'hyvor-talk') : __('SAVE', 'hyvor-talk') ?>
 				</span>
 			</div>
 
