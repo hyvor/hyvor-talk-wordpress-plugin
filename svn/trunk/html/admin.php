@@ -29,7 +29,7 @@ $selectedOption = 'selected="selected"';
 
 				<div class="dual-item-right">
 
-					<input type="text" name="talk-website-id" id="talk-website-id-input" class="input-item" value="<?php echo $websiteId ? $websiteId : '' ?>">
+					<input type="text" name="talk-website-id" id="talk-website-id-input" class="input-item" value="<?php echo $websiteId ? esc_attr($websiteId) : '' ?>">
 
 					<?php if (!$websiteId) : ?>
 
