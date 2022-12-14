@@ -38,10 +38,9 @@ if ($ssoData) {
 	var HYVOR_TALK_WEBSITE = <?php echo esc_html($websiteId) ?>;
 
 	<?php if(!empty($var)) : ?>
-		<?php $identifier = $var['identifier'] === false ? 'false' :  '"' . esc_html($var['identifier']) . '"' ?>
 		var HYVOR_TALK_CONFIG = {
 			url: "<?php echo esc_html($var['url']) ?>",
-			id: <?php echo $identifier ?>,
+			id: <?php echo $var['identifier'] === false ? 'false' :  '"' . esc_html($var['identifier']) . '"' ?>,
 			title: "<?php echo esc_html($var['title']) ?>",
 			loadMode: "<?php echo esc_html($var['loadMode']) ?>",
 			clickId: "hyvor-talk-load-button"
