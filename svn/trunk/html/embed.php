@@ -11,7 +11,6 @@
 
 $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 ?>
-
 <?php if ($var['isV3']) : ?>
 
     <div class="comments-area">

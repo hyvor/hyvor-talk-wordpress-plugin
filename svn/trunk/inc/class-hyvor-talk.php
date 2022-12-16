@@ -178,7 +178,6 @@ class HyvorTalk {
 	}
 
     public static function getIsV3() {
-        echo(get_option( self::VERSION_IS_3_OPTION_NAME ));
         return (bool) get_option( self::VERSION_IS_3_OPTION_NAME );
     }
 
