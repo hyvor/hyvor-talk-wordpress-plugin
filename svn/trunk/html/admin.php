@@ -9,6 +9,7 @@ use HyvorTalk\HyvorTalk as HyvorTalk;
 $websiteId = $this -> websiteId;
 $loadingMode = HyvorTalk::getLoadingMode();
 $ssoPrivateKey = HyvorTalk::getSSOPrivateKey();
+$isV3 = HyvorTalk::getIsV3();
 $selectedOption = 'selected="selected"';
 ?>
 
@@ -110,6 +111,25 @@ $selectedOption = 'selected="selected"';
 						</p>
 					</div>
 				</div>
+
+                <div class="dual-item">
+                    <div class="dual-item-left">V3 Beta</div>
+
+                    <div class="dual-item-right">
+                        <input
+                                placeholder="V3 Beta"
+                                type="checkbox"
+                                name="talk-v3"
+                                id="talk-v3-input"
+                                <?php echo $isV3 ? 'checked' : '' ?>
+                                style="margin-top: 10px"
+                        >
+
+                        <p class="help">
+                            Switch our upcoming <a target="_blank" href="https://talk.hyvor.com/docsv3/install">version 3</a> now. You can switch back anytime.
+                        </p>
+                    </div>
+                </div>
 
 
 			<?php endif; ?>

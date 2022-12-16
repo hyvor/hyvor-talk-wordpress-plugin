@@ -46,6 +46,11 @@ class HyvorTalk {
 	 */
 	const SSO_PRIVATE_KEY_OPTION_NAME = 'hyvor_talk_sso_private_key';
 
+    /**
+     * @since 1.8
+     */
+    const VERSION_IS_3_OPTION_NAME = 'hyvor_talk_version_is_v3';
+
 
 	/** 
 	* Sets the identifier 
@@ -61,6 +66,7 @@ class HyvorTalk {
 
 		$this -> websiteId = self::getWebsiteId();
 		$this -> loadingMode = self::getLoadingMode();
+
 
 		$this -> initHelpers(); 
 		$this -> initAdminHooks();
@@ -170,6 +176,15 @@ class HyvorTalk {
 	public static function setSSOPrivateKey($key) {
 		update_option( self::SSO_PRIVATE_KEY_OPTION_NAME, $key );
 	}
+
+    public static function getIsV3() {
+        echo(get_option( self::VERSION_IS_3_OPTION_NAME ));
+        return (bool) get_option( self::VERSION_IS_3_OPTION_NAME );
+    }
+
+    public static function setIsV3($value) {
+        update_option( self::VERSION_IS_3_OPTION_NAME, $value );
+    }
 
 
 }

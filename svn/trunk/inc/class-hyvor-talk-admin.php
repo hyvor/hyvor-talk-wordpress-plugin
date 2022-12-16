@@ -196,6 +196,9 @@ class Admin {
 		if ( isset($_POST['ssoPrivateKey']) )
 			HyvorTalk::setSSOPrivateKey( $_POST['ssoPrivateKey'] );
 
+        $isV3 = filter_var($_POST['isV3'], FILTER_VALIDATE_BOOLEAN);
+        HyvorTalk::setIsV3($isV3);
+
 		$this -> a_finish();
 
 	}

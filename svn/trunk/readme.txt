@@ -3,7 +3,7 @@ Contributors: hyvor, supunkavinda
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
 Tested up to: 6.1.1
-Stable tag: 1.2.7
+Stable tag: 1.2.8
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -86,8 +86,10 @@ In the WordPress admin panel,
 2. Comments Embed - Light
 3. Comments Embed - Dark
 
-
 == Change Log ==
+
+= 1.2.8 =
+* V3 beta support added
 
 = 1.2.7 =
 * Added support for Block-based themes

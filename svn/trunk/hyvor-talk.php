@@ -6,7 +6,7 @@
 Plugin Name: Comments by Hyvor Talk
 Plugin URI: https://talk.hyvor.com
 Description: The official WordPress plugin for Hyvor Talk, The Best Commenting Platform For Your Website
-Version: 1.2.7
+Version: 1.2.8
 Author: Hyvor
 Author URI: https://hyvor.com
 License: GPLv2 or later
@@ -15,7 +15,7 @@ Domain Path: /languages
 */
 
 /*
-Copyright (C) 2019  Hyvor
+Copyright (C) 2022  Hyvor
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ if (!defined('HYVOR_TALK_DIR_URL'))
 // the unique WP identifier of the plugin
 define('HYVOR_TALK_IDENTIFIER', 'hyvor-talk');
 // the version of the plugin
-define('HYVOR_TALK_VERSION', '1.2.7');
+define('HYVOR_TALK_VERSION', '1.2.8');
 
 require HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk.php'; 
 
