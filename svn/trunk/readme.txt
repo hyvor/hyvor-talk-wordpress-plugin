@@ -3,7 +3,7 @@ Contributors: hyvor, supunkavinda
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
 Tested up to: 6.1.1
-Stable tag: 1.2.9
+Stable tag: 1.2.10
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
