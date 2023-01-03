@@ -15,7 +15,7 @@ $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 
     <div class="comments-area">
         <?php include 'v3-component.php' ?>
-    <div class="comments-area">
+    </div>
 
     <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
 
