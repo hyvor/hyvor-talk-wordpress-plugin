@@ -1,8 +1,8 @@
 === Comments by Hyvor Talk ===
-Contributors: hyvor, supunkavinda 
+Contributors: hyvor, supunkavinda
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
-Tested up to: 6.1.1
+Tested up to: 6.2
 Stable tag: 1.2.12
 Requires PHP: 7.4
 License: GPLv2
@@ -126,4 +126,4 @@ In the WordPress admin panel,
 == Upgrade Notice ==
 
 = 1.2.6 =
-We have fixed minor bugs and some accessibility in the dasboard, and a minor security bug. We recommend you to upgrade to the latest version.
+We have fixed minor bugs and some accessibility in the dashboard, and a minor security bug. We recommend you to upgrade to the latest version.
