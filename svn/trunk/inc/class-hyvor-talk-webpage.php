@@ -124,8 +124,9 @@ class WebPage {
 
 	public function shortCodeComments($attr) {
 		$this->setEmbedVariables(true, isset($attr['id']) ? $attr['id'] : null);
-		$content = include HYVOR_TALK_DIR_PATH . '/html/embed.php';
-		return $content;
+        ob_start();
+		include HYVOR_TALK_DIR_PATH . '/html/embed.php';
+        return ob_get_clean();
 	}
 
 	public function shortCodeCount($attr) {
