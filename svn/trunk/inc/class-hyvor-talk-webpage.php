@@ -105,8 +105,7 @@ class WebPage {
 				'identifier' => $identifier !== null ? $identifier : $this -> getIdentifier(),
 				'title' => $this -> getTitle(),
 				'url' => $this -> getURL(),
-				'loadMode' => HyvorTalk::getLoadingMode(),
-                'isV3' => HyvorTalk::getIsV3()
+				'loadMode' => HyvorTalk::getLoadingMode()
 			);
 	
 			// SSO Start

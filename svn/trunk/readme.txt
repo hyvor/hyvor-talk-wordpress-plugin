@@ -1,9 +1,9 @@
 === Comments by Hyvor Talk ===
-Contributors: hyvor, supunkavinda 
+Contributors: hyvor, supunkavinda, nadil
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
-Tested up to: 6.1.1
-Stable tag: 1.2.8
+Tested up to: 6.5.3
+Stable tag: 1.2.13
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -88,6 +88,10 @@ In the WordPress admin panel,
 
 == Change Log ==
 
+= 1.2.13 =
+* V3 support made default
+* V2 support revoked
+
 = 1.2.8 =
 * V3 beta support added
 
@@ -126,4 +130,4 @@ In the WordPress admin panel,
 == Upgrade Notice ==
 
 = 1.2.6 =
-We have fixed minor bugs and some accessibility in the dasboard, and a minor security bug. We recommend you to upgrade to the latest version.
+We have fixed minor bugs and some accessibility in the dashboard, and a minor security bug. We recommend you to upgrade to the latest version.

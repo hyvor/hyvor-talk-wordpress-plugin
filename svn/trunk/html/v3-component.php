@@ -15,6 +15,7 @@ if ($ssoData) {
     if ($user -> ID !== 0) {
 
         $userData = base64_encode(json_encode([
+            'timestamp' => time(),
             'id' => $user -> ID,
             'name' => $user -> display_name,
             'email' => $user -> user_email,
