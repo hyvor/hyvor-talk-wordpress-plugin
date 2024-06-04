@@ -31,10 +31,6 @@ var hyvorTalk = (function($) {
 		var ssoPrivateKey = $.trim($("#talk-sso-private-key-input").val());
 		data.ssoPrivateKey = ssoPrivateKey;
 
-		var v3Input = $("#talk-v3-input")[0];
-		var isV3 = v3Input ? v3Input.checked : false;
-		data.isV3 = isV3;
-
 		// nothing to update
 		if (data === {})
 			return;
