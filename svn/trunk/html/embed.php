@@ -29,10 +29,6 @@ $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 
 <?php endif; ?>
 
-<div>
-    <hyvor-talk-comment-count page_id="<?php echo get_the_ID(); ?>"></hyvor-talk-comment-count>
-</div>
-
 <div class="comments-area">
     <?php include 'v3-component.php' ?>
 </div>
