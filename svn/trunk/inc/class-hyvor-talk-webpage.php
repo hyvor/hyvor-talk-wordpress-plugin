@@ -134,10 +134,10 @@ class WebPage {
 		include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
 		$content = ob_get_clean();
 
-		$pageId = isset($attr['id']) ? $attr['id'] : '';
+		$pageId = isset($attr['id']) ? "page-id={$attr['id']}" : '';
 		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "mode=\"number\"" : '';
 
-		$content .= "<hyvor-talk-comment-count page-id={$pageId} {$mode}></hyvor-talk-comment-count>";
+		$content .= "<hyvor-talk-comment-count {$pageId} {$mode}></hyvor-talk-comment-count>";
 		return $content;
 	}
 
