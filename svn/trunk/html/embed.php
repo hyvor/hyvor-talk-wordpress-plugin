@@ -12,6 +12,27 @@
 $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 ?>
 
+<?php if ($var['loadMode'] === 'click'): ?>
+
+    <div style="text-align:center">
+        <button id="hyvor-talk-load-button" onclick="this.style.display='none'">
+            <?php echo __('Load Comments') ?>
+        </button>
+    </div>
+
+    <script>
+        document.getElementById("hyvor-talk-load-button").addEventListener("click", function() {
+            const hyvorTalkComments = document.querySelector("hyvor-talk-comments");
+            hyvorTalkComments.load();
+        });
+    </script>
+
+<?php endif; ?>
+
+<div>
+    <hyvor-talk-comment-count page_id="<?php echo get_the_ID(); ?>"></hyvor-talk-comment-count>
+</div>
+
 <div class="comments-area">
     <?php include 'v3-component.php' ?>
 </div>
