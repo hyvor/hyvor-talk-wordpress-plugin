@@ -130,11 +130,14 @@ class WebPage {
 
 	public function shortCodeCount($attr) {
 		$this->setEmbedVariables(false);
+		ob_start();
 		include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
+		$content = ob_get_clean();
 
-		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "data-talk-mode=\"number\"" : '';
+		$pageId = isset($attr['id']) ? $attr['id'] : '';
+		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "mode=\"number\"" : '';
 
-		$content = "<span data-talk-id=\"{$attr['id']}\" $mode></span>";
+		$content .= "<hyvor-talk-comment-count page-id={$pageId} {$mode}></hyvor-talk-comment-count>";
 		return $content;
 	}
 
