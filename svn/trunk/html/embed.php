@@ -12,12 +12,9 @@
 $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
 ?>
 
+<?php $uniqueId = uniqid(); ?>
+
 <?php if ($var['loadMode'] === 'click'): ?>
-
-    <?php
-    $uniqueId = uniqid(); // Generate a random unique string
-
-    ?>
 
     <div style="text-align:center">
         <button id="hyvor-talk-load-button-<?php echo $uniqueId ?>" onclick="this.style.display='none'">
