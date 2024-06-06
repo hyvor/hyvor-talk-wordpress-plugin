@@ -100,7 +100,7 @@ class WebPage {
 			$GLOBALS['HYVOR_TALK_PLUGIN_WEBSITE_ID'] = $this->getWebsiteId();
 		}
 
-		if ($isForEmbed && !isset($GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'])) {
+		if ($isForEmbed) {
 			$configVarsJS = array(
 				'identifier' => $identifier !== null ? $identifier : $this -> getIdentifier(),
 				'title' => $this -> getTitle(),
@@ -134,7 +134,7 @@ class WebPage {
 		include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
 		$content = ob_get_clean();
 
-		$pageId = isset($attr['id']) ? "page-id={$attr['id']}" : '';
+		$pageId = isset($attr['id']) ? "page-id={$attr['id']}" : (is_single() ? "page-id=" . get_the_ID() : '');
 		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "mode=\"number\"" : '';
 
 		$content .= "<hyvor-talk-comment-count {$pageId} {$mode}></hyvor-talk-comment-count>";
