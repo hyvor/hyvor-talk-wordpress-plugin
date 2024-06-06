@@ -18,7 +18,7 @@ include 'variables.php';
 <script>
     window.addEventListener('load', function() {
         hyvorTalkCommentCounts.load({
-        "website-id": $websiteId
+        "website-id": $HYVOR_TALK_WEBSITE
         })
     });
 </script>
