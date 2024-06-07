@@ -100,7 +100,7 @@ class WebPage {
 			$GLOBALS['HYVOR_TALK_PLUGIN_WEBSITE_ID'] = $this->getWebsiteId();
 		}
 
-		if ($isForEmbed && !isset($GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'])) {
+		if ($isForEmbed) {
 			$configVarsJS = array(
 				'identifier' => $identifier !== null ? $identifier : $this -> getIdentifier(),
 				'title' => $this -> getTitle(),
@@ -130,11 +130,23 @@ class WebPage {
 
 	public function shortCodeCount($attr) {
 		$this->setEmbedVariables(false);
+		ob_start();
 		include_once HYVOR_TALK_DIR_PATH . '/html/count.php';
+		$content = ob_get_clean();
 
-		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "data-talk-mode=\"number\"" : '';
+		if (isset($attr['id'])) {
+			$pageId = "page-id={$attr['id']}";
+		}
+		elseif (is_single()) {
+			$pageId = "page-id=" . get_the_ID();
+		}
+		else {
+			$pageId = '';
+		}
 
-		$content = "<span data-talk-id=\"{$attr['id']}\" $mode></span>";
+		$mode = isset($attr['mode']) && $attr['mode'] === 'number' ? "mode=\"number\"" : '';
+
+		$content .= "<hyvor-talk-comment-count {$pageId} {$mode}></hyvor-talk-comment-count>";
 		return $content;
 	}
 

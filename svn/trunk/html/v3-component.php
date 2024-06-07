@@ -36,5 +36,13 @@ if ($ssoData) {
     page-id="<?php echo $var['identifier'] === false ? '' : esc_attr($var['identifier']) ?>"
     sso-user="<?php echo esc_attr($userData) ?>"
     sso-hash="<?php echo esc_attr($userHash) ?>"
+    data-unique-id="<?php echo $uniqueId ?>"
+    <?php if ($var['loadMode'] === 'default'): ?>
+        loading="default"
+    <?php elseif ($var['loadMode'] === 'scroll'): ?>
+        loading="lazy"
+    <?php elseif ($var['loadMode'] === 'click'): ?>
+        loading="manual"
+    <?php endif; ?>
 ></hyvor-talk-comments>
 

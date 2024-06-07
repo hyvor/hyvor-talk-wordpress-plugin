@@ -13,4 +13,12 @@
 
 include 'variables.php';
 ?>
-<script async type="text/javascript" src="//talk.hyvor.com/web-api/count/"></script>
+
+<script src="https://talk.hyvor.com/embed/comment-counts.js"></script>
+<script>
+    window.addEventListener('load', function() {
+        hyvorTalkCommentCounts.load({
+        "website-id": HYVOR_TALK_WEBSITE,
+        })
+    });
+</script>
