@@ -77,7 +77,7 @@ class WebPage {
 		global $post;
 
 		if ($this -> isCommentCountsLoadable())
-			return "<span data-talk-id=\"{$this -> getIdentifier($post)}\"></span>";
+			return "<hyvor-talk-comment-count page-id=\"{$this -> getIdentifier($post)}\"></hyvor-talk-comment-count>";
 		else
 			return $text;
 
@@ -135,10 +135,10 @@ class WebPage {
 		$content = ob_get_clean();
 
 		if (isset($attr['id'])) {
-			$pageId = "page-id={$attr['id']}";
+			$pageId = "page-id=\"{$attr['id']}\"";
 		}
 		elseif (is_single()) {
-			$pageId = "page-id=" . get_the_ID();
+			$pageId = "page-id=\"" . get_the_ID() . "\"";
 		}
 		else {
 			$pageId = '';

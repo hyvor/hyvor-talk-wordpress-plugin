@@ -3,7 +3,7 @@ Contributors: hyvor, supunkavinda, nadil
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
 Tested up to: 6.5.3
-Stable tag: 1.2.14
+Stable tag: 1.2.15
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -87,6 +87,9 @@ In the WordPress admin panel,
 3. Comments Embed - Dark
 
 == Change Log ==
+
+= 1.2.15 =
+* Minor bug fix for hyvor-talk-comments-count
 
 = 1.2.14 =
 * Introducing new logo
