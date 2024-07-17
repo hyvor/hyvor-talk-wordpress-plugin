@@ -32,6 +32,10 @@ if ($ssoData) {
 ?>
 
 <hyvor-talk-comments
+    <?php if ( class_exists('Sitepress') ) { ?>
+        page-language="<?php echo esc_attr(apply_filters( 'wpml_current_language', NULL )); ?>"
+    <?php }?>
+
     website-id="<?php echo esc_attr($websiteId) ?>"
     page-id="<?php echo $var['identifier'] === false ? '' : esc_attr($var['identifier']) ?>"
     sso-user="<?php echo esc_attr($userData) ?>"

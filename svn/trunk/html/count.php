@@ -19,6 +19,12 @@ include 'variables.php';
     window.addEventListener('load', function() {
         hyvorTalkCommentCounts.load({
         "website-id": HYVOR_TALK_WEBSITE,
+        
+        // WPML: Add language parameter
+        <?php if ( class_exists('Sitepress') && ! is_null( apply_filters( 'wpml_current_language', NULL ) ) ) { ?> 
+            "language": "<?php echo esc_attr(apply_filters( 'wpml_current_language', NULL )); ?>"	
+        <?php } ?>
+
         })
     });
 </script>
