@@ -1,12 +1,13 @@
 <?php
 /** 
-* @package HyvorTalk
-*/
+ * @package HyvorTalk
+ */
 /*
 Plugin Name: Comments by Hyvor Talk
 Plugin URI: https://talk.hyvor.com
 Description: The official WordPress plugin for Hyvor Talk, The Best Commenting Platform For Your Website
 Version: 1.2.15
+Version: 1.2.16
 Author: Hyvor
 Author URI: https://hyvor.com
 License: GPLv2 or later
@@ -32,7 +33,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-if (!defined( 'ABSPATH' ))
+if (!defined('ABSPATH'))
 	die;
 
 // DEFINE USEFUL CONSTS 
@@ -50,14 +51,14 @@ define('HYVOR_TALK_IDENTIFIER', 'hyvor-talk');
 // the version of the plugin
 define('HYVOR_TALK_VERSION', '1.2.15');
 
-require HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk.php'; 
+require HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk.php';
 
 $hyvorTalk = new HyvorTalk\HyvorTalk();
 
 /*
 	Set the website ID to use in future
 */
-define('HYVOR_TALK_WEBSITE_ID', $hyvorTalk -> websiteId);
+define('HYVOR_TALK_WEBSITE_ID', $hyvorTalk->websiteId);
 
 /**
  * Where the configurations are saved

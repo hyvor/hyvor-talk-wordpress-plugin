@@ -35,4 +35,4 @@ $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
     <?php include 'v3-component.php' ?>
 </div>
 
-<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+<script async src="https://talk.hyvor.com/embed/embed.js?wp=1" type="module"></script>
