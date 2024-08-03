@@ -23,7 +23,7 @@ $var = $GLOBALS['HYVOR_TALK_PLUGIN_JS_CONFIG'];
     </div>
 
     <script>
-        document.getElementById("hyvor-talk-load-button-<?php echo $uniqueId ?>").addEventListener("click", function() {
+        document.getElementById("hyvor-talk-load-button-<?php echo $uniqueId ?>").addEventListener("click", function () {
             const hyvorTalkComments = document.querySelector("hyvor-talk-comments[data-unique-id='<?php echo $uniqueId ?>']");
             hyvorTalkComments.load();
         });

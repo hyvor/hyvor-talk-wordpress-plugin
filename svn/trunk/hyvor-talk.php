@@ -6,7 +6,6 @@
 Plugin Name: Comments by Hyvor Talk
 Plugin URI: https://talk.hyvor.com
 Description: The official WordPress plugin for Hyvor Talk, The Best Commenting Platform For Your Website
-Version: 1.2.15
 Version: 1.2.16
 Author: Hyvor
 Author URI: https://hyvor.com
