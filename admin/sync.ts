@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 
-fs.watch('./dist', () => {
-
-    // sync to ../plugin
-    fs.copyFileSync('./dist/admin.js', '../plugin/admin.js');
-
-});
+// sync admin.js
+function syncAdminJs() {
+    fs.copyFileSync('./dist/admin.js', '../plugin/static/admin.js');
+}
+syncAdminJs();
+fs.watch('./dist', syncAdminJs);

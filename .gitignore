@@ -1,4 +1,5 @@
 wordpress
 .idea
 plugin/.svn
+plugin/static/admin.js
 .DS_Store
