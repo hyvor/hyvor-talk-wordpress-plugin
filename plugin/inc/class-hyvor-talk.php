@@ -1,6 +1,6 @@
 <?php
 namespace HyvorTalk;
-/** 
+/**
 	* The main class of the HyvorTalk Plugin for wordpress.
 	* @link https://talk.hyvor.com
 	* @since 1.0
@@ -16,7 +16,7 @@ class HyvorTalk {
 	*/
 	private $pluginIdentifier;
 
-	/** 
+	/**
 	* @since 1.0
 	* @var string /\d{2}\.\d{2}/ 	$pluginVersion 	The version of this plugin
 	*/
@@ -36,21 +36,21 @@ class HyvorTalk {
 
 	/**
 	 * @since 1.1
-	 * @var string  LOADING_MODE_OPTION_NAME 	WP Option name for the loading mode
+	 * @var string  LOADING_MODE_OPTION_NAME 	WP Options name for the loading mode
 	 */
 	const LOADING_MODE_OPTION_NAME = 'hyvor_talk_loading_mode';
-	
+
 	/**
 	 * @since 1.2
 	 * @var int SSO_ID_OPTION_NAME SSO ID
 	 */
 	const SSO_PRIVATE_KEY_OPTION_NAME = 'hyvor_talk_sso_private_key';
 
-	/** 
-	* Sets the identifier 
+	/**
+	* Sets the identifier
 	* Sets (or Gets) the website ID
 	* Loads helpers
-	* 
+	*
 	* @since 1.0
 	*/
 	public function __construct() {
@@ -62,14 +62,14 @@ class HyvorTalk {
 		$this -> loadingMode = self::getLoadingMode();
 
 
-		$this -> initHelpers(); 
+		$this -> initHelpers();
 		$this -> initAdminHooks();
 		$this -> initWebPageHooks();
 
 	}
 
 	/**
-	* Loads helper classes 
+	* Loads helper classes
 	* @since 1.0
 	*/
 	private function initHelpers() {
@@ -77,10 +77,10 @@ class HyvorTalk {
 		/*
 		* To handle everything in the admin panel
 		*/
-		require_once HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk-admin.php';
+		require_once HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk-admin.template.php';
 
 		/**
-		* To handle everything on a web page 
+		* To handle everything on a web page
 		*/
 		require_once HYVOR_TALK_DIR_PATH . '/inc/class-hyvor-talk-webpage.php';
 
@@ -96,7 +96,7 @@ class HyvorTalk {
 		$admin = new Admin($this -> pluginIdentifier, $this -> pluginVersion, $this -> websiteId);
 
 		// filters
-		add_filter('plugin_action_links', array ($admin, 'addActionLink'), 10, 2); 
+		add_filter('plugin_action_links', array ($admin, 'addActionLink'), 10, 2);
 
 		// actions
 		add_action('admin_enqueue_scripts', array ($admin, 'addStyles'));
@@ -135,7 +135,7 @@ class HyvorTalk {
 	/**
 	* @return int website ID (Null on no option)
 	*/
-	public static function getWebsiteId() {	
+	public static function getWebsiteId() {
 
 		$websiteId = get_option(self::WEBSITE_ID_OPTION_NAME);
 		return $websiteId ? (int) $websiteId : null;

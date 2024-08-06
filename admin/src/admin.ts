@@ -1,4 +1,5 @@
 import Admin from './Admin.svelte';
+import './admin.css';
 
 const wrap = document.getElementById('wp-hyvor-talk-admin');
 

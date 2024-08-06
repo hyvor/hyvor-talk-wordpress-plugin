@@ -1,0 +1,1 @@
+- No longer removes the WP comments panels in the admin

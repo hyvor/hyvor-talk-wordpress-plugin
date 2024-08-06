@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
 	* Admin functionality handler
 	* @link https://talk.hyvor.com
 	* @since 1.0
@@ -18,7 +18,7 @@ class Admin {
 	*/
 	private $pluginIdentifier;
 
-	/** 
+	/**
 	* @since 1.0
 	* @var string /\d{2}\.\d{2}/ 	$pluginVersion 	The version of this plugin
 	*/
@@ -65,13 +65,13 @@ class Admin {
 
 		if ($file === $this -> pluginIdentifier . '/' . $this -> pluginIdentifier . '.php') {
 
-			$links[] = 
-				'<a href="' . esc_url(get_admin_url( null, 'admin.php?page=hyvor-talk' ) ) . '">' .
-					($this -> websiteId === null ? 
-						__('Install', 'hyvor-talk') : 
+			$links[] =
+				'<a href="' . esc_url(get_admin_url( null, 'admin.template.php?page=hyvor-talk' ) ) . '">' .
+					($this -> websiteId === null ?
+						__('Install', 'hyvor-talk') :
 						__('Configure', 'hyvor-talk') ) .
 	            '</a>';
-			 
+
 		}
 
 		return $links;
@@ -81,8 +81,8 @@ class Admin {
 
 	/**
 	* Adds CSS styles for the admin panel
-	* 
-	* @since 1.0 
+	*
+	* @since 1.0
 	*/
 	public function addStyles() {
 
@@ -98,11 +98,11 @@ class Admin {
 
 	/**
 	* Adds Javascript for the admin panel
-	* 
-	* @since 1.0 
+	*
+	* @since 1.0
 	*/
 	public function addScripts() {
-		
+
         # admin js
         wp_enqueue_script(
         	$this -> pluginIdentifier . '-admin',				// identifier
@@ -153,12 +153,12 @@ class Admin {
 	* @since 1.0
 	*/
 	public function createView() {
-		require_once HYVOR_TALK_DIR_PATH . 'html/admin.php';
+		require_once HYVOR_TALK_DIR_PATH . 'html/admin.template.php';
 	}
 
 	/**
 	* Creates the bar menu shown in the bar of the wordpress
-	* 
+	*
 	* @since 1.0
 	* @param 	WP_Admin_Bar $wpAdminBar    Instance of WP_Admin_Bar
 	*/
@@ -170,12 +170,12 @@ class Admin {
 		$wpAdminBar -> add_node(array (
 			'id' => 'hyvor-talk',
 			'title' => 'Hyvor Talk',
-			'href' => admin_url( 'admin.php?page=hyvor-talk' )
+			'href' => admin_url( 'admin.template.php?page=hyvor-talk' )
 		));*/
 
-		
 
-	}	 
+
+	}
 
 	/*********
 	* AJAX FUNCTIONS START (a_ functions)

@@ -14,6 +14,7 @@ export default defineConfig({
             input: '/src/admin.ts',
             output: {
                 entryFileNames: 'admin.js',
+                assetFileNames: '[name][extname]',
             },
         }
     }

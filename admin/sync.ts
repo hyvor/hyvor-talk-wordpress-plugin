@@ -1,19 +1,27 @@
-import fs from 'node:fs';
 import { exec } from 'child_process';
 import chokidar from 'chokidar';
 
 const arg = process.argv[2];
+
+function copyDir(src: string, dest: string) {
+
+    const command = `rsync -av --delete "${src}/" "${dest}/"`;
+
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`Sync error: ${error.message}`);
+          return;
+        }
+    });
+
+}
 
 if (arg === 'admin') {
 
     // sync admin.js
     function syncAdminJs() {
         console.log('Syncing admin files...');
-
-        const adminJs = './dist/admin.js';
-        if (fs.existsSync(adminJs)) {
-            fs.copyFileSync(adminJs, '../plugin/static/admin.js');
-        }
+        copyDir('./dist', '../plugin/static/admin');
     }
     syncAdminJs();
     chokidar.watch('./dist/admin.js').on('all', syncAdminJs)
@@ -23,20 +31,8 @@ if (arg === 'admin') {
     console.log('Syncing plugin files...');
 
     function syncPluginFolder() {
-
-        const from = '../plugin';
-        const to = '../wordpress/wp-content/plugins/hyvor-talk';
-        const command = `rsync -av --delete "${from}/" "${to}/"`;
-
-        console.log(`Syncing plugin changes at ${new Date().toLocaleString()}`);
-
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-              console.error(`Sync error: ${error.message}`);
-              return;
-            }
-        });
-
+        console.log(`Syncing plugin changes`);
+        copyDir('../plugin', '../wordpress/wp-content/plugins/hyvor-talk');
     }
 
     syncPluginFolder();
