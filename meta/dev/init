@@ -1,0 +1,42 @@
+#!/usr/bin/env sh
+
+set -e
+
+# Check if WP-CLI is installed
+if ! command -v wp &> /dev/null; then
+    echo "WP-CLI is not installed. Please install WP-CLI to continue."
+    exit 1
+fi
+
+# delete /wordpress
+echo "Deleting existing WordPress directory..."
+rm -rf ./wordpress
+
+# Download WordPress
+echo "Downloading WordPress..."
+wp core download || { echo "Failed to download WordPress"; exit 1; }
+
+# Create wp-config.php
+echo "Creating wp-config.php..."
+cp wordpress/wp-config-sample.php wordpress/wp-config.php
+
+# Set permissions
+echo "Setting permissions..."
+chmod 644 wordpress/wp-config.php
+chmod 755 wordpress/wp-content
+
+# get DB data
+echo "Please enter your database information:"
+read -p "Database Name: " dbname
+read -p "Database User: " dbuser
+read -p "Database Password: " dbpass
+read -p "Database Host (usually localhost): " dbhost
+
+# Update wp-config.php
+sed -i '' "s/database_name_here/$dbname/" wordpress/wp-config.php
+sed -i '' "s/username_here/$dbuser/" wordpress/wp-config.php
+sed -i '' "s/password_here/$dbpass/" wordpress/wp-config.php
+sed -i '' "s/localhost/$dbhost/" wordpress/wp-config.php
+
+echo "WordPress installation complete!"
+echo "Run ./dev to start the development server."
