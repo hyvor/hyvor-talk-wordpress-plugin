@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+set -e
+
+(
+    trap 'kill 0' SIGINT;
+
+    wp server --host=127.0.0.1 --port=9393 --docroot=./wordpress &
+    cd admin && bun run dev
+
+)

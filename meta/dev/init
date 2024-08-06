@@ -14,29 +14,22 @@ rm -rf ./wordpress
 
 # Download WordPress
 echo "Downloading WordPress..."
-wp core download || { echo "Failed to download WordPress"; exit 1; }
+wp core download --path=wordpress || { echo "Failed to download WordPress"; exit 1; }
 
 # Create wp-config.php
-echo "Creating wp-config.php..."
-cp wordpress/wp-config-sample.php wordpress/wp-config.php
+echo "Configure WordPress..."
+read -p "Database Name (default: wordpress): " dbname
+dbname=${dbname:-wordpress}
+read -p "Database User (default: root): " dbuser
+dbuser=${dbuser:-root}
+read -s -p "Database Password (default:): " dbpass
+echo
+read -p "Database Host (default: 127.0.0.1): " dbhost
+dbhost=${dbhost:-'127.0.0.1'}
 
-# Set permissions
-echo "Setting permissions..."
-chmod 644 wordpress/wp-config.php
-chmod 755 wordpress/wp-content
+wp config create --path=./wordpress --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpass --dbhost=$dbhost --dbprefix='wp_' || { echo "Failed to create wp-config.php"; exit 1; }
 
-# get DB data
-echo "Please enter your database information:"
-read -p "Database Name: " dbname
-read -p "Database User: " dbuser
-read -p "Database Password: " dbpass
-read -p "Database Host (usually localhost): " dbhost
+# Install WordPress
+echo "Installing WordPress..."
 
-# Update wp-config.php
-sed -i '' "s/database_name_here/$dbname/" wordpress/wp-config.php
-sed -i '' "s/username_here/$dbuser/" wordpress/wp-config.php
-sed -i '' "s/password_here/$dbpass/" wordpress/wp-config.php
-sed -i '' "s/localhost/$dbhost/" wordpress/wp-config.php
-
-echo "WordPress installation complete!"
-echo "Run ./dev to start the development server."
+wp core install --path=./wordpress --url=http://127.0.0.1:9393 --title="WordPress" --admin_user=admin --admin_password=admin --admin_email=no-reply@hyvor.com || { echo "Failed to install WordPress"; exit 1; }
