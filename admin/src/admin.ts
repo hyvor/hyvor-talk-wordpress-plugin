@@ -12,4 +12,3 @@ if (wrap) {
 
 }
 
-console.log(wrap)
