@@ -67,7 +67,7 @@
         display: flex;
         font-size: 16px;
         padding: 20px 0;
-        justify-content: flex-start;
+        align-items: flex-start;
     }
     .ht-nav {
         padding: 20px 0;

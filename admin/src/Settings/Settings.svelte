@@ -1,5 +1,7 @@
 <script>
     import SplitControl from "../@components/SplitControl.svelte";
+
+    let advanced = false;
 </script>
 
 <div class="ht-settings-wrap">
@@ -26,6 +28,23 @@
     >
         <input type="text" value="1" />
     </SplitControl>
+
+    <div class="ht-advanced">
+        <button on:click={() => (advanced = !advanced)}>
+            {advanced ? "Hide" : "Show"} Advanced Settings
+        </button>
+        {#if advanced}
+            <SplitControl
+                label="Hyvor Talk Instance"
+                caption="If you are self-hosting HYVOR, set this to the Hyvor Talk URL"
+            >
+                <input
+                    type="text"
+                    placeholder="https://talk.hyvor.example.org"
+                />
+            </SplitControl>
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -35,5 +54,13 @@
     input[type="text"] {
         display: block;
         width: 100%;
+    }
+    .ht-advanced {
+        margin-top: 10px;
+    }
+    .ht-advanced button {
+        font-size: 14px;
+        color: var(--ht-link);
+        text-decoration: underline;
     }
 </style>

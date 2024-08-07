@@ -20,6 +20,7 @@
     .ht-split-control {
         padding: 15px 0;
         display: flex;
+        gap: 10px;
     }
     .ht-split-control-left {
         flex: 1;
@@ -31,7 +32,7 @@
         font-weight: 600;
     }
     .ht-caption {
-        font-size: 14px;
+        font-size: 13px;
         color: var(--ht-text-light);
         margin-top: 3px;
     }
