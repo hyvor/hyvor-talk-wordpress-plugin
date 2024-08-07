@@ -51,6 +51,7 @@
                 <Radio label="Slug" value="slug" bind:group={$optionsEditing.default_post_id} />
             </div>
         </SplitControl>
+        <OptionSave key="default_post_id" />
 
         <SplitControl
             label="Sync Comments"
