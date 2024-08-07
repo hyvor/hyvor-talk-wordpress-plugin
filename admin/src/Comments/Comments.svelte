@@ -19,6 +19,15 @@
     <OptionSave key="comments_enabled" />
 
     {#if $options.comments_enabled}
+
+        <SplitControl
+            label="Enable Comment Counts"
+            caption="Enable or disable comment counts on your site"
+        >
+            <input type="checkbox" bind:checked={$optionsEditing.comment_counts_enabled} />
+        </SplitControl>
+        <OptionSave key="comment_counts_enabled" />
+        
         <SplitControl
             label="Loading Mode"
             caption="When to load the comments in the page"

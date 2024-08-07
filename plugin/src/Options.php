@@ -36,6 +36,10 @@ class Options {
     const COMMENTS_ENABLED = 'hyvor_talk_comments_enabled';
 
     /**
+     * Comment counts enabled
+     */
+    const COMMENT_COUNTS_ENABLED = 'hyvor_talk_comment_counts_enabled';
+    /**
      * Loading mode of the comments embed
      */
     const LOADING_MODE = 'hyvor_talk_loading_mode';
@@ -49,6 +53,7 @@ class Options {
             self::ENCRYPTION_KEY,
             self::INSTANCE,
             self::COMMENTS_ENABLED,
+            self::COMMENT_COUNTS_ENABLED,
             self::LOADING_MODE
         ];
     }
@@ -78,6 +83,7 @@ class Options {
             'encryption_key' => self::encryptionKey(),
             'instance' => self::instance(),
             'comments_enabled' => self::commentsEnabled(),
+            'comment_counts_enabled' => self::commentCountsEnabled(),
             'loading_mode' => self::loadingMode()
         ];
 
@@ -135,6 +141,14 @@ class Options {
     public static function commentsEnabled()
     {
         return boolval(get_option(self::COMMENTS_ENABLED));
+    }
+
+    /**
+     * @return bool
+     */
+    public static function commentCountsEnabled()
+    {
+        return boolval(get_option(self::COMMENT_COUNTS_ENABLED));
     }
 
     /**

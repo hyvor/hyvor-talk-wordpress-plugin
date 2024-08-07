@@ -11,6 +11,7 @@ export interface Options {
     encryption_key: string;
     instance: string;
     comments_enabled: boolean;
+    comment_counts_enabled: boolean;
     loading_mode: 'default' | 'scroll' | 'click';
 }
 
