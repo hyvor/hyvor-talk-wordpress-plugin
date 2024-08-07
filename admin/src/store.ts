@@ -10,6 +10,8 @@ export interface Options {
     sso_private_key: string;
     encryption_key: string;
     instance: string;
+    comments_enabled: boolean;
+    loading_mode: 'default' | 'scroll' | 'click';
 }
 
 export const options = writable<Options>({} as Options);
