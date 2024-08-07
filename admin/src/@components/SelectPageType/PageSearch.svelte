@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { tick } from "svelte";
+    import { createEventDispatcher, tick } from "svelte";
     import { callApi } from "../../api";
     import type { PostType } from "../../store";
     import Loader from "../Loader.svelte";
@@ -11,6 +11,8 @@
     let search = "";
     let loading = false;
     let timeout: null | ReturnType<typeof setTimeout> = null;
+
+    const dispatch = createEventDispatcher<{ change: PostType[] }>();
 
     async function onInput() {
         await tick();
@@ -72,6 +74,31 @@
             return "taxonomy - " + taxonomyName;
         }
     }
+
+    function dispatchChange() {
+        dispatch("change", types);
+    }
+
+    function onSearchTypeClick(type: PostType) {
+        if (types.some((t) => t.post_type === type.post_type)) {
+            return;
+        }
+        types = [...types, type];
+        searchedTypes = [];
+        search = "";
+        dispatchChange();
+    }
+
+    function onRemoveType(type: PostType) {
+        types = types.filter((t) => {
+            if (t.type === "post_type") {
+                return t.post_type !== type.post_type;
+            } else {
+                return t.taxonomy !== type.taxonomy || t.term !== type.term;
+            }
+        });
+        dispatchChange();
+    }
 </script>
 
 <div class="ht-wrap">
@@ -93,9 +120,10 @@
                     {/if}
 
                     {#each searchedTypes as type}
-                        <div
+                        <button
                             class="ht-searched-type"
                             class:disabled={includedInCurrent(type)}
+                            on:click={() => onSearchTypeClick(type)}
                         >
                             <div class="ht-left">
                                 {getPostTypeName(type)}
@@ -103,16 +131,29 @@
                             <div class="ht-right">
                                 {getPostType(type)}
                             </div>
-                        </div>
+                        </button>
                     {/each}
                 {/if}
             </div>
         {/if}
     </div>
 
-    {#each types as type}
-        <div>{type.post_type} {type?.term || type?.post_type}</div>
-    {/each}
+    {#if types.length}
+        <div class="ht-selected-types">
+            {#each types as type}
+                <span class="ht-tag">
+                    <span class="ht-type-name">{getPostTypeName(type)}</span>
+                    <span class="ht-post">({getPostType(type)})</span>
+                    <button
+                        class="ht-remove"
+                        on:click={() => onRemoveType(type)}
+                    >
+                        &times;
+                    </button>
+                </span>
+            {/each}
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -151,6 +192,8 @@
         font-size: 14px;
         padding: 4px 15px;
         cursor: pointer;
+        width: 100%;
+        text-align: left;
     }
     .ht-searched-type:hover {
         background-color: var(--ht-hover);
@@ -165,5 +208,24 @@
     .ht-right {
         font-size: 13px;
         color: var(--ht-text-light);
+    }
+    .ht-selected-types {
+        margin-top: 5px;
+        display: flex;
+        gap: 5px;
+    }
+    .ht-selected-types .ht-tag {
+        display: inline-flex;
+        background-color: var(--ht-input);
+        border-radius: 5px;
+        padding: 2px 8px;
+    }
+    .ht-selected-types .ht-post {
+        color: var(--ht-text-light);
+        font-size: 13px;
+        margin-left: 5px;
+    }
+    .ht-remove {
+        margin-left: 5px;
     }
 </style>

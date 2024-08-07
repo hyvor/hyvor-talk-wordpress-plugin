@@ -1,11 +1,14 @@
 <script lang="ts">
     import Radio from "../Radio.svelte";
-    import type { SelectedPages } from "../../store";
+    import type { PostType, SelectedPages } from "../../store";
     import PageSearch from "./PageSearch.svelte";
+    import { createEventDispatcher } from "svelte";
 
     export let config: SelectedPages;
 
     $: group = !config ? "all" : config.logic;
+
+    const dispatch = createEventDispatcher<{ change: SelectedPages }>();
 
     function onLogicChange(value: "all" | "include" | "exclude") {
         if (value === "all") {
@@ -16,6 +19,17 @@
                 types: [],
             };
         }
+
+        dispatch("change", config);
+    }
+
+    function onTypesChange(e: CustomEvent<PostType[]>) {
+        if (!config) {
+            return;
+        }
+        config.types = e.detail;
+
+        dispatch("change", config);
     }
 </script>
 
@@ -35,7 +49,7 @@
         on:change={() => onLogicChange("include")}
     />
     {#if config && config.logic === "include"}
-        <PageSearch bind:types={config.types} />
+        <PageSearch bind:types={config.types} on:change={onTypesChange} />
     {/if}
     <Radio
         name="page-type"

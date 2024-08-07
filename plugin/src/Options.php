@@ -75,6 +75,13 @@ class Options {
         ];
     }
 
+    public static function jsonKeys()
+    {
+        return [
+            self::MEMBERSHIPS_PAGES,
+        ];
+    }
+
     public static function update($key, $value)
     {
         if (!in_array($key, self::allKeys())) {
@@ -84,6 +91,10 @@ class Options {
         if ($value === null) {
             delete_option($key);
         } else {
+            if (in_array($key, self::jsonKeys())) {
+                $value = json_encode($value);
+            }
+
             update_option($key, $value);
         }
 
@@ -199,19 +210,24 @@ class Options {
 
     public static function membershipsPages()
     {
-        $pages = get_option(self::MEMBERSHIPS_PAGES);
+        return self::nullabelJsonArray(self::MEMBERSHIPS_PAGES);
+    }
 
-        if ($pages === false) {
+    private static function nullabelJsonArray(string $key)
+    {
+        $value = get_option($key);
+
+        if ($value === false) {
             return null;
         }
 
-        $pages = json_decode($pages, true);
+        $value = json_decode($value, true);
 
-        if (!is_array($pages)) {
+        if (!is_array($value)) {
             return null;
         }
 
-        return $pages;
+        return $value;
     }
 
     private static function nullableString(string $key)
