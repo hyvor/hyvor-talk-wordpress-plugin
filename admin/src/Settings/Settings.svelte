@@ -60,18 +60,6 @@
             bind:value={$optionsEditing.sso_private_key}
         />
         <OptionSave key="sso_private_key" />
-
-        {#if $options.website_id && !$options.sso_private_key}
-            <Notice>
-                Enter your SSO Private Key to enable Single Sign-On.
-                <a
-                    href="https://talk.hyvor.com/console/{$options.website_id}/settings/sso"
-                    target="_blank"
-                >
-                    Get SSO Private Key
-                </a>
-            </Notice>
-        {/if}
     </SplitControl>
 
     <SplitControl
@@ -85,18 +73,6 @@
             bind:value={$optionsEditing.encryption_key}
         />
         <OptionSave key="encryption_key" />
-
-        {#if $options.website_id && !$options.encryption_key}
-            <Notice>
-                Enter your Encryption Key to enable the gated content feature.
-                <a
-                    href="https://talk.hyvor.com/console/{$options.website_id}/settings/api"
-                    target="_blank"
-                >
-                    Get Encryption Key
-                </a>
-            </Notice>
-        {/if}
     </SplitControl>
 
     <div class="ht-advanced">

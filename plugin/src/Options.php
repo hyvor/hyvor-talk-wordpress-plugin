@@ -142,7 +142,7 @@ class Options {
      */
     public static function loadingMode()
     {
-        return self::nullableString(self::LOADING_MODE);
+        return get_option(self::LOADING_MODE, 'default');
     }
 
     private static function nullableString(string $key)

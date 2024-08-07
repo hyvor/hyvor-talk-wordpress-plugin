@@ -1,13 +1,13 @@
 <script lang="ts">
     export let label: string;
     export let value: string;
-    export let radioGroup: any;
+    export let group: any;
 
     let id = label.replace(/\s+/g, '').replace(/^\w/, (c) => c.toLowerCase());
 </script>
 
 <div class="ht-radio-button">
-    <input type="radio" id={id} value={value} bind:group={radioGroup} />
+    <input type="radio" id={id} value={value} bind:group={group} />
     <label for={id}>{label}</label>
 </div>
 
