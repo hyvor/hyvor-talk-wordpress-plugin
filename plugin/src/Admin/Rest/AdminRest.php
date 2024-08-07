@@ -2,8 +2,6 @@
 
 namespace Hyvor\HyvorTalkWP\Admin\Rest;
 
-use Hyvor\HyvorTalkWP\Context;
-
 class AdminRest {
 
 	public static function registerRestRoutes() {
@@ -12,15 +10,19 @@ class AdminRest {
 			'callback' => [SettingsController::class, 'init'],
 			'permission_callback' => [self::class, 'permissions'],
 		]);
-		/*register_rest_route('hyvor-talk/v1', '/website', [
-			'methods' => 'POST',
-			'callback' => [self::class, 'setWebsite'],
-			'permission_callback' => [self::class, 'setWebsitePermission'],
-		]);*/
+        register_rest_route('hyvor-talk/v1', '/option', [
+            'methods' => 'PATCH',
+            'callback' => [SettingsController::class, 'updateOption'],
+            'permission_callback' => [self::class, 'permissions'],
+        ]);
 	}
 
+    /**
+     * Anyone who can manage options can also access the REST API endpoints.
+     * https://wordpress.org/documentation/article/roles-and-capabilities/#manage_options
+     */
 	public static function permissions() {
-		return true;
+		return current_user_can('manage_options');
 	}
 
 }

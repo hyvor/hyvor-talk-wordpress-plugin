@@ -1,9 +1,11 @@
 <script lang="ts">
     export let label: string;
     export let caption: string | undefined = undefined;
+
+    export let disabled = false;
 </script>
 
-<div class="ht-split-control">
+<div class="ht-split-control" class:disabled>
     <div class="ht-split-control-left">
         <div class="ht-label">{label}</div>
         {#if caption}
@@ -21,6 +23,10 @@
         padding: 15px 0;
         display: flex;
         gap: 10px;
+    }
+    .ht-split-control.disabled {
+        opacity: 0.5;
+        pointer-events: none;
     }
     .ht-split-control-left {
         flex: 1;

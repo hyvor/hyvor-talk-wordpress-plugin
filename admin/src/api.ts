@@ -1,23 +1,38 @@
 
 
 export function callApi(
-    method: 'GET' | 'POST' | 'PUT' | 'DELETE',
+    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE',
     endpoint: string,
-    data?: any
+    data?: Record<string, any>,
+    onSuccess?: (response: any) => void,
+    onError?: (error: any) => void
 ) {
 
     endpoint = endpoint.replace(/^\//, '');
     endpoint = '/' + endpoint;
 
+    const isJson = method !== 'GET';
+
     (window as any).jQuery.ajax({
         method,
         url: (window as any).HYVOR_TALK_REST_URL + endpoint,
-        data,
+        data: isJson ? JSON.stringify(data) : data,
+        contentType: isJson ? 'application/json' : undefined,
+
+        beforeSend: (xhr: any) => {
+            xhr.setRequestHeader('X-WP-Nonce', (window as any).HYVOR_TALK_NONCE);
+        },
         success: (response: any) => {
-            console.log(response);
+            if (onSuccess) {
+                onSuccess(response);
+            }
         },
         error: (error: any) => {
-            console.error(error);
+            if (onError) {
+                onError(error);
+            } else {
+                console.error(error);
+            }
         }
     });
 

@@ -6,7 +6,10 @@
     --ht-accent-lightest: #fffaec;
     --ht-hover: #fafafa;
     --ht-text-light: #777;
-    --ht-link: #7cb6e1;
+
+    /* wp colors */
+    --ht-link: #2271b1;
+    --ht-green: #007017;
 }
 
 .ht-global-box {

@@ -71,7 +71,7 @@ class AdminContext {
 			'moderate_comments',
 			'hyvor-talk',
 			[$this, 'renderAdminPage'],
-			'dashicons-admin-comments',
+			'dashicons-format-chat',
 			26 // right after comments
 		);
 	}

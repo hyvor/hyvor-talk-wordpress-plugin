@@ -2,12 +2,38 @@
 
 namespace Hyvor\HyvorTalkWP\Admin\Rest;
 
+use Hyvor\HyvorTalkWP\Options;
+
 class SettingsController {
 
 	public static function init()
 	{
-		$data = array('message' => 'Hello from the API!');
-		return new \WP_REST_Response($data, 200);
+        $options = Options::all();
+
+		return new \WP_REST_Response([
+            'options' => $options,
+        ], 200);
 	}
+
+    /**
+     * @param \WP_REST_Request $request
+     */
+    public static function updateOption($request)
+    {
+        $options = $request->get_json_params();
+        $allKeys = Options::allKeys();
+
+        foreach ($options as $key => $value) {
+            $key = 'hyvor_talk_' . $key;
+            if (!in_array($key, $allKeys)) {
+                return new \WP_REST_Response([
+                    'message' => 'Invalid option key: ' . $key,
+                ], 400);
+            }
+            Options::update($key, $value);
+        }
+
+        return new \WP_REST_Response(Options::all(), 200);
+    }
 
 }

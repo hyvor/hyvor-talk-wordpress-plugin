@@ -1,7 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import NavLink from "./@components/NavLink.svelte";
-    import { section, type SectionType } from "./store";
+    import {
+        options,
+        optionsEditing,
+        section,
+        setOptions,
+        type SectionType,
+    } from "./store";
     import { callApi } from "./api";
     import Settings from "./Settings/Settings.svelte";
     import IconGear from "./@icons/IconGear.svelte";
@@ -15,51 +21,67 @@
         $section = newSection;
     }
 
+    let loading = true;
+
     onMount(() => {
-        callApi("GET", "/init");
+        callApi(
+            "GET",
+            "/init",
+            {},
+            (response) => {
+                setOptions(response.options);
+
+                loading = false;
+            },
+            (err) => {
+                alert(err.message);
+            },
+        );
     });
 </script>
 
 <div class="ht-main-wrap">
-    <div class="ht-nav ht-global-box">
-        <NavLink
-            on:click={() => setSection("settings")}
-            active={$section === "settings"}
-        >
-            <IconGear slot="start" />
-            Plugin Configuration
-        </NavLink>
-        <NavLink
-            on:click={() => setSection("comments")}
-            active={$section === "comments"}
-        >
-            <IconChat slot="start" />
-            Comments
-        </NavLink>
-        <NavLink
-            on:click={() => setSection("newsletters")}
-            active={$section === "newsletters"}
-        >
-            <IconEnvelope slot="start" />
-            Newsletters
-        </NavLink>
-        <NavLink
-            on:click={() => setSection("memberships")}
-            active={$section === "memberships"}
-        >
-            <IconPersonUp slot="start" />
-            Memberships
-        </NavLink>
-    </div>
-    <div class="ht-content ht-global-box">
-        {#if $section === "settings"}
-            <Settings />
-        {:else if $section === "comments"}
-            <Comments />
-        {:else if $section === "newsletters"}
-            <Newsletters />
-        {/if}
-    </div>
+    {#if !loading}
+        <div class="ht-nav ht-global-box">
+            <NavLink
+                on:click={() => setSection("settings")}
+                active={$section === "settings"}
+            >
+                <IconGear slot="start" />
+                Plugin Configuration
+            </NavLink>
+            <NavLink
+                on:click={() => setSection("comments")}
+                active={$section === "comments"}
+            >
+                <IconChat slot="start" />
+                Comments
+            </NavLink>
+            <NavLink
+                on:click={() => setSection("newsletters")}
+                active={$section === "newsletters"}
+            >
+                <IconEnvelope slot="start" />
+                Newsletters
+            </NavLink>
+            <NavLink
+                on:click={() => setSection("memberships")}
+                active={$section === "memberships"}
+            >
+                <IconPersonUp slot="start" />
+                Memberships
+            </NavLink>
+        </div>
+        <div class="ht-content ht-global-box">
+            {#if $section === "settings"}
+                <Settings />
+            {:else if $section === "comments"}
+                <Comments />
+            {:else if $section === "newsletters"}
+                <Newsletters />
+            {/if}
+        </div>
+    {/if}
 </div>
 
 <style>
