@@ -1,4 +1,5 @@
 <script>
+    import Shortcode from "../@components/Shortcode.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
 </script>
 
@@ -23,6 +24,18 @@
             Console.
         </p>
     </SplitControl>
+
+    <hr style="margin:20px 0;" />
+
+    <h3>Shortcodes</h3>
+
+    <Shortcode
+        title="1. Newsletter Form"
+        code={`[hyvor-talk-newsletter]`}
+        href="https://talk.hyvor.com/docs/wordpress#shortcode-newsletters"
+    >
+        <p>Use this shortcode to display the newsletter form on a page.</p>
+    </Shortcode>
 </div>
 
 <style>
