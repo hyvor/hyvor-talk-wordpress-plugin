@@ -2,7 +2,7 @@
     import Notice from "../@components/Notice.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
-    import OptionSave from "./OptionSave.svelte";
+    import OptionSave from "../@components/OptionSave.svelte";
 
     let advanced = false;
 </script>

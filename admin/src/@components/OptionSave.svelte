@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Notice from "../@components/Notice.svelte";
+    import Notice from "./Notice.svelte";
     import { callApi } from "../api";
     import { options, optionsEditing, type Options } from "../store";
 
