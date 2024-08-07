@@ -1,17 +1,23 @@
+@import url(https://fonts.bunny.net/css?family=readex-pro:400,600);
+
 :root {
     --ht-accent: #ffd969;
     --ht-accent-light: #fff1cb;
     --ht-accent-lightest: #fffaec;
     --ht-hover: #fafafa;
+    --ht-text-light: #777;
 }
 
-body {
-    background-color: #fafafa!important;
-}
-
-
-.ht-box {
+.ht-global-box {
     background-color: #fff;
     border-radius: 20px;
     box-shadow: 0 0 30px #0000000d;
+}
+
+
+.ht-main-wrap {
+    font-family: 'Readex Pro', sans-serif;
+}
+.ht-main-wrap svg {
+    vertical-align: middle;
 }

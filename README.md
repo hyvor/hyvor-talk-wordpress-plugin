@@ -34,3 +34,14 @@ This command:
 -   Runs `bun run dev --watch` in the `admin` directory.
 -   Syncs `/plugin` to `/wordpress/wp-content/plugins/hyvor-talk`.
 -   Syncs `admin.js` changes to `/wordpress/wp-content/plugins/hyvor-talk/admin/admin.js`.
+
+## All Features of the Plugin
+
+### Newsletter
+
+-   Auto subscribe users to the newsletter when they sign up (`user_register` hook).
+-   Auto subscribe users to the newsletter when they comment on a post (`comment_post` hook). Only if the user is using WordPress comments. For Hyvor Talk comments, configure this in Settings -> Newsletter.
+
+### Memberships
+
+-

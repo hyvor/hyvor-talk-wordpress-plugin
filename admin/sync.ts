@@ -16,12 +16,18 @@ function copyDir(src: string, dest: string) {
 
 }
 
+function syncPluginFolder() {
+    console.log(`Syncing plugin changes`);
+    copyDir('../plugin', '../wordpress/wp-content/plugins/hyvor-talk');
+}
+
 if (arg === 'admin') {
 
     // sync admin.js
     function syncAdminJs() {
         console.log('Syncing admin files...');
         copyDir('./dist', '../plugin/static/admin');
+        setTimeout(syncPluginFolder, 1000);
     }
     syncAdminJs();
     chokidar.watch('./dist/admin.js').on('all', syncAdminJs)
@@ -29,11 +35,6 @@ if (arg === 'admin') {
 } else if (arg === 'plugin') {
 
     console.log('Syncing plugin files...');
-
-    function syncPluginFolder() {
-        console.log(`Syncing plugin changes`);
-        copyDir('../plugin', '../wordpress/wp-content/plugins/hyvor-talk');
-    }
 
     syncPluginFolder();
     chokidar.watch('../plugin', {
