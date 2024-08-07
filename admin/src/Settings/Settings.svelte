@@ -2,7 +2,7 @@
     import Notice from "../@components/Notice.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
-    import OptionSave from "./OptionSave.svelte";
+    import OptionSave from "../@components/OptionSave.svelte";
 
     let advanced = false;
 </script>
@@ -23,6 +23,7 @@
             </Notice>
         {/if}
     </SplitControl>
+
     <SplitControl
         label="Console API Key"
         caption="To communicate with Hyvor Talk servers. Required for admin features"
@@ -33,6 +34,7 @@
             name="hyvor-talk-console-api-key"
             bind:value={$optionsEditing.console_api_key}
         />
+        <OptionSave key="console_api_key" />
 
         {#if $options.website_id && !$options.console_api_key}
             <Notice>
@@ -46,6 +48,7 @@
             </Notice>
         {/if}
     </SplitControl>
+
     <SplitControl
         label="SSO Private Key"
         caption="To connect WordPress users with Hyvor Talk using Single Sign-On"
@@ -56,7 +59,21 @@
             name="hyvor-talk-private-key"
             bind:value={$optionsEditing.sso_private_key}
         />
+        <OptionSave key="sso_private_key" />
+
+        {#if $options.website_id && !$options.sso_private_key}
+            <Notice>
+                Enter your SSO Private Key to enable Single Sign-On.
+                <a
+                    href="https://talk.hyvor.com/console/{$options.website_id}/settings/sso"
+                    target="_blank"
+                >
+                    Get SSO Private Key
+                </a>
+            </Notice>
+        {/if}
     </SplitControl>
+
     <SplitControl
         label="Encryption Key"
         caption="Required for the gated content feature"
@@ -67,6 +84,19 @@
             name="hyvor-talk-encryption-key"
             bind:value={$optionsEditing.encryption_key}
         />
+        <OptionSave key="encryption_key" />
+
+        {#if $options.website_id && !$options.encryption_key}
+            <Notice>
+                Enter your Encryption Key to enable the gated content feature.
+                <a
+                    href="https://talk.hyvor.com/console/{$options.website_id}/settings/api"
+                    target="_blank"
+                >
+                    Get Encryption Key
+                </a>
+            </Notice>
+        {/if}
     </SplitControl>
 
     <div class="ht-advanced">

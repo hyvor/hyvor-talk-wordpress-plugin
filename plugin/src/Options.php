@@ -30,6 +30,15 @@ class Options {
      */
     const INSTANCE = 'hyvor_talk_instance';
 
+    /**
+     * Comments enabled
+     */
+    const COMMENTS_ENABLED = 'hyvor_talk_comments_enabled';
+
+    /**
+     * Loading mode of the comments embed
+     */
+    const LOADING_MODE = 'hyvor_talk_loading_mode';
 
     public static function allKeys()
     {
@@ -39,6 +48,8 @@ class Options {
             self::SSO_PRIVATE_KEY,
             self::ENCRYPTION_KEY,
             self::INSTANCE,
+            self::COMMENTS_ENABLED,
+            self::LOADING_MODE
         ];
     }
 
@@ -66,6 +77,8 @@ class Options {
             'sso_private_key' => self::ssoPrivateKey(),
             'encryption_key' => self::encryptionKey(),
             'instance' => self::instance(),
+            'comments_enabled' => self::commentsEnabled(),
+            'loading_mode' => self::loadingMode()
         ];
 
     }
@@ -114,6 +127,22 @@ class Options {
     public static function instance()
     {
         return self::nullableString(self::INSTANCE);
+    }
+
+    /**
+     * @return bool
+     */
+    public static function commentsEnabled()
+    {
+        return boolval(get_option(self::COMMENTS_ENABLED));
+    }
+
+    /**
+     * @return ?string
+     */
+    public static function loadingMode()
+    {
+        return self::nullableString(self::LOADING_MODE);
     }
 
     private static function nullableString(string $key)
