@@ -39,18 +39,21 @@ class PostTypeObject
         string $term = null
     ) {
         $this->type = $type;
-        $this->post_type = $post_type;
-        $this->taxonomy = $taxonomy;
-        $this->term = $term;
+        if ($type === 'post_type') {
+            $this->post_type = $post_type;
+        } else {
+            $this->taxonomy = $taxonomy;
+            $this->term = $term;
+        }
     }
 
 
-    public static function fromPostType(string $post_type) : PostTypeObject
+    public static function fromPostType(string $post_type): PostTypeObject
     {
         return new PostTypeObject('post_type', $post_type);
     }
 
-    public static function fromTaxonomy(string $taxonomy, string $term = null) : PostTypeObject
+    public static function fromTaxonomy(string $taxonomy, string $term = null): PostTypeObject
     {
         return new PostTypeObject('taxonomy', null, $taxonomy, $term);
     }
@@ -58,7 +61,7 @@ class PostTypeObject
     /**
      * @return self[]
      */
-    public static function search(string $search) : array
+    public static function search(string $search): array
     {
 
         $postTypes = get_post_types(['public' => true], 'names');

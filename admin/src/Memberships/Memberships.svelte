@@ -1,5 +1,8 @@
 <script>
     import SplitControl from "../@components/SplitControl.svelte";
+    import SelectPageType from "../@components/SelectPageType/SelectPageType.svelte";
+    import { optionsEditing } from "../store";
+    import OptionSave from "../@components/OptionSave.svelte";
 </script>
 
 <div class="ht-wrap">
@@ -9,16 +12,18 @@
         label="Enable Memberships"
         caption="Show membership subscription button on your website"
     >
-        <input type="checkbox" value="1" />
+        <input
+            type="checkbox"
+            bind:checked={$optionsEditing.memberships_enabled}
+        />
+        <OptionSave key="memberships_enabled" />
     </SplitControl>
 
     <SplitControl
         label="Available on"
         caption="On which pages the membership button should be shown"
     >
-        <input type="radio" value="all" /> All Pages
-        <input type="radio" value="only" /> Only on selected pages
-        <input type="radio" value="except" /> On all pages except selected pages
+        <SelectPageType config={null} />
     </SplitControl>
 </div>
 

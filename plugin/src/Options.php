@@ -49,6 +49,11 @@ class Options {
      */
     const DEFAULT_POST_ID = 'hyvor_talk_default_post_id';
 
+
+    // Memberships
+    const MEMBERSHIPS_ENABLED = 'hyvor_talk_memberships_enabled';
+    const MEMBERSHIPS_PAGES = 'hyvor_talk_memberships_pages';
+
     public static function allKeys()
     {
         return [
@@ -57,10 +62,16 @@ class Options {
             self::SSO_PRIVATE_KEY,
             self::ENCRYPTION_KEY,
             self::INSTANCE,
+
+            // comments
             self::COMMENTS_ENABLED,
             self::COMMENT_COUNTS_ENABLED,
             self::LOADING_MODE,
-            self::DEFAULT_POST_ID
+            self::DEFAULT_POST_ID,
+
+            // memberships
+            self::MEMBERSHIPS_ENABLED,
+            self::MEMBERSHIPS_PAGES,
         ];
     }
 
@@ -83,15 +94,22 @@ class Options {
     {
 
         return [
+            // basic
             'website_id' => self::websiteId(),
             'console_api_key' => self::consoleApiKey(),
             'sso_private_key' => self::ssoPrivateKey(),
             'encryption_key' => self::encryptionKey(),
             'instance' => self::instance(),
+
+            // comments
             'comments_enabled' => self::commentsEnabled(),
             'comment_counts_enabled' => self::commentCountsEnabled(),
             'loading_mode' => self::loadingMode(),
-            'default_post_id' => self::defaultPostId()
+            'default_post_id' => self::defaultPostId(),
+
+            // memberships
+            'memberships_enabled' => self::membershipsEnabled(),
+            'memberships_pages' => self::membershipsPages(),
         ];
 
     }
@@ -172,6 +190,28 @@ class Options {
     public static function defaultPostId()
     {
         return get_option(self::DEFAULT_POST_ID, 'post_id');    // confirm the default value
+    }
+
+    public static function membershipsEnabled()
+    {
+        return boolval(get_option(self::MEMBERSHIPS_ENABLED));
+    }
+
+    public static function membershipsPages()
+    {
+        $pages = get_option(self::MEMBERSHIPS_PAGES);
+
+        if ($pages === false) {
+            return null;
+        }
+
+        $pages = json_decode($pages, true);
+
+        if (!is_array($pages)) {
+            return null;
+        }
+
+        return $pages;
     }
 
     private static function nullableString(string $key)

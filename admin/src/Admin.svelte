@@ -27,7 +27,7 @@
         } else {
             url.searchParams.set("section", newSection);
         }
-        window.history.pushState({}, "", url);
+        window.history.replaceState({}, "", url);
     }
 
     let loading = true;
