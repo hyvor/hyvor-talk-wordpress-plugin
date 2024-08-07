@@ -2,7 +2,7 @@
     import SplitControl from "../@components/SplitControl.svelte";
 </script>
 
-<div class="wrap">
+<div class="ht-wrap">
     <h3 style="margin-top:0;">Newsletter</h3>
 
     <SplitControl
@@ -26,7 +26,7 @@
 </div>
 
 <style>
-    .wrap {
+    .ht-wrap {
         padding: 30px 35px;
     }
 </style>
