@@ -4,6 +4,8 @@
     import { options, optionsEditing, type Options } from "../store";
 
     export let key: keyof Options;
+    export let validate: ((value: any) => string | true) | undefined =
+        undefined;
 
     $: value = $options[key];
 
@@ -15,6 +17,8 @@
 
     let editing = false;
     let saved = false;
+
+    let error = "";
 
     function getSavableValue() {
         let val = valueEditing;
@@ -30,7 +34,20 @@
     }
 
     function handleSave() {
+        const val = getSavableValue();
+        error = "";
+
+        const validation = validate !== undefined ? validate(val) : true;
+        if (validation !== true) {
+            error = validation;
+            setTimeout(() => {
+                error = "";
+            }, 2000);
+            return;
+        }
+
         editing = true;
+
         callApi(
             "PATCH",
             "/option",
@@ -65,6 +82,10 @@
 
 {#if saved}
     <Notice type="success">Saved!</Notice>
+{/if}
+
+{#if error}
+    <Notice type="error">{error}</Notice>
 {/if}
 
 <style>

@@ -7,6 +7,13 @@
     function onMembershipPagesChange(e: CustomEvent<SelectedPages>) {
         $optionsEditing.memberships_pages = e.detail;
     }
+
+    function validatePages(p: SelectedPages) {
+        if (p && p.types.length === 0) {
+            return "Please select at least one page type";
+        }
+        return true;
+    }
 </script>
 
 <div class="ht-wrap">
@@ -32,7 +39,7 @@
                 config={$optionsEditing.memberships_pages}
                 on:change={onMembershipPagesChange}
             />
-            <OptionSave key="memberships_pages" />
+            <OptionSave key="memberships_pages" validate={validatePages} />
         </SplitControl>
     {/if}
 </div>
