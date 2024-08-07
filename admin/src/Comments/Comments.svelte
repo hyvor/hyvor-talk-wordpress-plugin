@@ -27,7 +27,7 @@
             <input type="checkbox" bind:checked={$optionsEditing.comment_counts_enabled} />
         </SplitControl>
         <OptionSave key="comment_counts_enabled" />
-        
+
         <SplitControl
             label="Loading Mode"
             caption="When to load the comments in the page"
@@ -40,6 +40,18 @@
         </SplitControl>
         <OptionSave key="loading_mode" />
         
+
+        <SplitControl
+            label="Default post-id"
+            caption="The default post-id to use when the post-id is not set"
+        >                                                                               <!-- double check the caption -->
+            <div>
+                <Radio label="Post ID" value="post_id" bind:group={$optionsEditing.default_post_id} />
+                <Radio label="URL" value="url" bind:group={$optionsEditing.default_post_id} />
+                <Radio label="Slug" value="slug" bind:group={$optionsEditing.default_post_id} />
+            </div>
+        </SplitControl>
+
         <SplitControl
             label="Sync Comments"
             caption="Sync comments from Hyvor Talk to WordPress daily"

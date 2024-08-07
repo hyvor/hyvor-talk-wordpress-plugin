@@ -13,6 +13,7 @@ export interface Options {
     comments_enabled: boolean;
     comment_counts_enabled: boolean;
     loading_mode: 'default' | 'scroll' | 'click';
+    default_post_id: 'post_id' | 'url' | 'slug';
 }
 
 export const options = writable<Options>({} as Options);

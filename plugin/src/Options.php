@@ -44,6 +44,11 @@ class Options {
      */
     const LOADING_MODE = 'hyvor_talk_loading_mode';
 
+    /**
+     * Default post ID for the comments embed
+     */
+    const DEFAULT_POST_ID = 'hyvor_talk_default_post_id';
+
     public static function allKeys()
     {
         return [
@@ -54,7 +59,8 @@ class Options {
             self::INSTANCE,
             self::COMMENTS_ENABLED,
             self::COMMENT_COUNTS_ENABLED,
-            self::LOADING_MODE
+            self::LOADING_MODE,
+            self::DEFAULT_POST_ID
         ];
     }
 
@@ -84,7 +90,8 @@ class Options {
             'instance' => self::instance(),
             'comments_enabled' => self::commentsEnabled(),
             'comment_counts_enabled' => self::commentCountsEnabled(),
-            'loading_mode' => self::loadingMode()
+            'loading_mode' => self::loadingMode(),
+            'default_post_id' => self::defaultPostId()
         ];
 
     }
@@ -152,11 +159,19 @@ class Options {
     }
 
     /**
-     * @return ?string
+     * @return string
      */
     public static function loadingMode()
     {
         return get_option(self::LOADING_MODE, 'default');
+    }
+
+    /**
+     * @return string
+     */
+    public static function defaultPostId()
+    {
+        return get_option(self::DEFAULT_POST_ID, 'post_id');    // confirm the default value
     }
 
     private static function nullableString(string $key)
