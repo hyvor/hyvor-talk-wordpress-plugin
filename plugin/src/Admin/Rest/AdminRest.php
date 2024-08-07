@@ -15,6 +15,11 @@ class AdminRest {
             'callback' => [SettingsController::class, 'updateOption'],
             'permission_callback' => [self::class, 'permissions'],
         ]);
+        register_rest_route('hyvor-talk/v1', '/post-taxonomy-search', [
+            'methods' => 'GET',
+            'callback' => [SettingsController::class, 'searchTaxonomies'],
+            'permission_callback' => [self::class, 'permissions'],
+        ]);
 	}
 
     /**
