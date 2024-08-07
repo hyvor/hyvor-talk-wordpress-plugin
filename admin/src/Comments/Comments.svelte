@@ -1,6 +1,7 @@
 <script>
     import OptionSave from "../@components/OptionSave.svelte";
     import Radio from "../@components/Radio.svelte";
+    import Shortcode from "../@components/Shortcode.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
 
@@ -42,7 +43,60 @@
 
     <h3>Shortcodes</h3>
 
-    <p>Coming soon...</p>
+    <p>View docs for more available attributes in the shortcodes.</p>
+
+    <Shortcode
+        title="1. Comments"
+        code={`[hyvor-talk-comments page-id="YOUR_PAGE_ID"]`}
+        href="https://talk.hyvor.com/docs/wordpress#shortcode-comments"
+    >
+        <ul>
+            <li>Use this shortcode to display the comments embed on a page.</li>
+            <li>
+                Replace<code>YOUR_PAGE_ID</code>
+                with a unique identifier for the page.
+            </li>
+            <li>
+                Each value of
+                <code>page-id</code> will have a separate comment thread.
+            </li>
+        </ul>
+    </Shortcode>
+
+    <Shortcode
+        title="2. Comment Counts"
+        code={`[hyvor-talk-comments-count page-id="YOUR_PAGE_ID"]`}
+        href="https://talk.hyvor.com/docs/wordpress#shortcode-comment-counts"
+    >
+        <ul>
+            <li>Use this shortcode to display the comment count of a page.</li>
+            <li>
+                Usually, you can use this shortcode in the loop to display the
+                comment count of each post.
+            </li>
+            <li>
+                Replace <code>YOUR_PAGE_ID</code> with the <code>page-id</code>
+                of the page. This is the same as the <code>page-id</code> of the
+                comments shortcode.
+            </li>
+        </ul>
+    </Shortcode>
+
+    <!-- <div class="shortcode">
+        <div>
+            <code> [hyvor-talk-comments page-id="YOUR_PAGE_ID"] </code>
+            <IconButton>
+                <IconCopy size={12} />
+            </IconButton>
+        </div>
+        <p>
+            Use this shortcode to display the comments embed on a page. Replace <code
+                >YOUR_PAGE_ID</code
+            >
+            with a unique identifier for the page. Each value of
+            <code>page-id</code> will have a separate comment thread.
+        </p>
+    </div> -->
 </div>
 
 <style>

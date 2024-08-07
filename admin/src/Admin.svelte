@@ -19,6 +19,14 @@
 
     function setSection(newSection: SectionType) {
         $section = newSection;
+
+        const url = new URL(window.location.href);
+        if (newSection === "settings") {
+            url.searchParams.delete("section");
+        } else {
+            url.searchParams.set("section", newSection);
+        }
+        window.history.pushState({}, "", url);
     }
 
     let loading = true;
@@ -30,8 +38,13 @@
             {},
             (response) => {
                 setOptions(response.options);
-
                 loading = false;
+
+                const url = new URL(window.location.href);
+                const section = url.searchParams.get("section");
+                if (section) {
+                    setSection(section as SectionType);
+                }
             },
             (err) => {
                 alert(err.message);
