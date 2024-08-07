@@ -36,9 +36,18 @@ class Options {
     const COMMENTS_ENABLED = 'hyvor_talk_comments_enabled';
 
     /**
+     * Comment counts enabled
+     */
+    const COMMENT_COUNTS_ENABLED = 'hyvor_talk_comment_counts_enabled';
+    /**
      * Loading mode of the comments embed
      */
     const LOADING_MODE = 'hyvor_talk_loading_mode';
+
+    /**
+     * Default post ID for the comments embed
+     */
+    const DEFAULT_POST_ID = 'hyvor_talk_default_post_id';
 
     public static function allKeys()
     {
@@ -49,7 +58,9 @@ class Options {
             self::ENCRYPTION_KEY,
             self::INSTANCE,
             self::COMMENTS_ENABLED,
-            self::LOADING_MODE
+            self::COMMENT_COUNTS_ENABLED,
+            self::LOADING_MODE,
+            self::DEFAULT_POST_ID
         ];
     }
 
@@ -78,7 +89,9 @@ class Options {
             'encryption_key' => self::encryptionKey(),
             'instance' => self::instance(),
             'comments_enabled' => self::commentsEnabled(),
-            'loading_mode' => self::loadingMode()
+            'comment_counts_enabled' => self::commentCountsEnabled(),
+            'loading_mode' => self::loadingMode(),
+            'default_post_id' => self::defaultPostId()
         ];
 
     }
@@ -138,11 +151,27 @@ class Options {
     }
 
     /**
-     * @return ?string
+     * @return bool
+     */
+    public static function commentCountsEnabled()
+    {
+        return boolval(get_option(self::COMMENT_COUNTS_ENABLED));
+    }
+
+    /**
+     * @return string
      */
     public static function loadingMode()
     {
-        return self::nullableString(self::LOADING_MODE);
+        return get_option(self::LOADING_MODE, 'default');
+    }
+
+    /**
+     * @return string
+     */
+    public static function defaultPostId()
+    {
+        return get_option(self::DEFAULT_POST_ID, 'post_id');    // confirm the default value
     }
 
     private static function nullableString(string $key)

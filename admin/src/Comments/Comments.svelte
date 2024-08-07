@@ -19,18 +19,39 @@
     <OptionSave key="comments_enabled" />
 
     {#if $options.comments_enabled}
+
+        <SplitControl
+            label="Enable Comment Counts"
+            caption="Enable or disable comment counts on your site"
+        >
+            <input type="checkbox" bind:checked={$optionsEditing.comment_counts_enabled} />
+        </SplitControl>
+        <OptionSave key="comment_counts_enabled" />
+
         <SplitControl
             label="Loading Mode"
             caption="When to load the comments in the page"
         >
         <div>
-            <Radio label="On Load" value="default" radioGroup={$optionsEditing.loading_mode} />
-            <Radio label="On Scroll" value="scroll" radioGroup={$optionsEditing.loading_mode} />
-            <Radio label="On Button Click" value="click" radioGroup={$optionsEditing.loading_mode} />
+            <Radio label="On Load" value="default" bind:group={$optionsEditing.loading_mode} />
+            <Radio label="On Scroll" value="scroll" bind:group={$optionsEditing.loading_mode} />
+            <Radio label="On Button Click" value="click" bind:group={$optionsEditing.loading_mode} />
         </div>
         </SplitControl>
         <OptionSave key="loading_mode" />
         
+
+        <SplitControl
+            label="Default post-id"
+            caption="The default post-id to use when the post-id is not set"
+        >                                                                               <!-- double check the caption -->
+            <div>
+                <Radio label="Post ID" value="post_id" bind:group={$optionsEditing.default_post_id} />
+                <Radio label="URL" value="url" bind:group={$optionsEditing.default_post_id} />
+                <Radio label="Slug" value="slug" bind:group={$optionsEditing.default_post_id} />
+            </div>
+        </SplitControl>
+
         <SplitControl
             label="Sync Comments"
             caption="Sync comments from Hyvor Talk to WordPress daily"
