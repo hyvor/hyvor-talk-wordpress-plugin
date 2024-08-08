@@ -1,6 +1,6 @@
 <script lang="ts">
     import Radio from "../Radio.svelte";
-    import type { PostType, SelectedPages } from "../../store";
+    import { options, type PostType, type SelectedPages } from "../../store";
     import PageSearch from "./PageSearch.svelte";
     import { createEventDispatcher } from "svelte";
 
@@ -16,7 +16,10 @@
         } else {
             config = {
                 logic: value,
-                types: [],
+                types:
+                    $options.memberships_pages?.logic === value
+                        ? $options.memberships_pages.types
+                        : [],
             };
         }
 
@@ -58,4 +61,7 @@
         {group}
         on:change={() => onLogicChange("exclude")}
     />
+    {#if config && config.logic === "exclude"}
+        <PageSearch bind:types={config.types} on:change={onTypesChange} />
+    {/if}
 </div>
