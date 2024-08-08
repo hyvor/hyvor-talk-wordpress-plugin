@@ -80,7 +80,7 @@
     }
 
     function onSearchTypeClick(type: PostType) {
-        if (types.some((t) => t.post_type === type.post_type)) {
+        if (includedInCurrent(type)) {
             return;
         }
         types = [...types, type];
@@ -105,7 +105,7 @@
     <div class="ht-search-wrap">
         <input
             type="text"
-            placeholder="Search page type"
+            placeholder="Search page type or taxonomy (e.g. post, category)"
             on:input={onInput}
             bind:value={search}
         />
@@ -162,8 +162,12 @@
         margin-left: 25px;
     }
     .ht-search-wrap {
-        display: inline-block;
+        display: block;
         position: relative;
+    }
+    input {
+        display: block;
+        width: 100%;
     }
     .ht-search {
         position: absolute;
@@ -171,14 +175,13 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        left: 50%;
+        left: 0;
         top: 100%;
-        width: 350px;
+        width: 450px;
         z-index: 100;
         padding: 15px 0;
         max-height: 300px;
         overflow: auto;
-        transform: translateX(-50%);
         margin-top: 5px;
     }
     .ht-no-results {

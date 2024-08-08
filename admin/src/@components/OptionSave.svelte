@@ -72,7 +72,7 @@
     }
 </script>
 
-{#if value !== valueEditing}
+{#if JSON.stringify(value) !== JSON.stringify(valueEditing)}
     <div class="ht-option-save">
         <button class="button" on:click={handleSave} disabled={editing}>
             Save

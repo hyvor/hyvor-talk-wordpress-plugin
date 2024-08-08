@@ -44,5 +44,5 @@ export const optionsEditing = writable<Options>({} as Options);
 
 export function setOptions(newOptions: Options) {
     options.set(newOptions);
-    optionsEditing.set({...newOptions});
+    optionsEditing.set(structuredClone(newOptions));
 }

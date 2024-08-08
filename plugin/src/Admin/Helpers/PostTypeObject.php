@@ -70,7 +70,7 @@ class PostTypeObject
         $objects = [];
 
         foreach ($postTypes as $postType) {
-            if (stripos($postType, $search) !== false) {
+            if ($search && stripos($postType, $search) !== false) {
                 $objects[] = self::fromPostType($postType);
             }
         }
