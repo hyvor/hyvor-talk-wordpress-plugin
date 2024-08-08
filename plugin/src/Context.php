@@ -2,7 +2,8 @@
 
 namespace Hyvor\HyvorTalkWP;
 
-use Hyvor\HyvorTalkWP\Admin\AdminContext;
+use Hyvor\HyvorTalkWP\Admin\AdminHooks;
+use Hyvor\HyvorTalkWP\Embed\EmbedHooks;
 
 class Context
 {
@@ -29,19 +30,27 @@ class Context
 	 */
 	public $websiteId;
 
+    /**
+     * @var array<string, mixed>
+     */
+    public $options;
+
     public function __construct(string $pluginPath)
     {
 
         $this->pluginDir = plugin_dir_path($pluginPath);
 		$this->pluginUrl = plugin_dir_url($pluginPath);
-		$this->websiteId = Options::websiteId();
+
+        //$this->websiteId = Options::websiteId();
+        $this->options = Options::all();
 
     }
 
 	public function init()
 	{
 
-		(new AdminContext($this))->init();
+		(new AdminHooks($this))->init();
+        (new EmbedHooks($this))->init();
 
 	}
 

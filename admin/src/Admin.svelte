@@ -16,6 +16,7 @@
     import IconPersonUp from "./@icons/IconPersonUp.svelte";
     import Comments from "./Comments/Comments.svelte";
     import Newsletters from "./Newsletters/Newsletters.svelte";
+    import Memberships from "./Memberships/Memberships.svelte";
 
     function setSection(newSection: SectionType) {
         $section = newSection;
@@ -26,7 +27,7 @@
         } else {
             url.searchParams.set("section", newSection);
         }
-        window.history.pushState({}, "", url);
+        window.history.replaceState({}, "", url);
     }
 
     let loading = true;
@@ -92,6 +93,8 @@
                 <Comments />
             {:else if $section === "newsletters"}
                 <Newsletters />
+            {:else if $section === "memberships"}
+                <Memberships />
             {/if}
         </div>
     {/if}

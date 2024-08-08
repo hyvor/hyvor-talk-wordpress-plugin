@@ -2,6 +2,7 @@
 
 namespace Hyvor\HyvorTalkWP\Admin\Rest;
 
+use Hyvor\HyvorTalkWP\Admin\Helpers\PostTypeObject;
 use Hyvor\HyvorTalkWP\Options;
 
 class SettingsController {
@@ -34,6 +35,18 @@ class SettingsController {
         }
 
         return new \WP_REST_Response(Options::all(), 200);
+    }
+
+    /**
+     * @param \WP_REST_Request $request
+     */
+    public static function searchTaxonomies($request)
+    {
+        $search = $request->get_param('search');
+
+        $objects = PostTypeObject::search($search);
+
+        return new \WP_REST_Response($objects, 200);
     }
 
 }

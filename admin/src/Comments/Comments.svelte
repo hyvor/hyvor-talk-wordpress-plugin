@@ -103,22 +103,6 @@
             </li>
         </ul>
     </Shortcode>
-
-    <!-- <div class="shortcode">
-        <div>
-            <code> [hyvor-talk-comments page-id="YOUR_PAGE_ID"] </code>
-            <IconButton>
-                <IconCopy size={12} />
-            </IconButton>
-        </div>
-        <p>
-            Use this shortcode to display the comments embed on a page. Replace <code
-                >YOUR_PAGE_ID</code
-            >
-            with a unique identifier for the page. Each value of
-            <code>page-id</code> will have a separate comment thread.
-        </p>
-    </div> -->
 </div>
 
 <style>

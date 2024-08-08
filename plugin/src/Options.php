@@ -49,6 +49,12 @@ class Options {
      */
     const DEFAULT_POST_ID = 'hyvor_talk_default_post_id';
 
+
+    // Memberships
+    const MEMBERSHIPS_ENABLED = 'hyvor_talk_memberships_enabled';
+    const MEMBERSHIPS_PAGES = 'hyvor_talk_memberships_pages';
+    const MEMBERSHIPS_GATED_CONTENT_RULES = 'hyvor_talk_memberships_gated_content_rules';
+
     public static function allKeys()
     {
         return [
@@ -57,10 +63,17 @@ class Options {
             self::SSO_PRIVATE_KEY,
             self::ENCRYPTION_KEY,
             self::INSTANCE,
+
+            // comments
             self::COMMENTS_ENABLED,
             self::COMMENT_COUNTS_ENABLED,
             self::LOADING_MODE,
-            self::DEFAULT_POST_ID
+            self::DEFAULT_POST_ID,
+
+            // memberships
+            self::MEMBERSHIPS_ENABLED,
+            self::MEMBERSHIPS_PAGES,
+            self::MEMBERSHIPS_GATED_CONTENT_RULES,
         ];
     }
 
@@ -83,15 +96,23 @@ class Options {
     {
 
         return [
+            // basic
             'website_id' => self::websiteId(),
             'console_api_key' => self::consoleApiKey(),
             'sso_private_key' => self::ssoPrivateKey(),
             'encryption_key' => self::encryptionKey(),
             'instance' => self::instance(),
+
+            // comments
             'comments_enabled' => self::commentsEnabled(),
             'comment_counts_enabled' => self::commentCountsEnabled(),
             'loading_mode' => self::loadingMode(),
-            'default_post_id' => self::defaultPostId()
+            'default_post_id' => self::defaultPostId(),
+
+            // memberships
+            'memberships_enabled' => self::membershipsEnabled(),
+            'memberships_pages' => self::membershipsPages(),
+            'memberships_gated_content_rules' => self::membershipsGatedContentRules(),
         ];
 
     }
@@ -172,6 +193,52 @@ class Options {
     public static function defaultPostId()
     {
         return get_option(self::DEFAULT_POST_ID, 'post_id');    // confirm the default value
+    }
+
+    public static function membershipsEnabled()
+    {
+        return boolval(get_option(self::MEMBERSHIPS_ENABLED));
+    }
+
+    public static function membershipsPages()
+    {
+        return self::nullableArray(self::MEMBERSHIPS_PAGES);
+    }
+
+    public static function membershipsGatedContentRules()
+    {
+        return self::nullableArray(self::MEMBERSHIPS_GATED_CONTENT_RULES) ?? [];
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    public static function withDefaults($options)
+    {
+        $defaults = [
+            'instance' => 'https://talk.hyvor.com',
+        ];
+        foreach ($defaults as $key => $value) {
+            if (!isset($options[$key])) {
+                $options[$key] = $value;
+            }
+        }
+        return $options;
+    }
+
+    private static function nullableArray(string $key)
+    {
+        $value = get_option($key);
+
+        if ($value === false) {
+            return null;
+        }
+
+        if (!is_array($value)) {
+            return null;
+        }
+
+        return $value;
     }
 
     private static function nullableString(string $key)
