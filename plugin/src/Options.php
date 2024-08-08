@@ -53,7 +53,7 @@ class Options {
     // Memberships
     const MEMBERSHIPS_ENABLED = 'hyvor_talk_memberships_enabled';
     const MEMBERSHIPS_PAGES = 'hyvor_talk_memberships_pages';
-    const MEMBERSHIPS_GATED_CONTENT_RULES = 'hyvor_talk_membership_gated_content_rules';
+    const MEMBERSHIPS_GATED_CONTENT_RULES = 'hyvor_talk_memberships_gated_content_rules';
 
     public static function allKeys()
     {
@@ -77,13 +77,6 @@ class Options {
         ];
     }
 
-    public static function jsonKeys()
-    {
-        return [
-            self::MEMBERSHIPS_PAGES,
-        ];
-    }
-
     public static function update($key, $value)
     {
         if (!in_array($key, self::allKeys())) {
@@ -93,10 +86,6 @@ class Options {
         if ($value === null) {
             delete_option($key);
         } else {
-            if (in_array($key, self::jsonKeys())) {
-                $value = json_encode($value);
-            }
-
             update_option($key, $value);
         }
 
@@ -213,23 +202,21 @@ class Options {
 
     public static function membershipsPages()
     {
-        return self::nullabelJsonArray(self::MEMBERSHIPS_PAGES);
+        return self::nullableArray(self::MEMBERSHIPS_PAGES);
     }
 
     public static function membershipsGatedContentRules()
     {
-        return self::nullabelJsonArray(self::MEMBERSHIPS_GATED_CONTENT_RULES) ?? [];
+        return self::nullableArray(self::MEMBERSHIPS_GATED_CONTENT_RULES) ?? [];
     }
 
-    private static function nullabelJsonArray(string $key)
+    private static function nullableArray(string $key)
     {
         $value = get_option($key);
 
         if ($value === false) {
             return null;
         }
-
-        $value = json_decode($value, true);
 
         if (!is_array($value)) {
             return null;

@@ -1,7 +1,13 @@
 <script lang="ts">
     import Notice from "./Notice.svelte";
     import { callApi } from "../api";
-    import { options, optionsEditing, type Options } from "../store";
+    import {
+        options,
+        optionsEditing,
+        setOptions,
+        type Options,
+    } from "../store";
+    import { updateOption } from "../actions";
 
     export let key: keyof Options;
     export let validate: ((value: any) => string | true) | undefined =
@@ -48,24 +54,18 @@
 
         editing = true;
 
-        callApi(
-            "PATCH",
-            "/option",
-            {
-                [key]: getSavableValue(),
-            },
-            (response) => {
-                options.set(response);
-                optionsEditing.set(response);
+        updateOption(
+            key,
+            val,
+            () => {
                 editing = false;
-
                 saved = true;
                 setTimeout(() => {
                     saved = false;
                 }, 2000);
             },
             (err) => {
-                alert(err.message);
+                error = err.message;
                 editing = false;
             },
         );

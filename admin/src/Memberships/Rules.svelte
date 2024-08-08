@@ -25,6 +25,6 @@
     </button>
 {/if}
 
-{#each $options.memberships_gated_content_rules as rule}
-    <RuleRow {rule} />
+{#each $options.memberships_gated_content_rules as rule, i}
+    <RuleRow {rule} index={i} />
 {/each}

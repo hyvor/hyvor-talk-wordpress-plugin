@@ -3,6 +3,7 @@
     import { callApi } from "../../api";
     import type { PostType } from "../../store";
     import Loader from "../Loader.svelte";
+    import { getPostType, getPostTypeName } from "./pageSearch";
 
     export let types: PostType[] = [];
 
@@ -55,24 +56,6 @@
                 return t.taxonomy === type.taxonomy && t.term === type.term;
             }
         });
-    }
-
-    function getPostTypeName(type: PostType) {
-        if (type.type === "post_type") {
-            return type.post_type;
-        } else {
-            return type.term;
-        }
-    }
-
-    function getPostType(type: PostType) {
-        if (type.type === "post_type") {
-            return "post type";
-        } else {
-            const taxonomy = type.taxonomy || "";
-            const taxonomyName = taxonomy.replace("_", " ");
-            return "taxonomy - " + taxonomyName;
-        }
     }
 
     function dispatchChange() {
