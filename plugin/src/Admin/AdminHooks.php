@@ -5,7 +5,7 @@ namespace Hyvor\HyvorTalkWP\Admin;
 use Hyvor\HyvorTalkWP\Admin\Rest\AdminRest;
 use Hyvor\HyvorTalkWP\Context;
 
-class AdminContext
+class AdminHooks
 {
 
 	/**

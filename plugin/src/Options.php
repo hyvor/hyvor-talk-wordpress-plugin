@@ -210,6 +210,22 @@ class Options {
         return self::nullableArray(self::MEMBERSHIPS_GATED_CONTENT_RULES) ?? [];
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
+    public static function withDefaults($options)
+    {
+        $defaults = [
+            'instance' => 'https://talk.hyvor.com',
+        ];
+        foreach ($defaults as $key => $value) {
+            if (!isset($options[$key])) {
+                $options[$key] = $value;
+            }
+        }
+        return $options;
+    }
+
     private static function nullableArray(string $key)
     {
         $value = get_option($key);
