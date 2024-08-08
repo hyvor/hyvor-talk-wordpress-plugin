@@ -218,7 +218,7 @@ class Options {
 
     public static function membershipsGatedContentRules()
     {
-        return self::nullabelJsonArray(self::MEMBERSHIPS_GATED_CONTENT_RULES);
+        return self::nullabelJsonArray(self::MEMBERSHIPS_GATED_CONTENT_RULES) ?? [];
     }
 
     private static function nullabelJsonArray(string $key)

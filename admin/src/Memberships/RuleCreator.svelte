@@ -16,6 +16,18 @@
     function cancel() {
         disptach("cancel");
     }
+
+    function create() {
+        $options.memberships_gated_content_rules = [
+            ...$options.memberships_gated_content_rules,
+            {
+                minimum_plan: minimumPlan,
+                post_types: postTypes,
+                gate,
+                show_excerpt: showExcerpt,
+            },
+        ];
+    }
 </script>
 
 <div class="ht-rule-creator">
@@ -33,7 +45,10 @@
                 </a>
             </p>
         </SplitControl>
-        <SplitControl label="Post Types">
+        <SplitControl
+            label="Post Types"
+            caption="Select the post types to apply the rule."
+        >
             <SelectPageType name="rule-post-types" config={postTypes} />
         </SplitControl>
 
@@ -59,7 +74,9 @@
     <div class="ht-footer">
         <button class="button button-secondary" on:click={cancel}>Cancel</button
         >
-        <button class="button button-primary">Create Rule</button>
+        <button class="button button-primary" on:click={create}
+            >Create Rule</button
+        >
     </div>
 </div>
 

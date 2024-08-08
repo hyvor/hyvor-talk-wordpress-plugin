@@ -1,5 +1,7 @@
 <script>
+    import { options } from "../store";
     import RuleCreator from "./RuleCreator.svelte";
+    import RuleRow from "./RuleRow.svelte";
 
     let creating = false;
 </script>
@@ -14,7 +16,15 @@
 {#if creating}
     <RuleCreator on:cancel={() => (creating = false)} />
 {:else}
-    <button class="button" on:click={() => (creating = true)}>
+    <button
+        class="button"
+        on:click={() => (creating = true)}
+        disabled={$options.memberships_gated_content_rules.length >= 10}
+    >
         Create Rule
     </button>
 {/if}
+
+{#each $options.memberships_gated_content_rules as rule}
+    <RuleRow {rule} />
+{/each}

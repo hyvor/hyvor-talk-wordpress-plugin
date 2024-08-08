@@ -22,6 +22,7 @@ export interface Options {
     // memberships
     memberships_enabled: boolean;
     memberships_pages: SelectedPages;
+    memberships_gated_content_rules: GatedContentRule[]
 }
 
 export type SelectedPages = null | { // null = all pages
