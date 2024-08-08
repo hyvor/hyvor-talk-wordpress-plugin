@@ -20,6 +20,25 @@ class EmbedHooks
 
     public function init()
     {
+        if (!$this->isEmbedsLoadable()) {
+            return;
+        }
+
+        // comments
+        if ($this->context->options['comments_enabled']) {
+            add_filter('pre_render_block', [$this, 'getCommentsPluginTemplateForBlock'], 10, 2);
+            add_filter('comments_template', [$this, 'getCommentsPluginTemplate']);
+        }
+
+        // comment counts
+        if ($this->context->options['comments_enabled'] && $this->context->options['comment_counts_enabled']) {
+            add_filter('comments_number', [$this, 'getCommentCountsTemplate']);
+            add_action('wp_footer', [$this, 'addCommentCountsScript']);
+        }
+
+        // newsletters
+        // TODO
+
         // memberships
         if ($this->context->options['memberships_enabled']) {
             add_action('wp_footer', [$this, 'addMembershipsScripts']);
@@ -27,6 +46,52 @@ class EmbedHooks
         }
     }
 
+    public function isEmbedsLoadable()
+    {
+        if (!$this->context->websiteId) {
+            return false;
+        }
+
+        if (is_feed()) {
+            return false;
+        }
+    }
+
+    /************************************************************************************************************
+     * COMMENTS
+     */
+
+    
+    /************************************************************************************************************
+     * COMMENT COUNTS
+     */
+    public function getCommentCountsTemplate()
+    {
+        $options = Options::withDefaults($this->context->options);
+        ob_start();
+        include($this->context->pluginDir . 'src/Embed/templates/comment-counts.template.php');
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
+    }
+
+    public function addCommentCountsScript()
+    {
+        $options = Options::withDefaults($this->context->options);
+        ob_start();
+        include($this->context->pluginDir . 'src/Embed/templates/comment-counts-script.template.php');
+        $content = ob_get_contents();
+        ob_end_clean();
+        echo $content;
+    }
+    
+    /************************************************************************************************************
+     * NEWSLETTERS
+     */
+    
+    /************************************************************************************************************
+     * MEMBERSHIPS
+     */
     public function addMembershipsScripts()
     {
         $options = Options::withDefaults($this->context->options);
