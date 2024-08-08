@@ -53,6 +53,7 @@ class Options {
     // Memberships
     const MEMBERSHIPS_ENABLED = 'hyvor_talk_memberships_enabled';
     const MEMBERSHIPS_PAGES = 'hyvor_talk_memberships_pages';
+    const MEMBERSHIPS_GATED_CONTENT_RULES = 'hyvor_talk_membership_gated_content_rules';
 
     public static function allKeys()
     {
@@ -72,6 +73,7 @@ class Options {
             // memberships
             self::MEMBERSHIPS_ENABLED,
             self::MEMBERSHIPS_PAGES,
+            self::MEMBERSHIPS_GATED_CONTENT_RULES,
         ];
     }
 
@@ -121,6 +123,7 @@ class Options {
             // memberships
             'memberships_enabled' => self::membershipsEnabled(),
             'memberships_pages' => self::membershipsPages(),
+            'memberships_gated_content_rules' => self::membershipsGatedContentRules(),
         ];
 
     }
@@ -211,6 +214,11 @@ class Options {
     public static function membershipsPages()
     {
         return self::nullabelJsonArray(self::MEMBERSHIPS_PAGES);
+    }
+
+    public static function membershipsGatedContentRules()
+    {
+        return self::nullabelJsonArray(self::MEMBERSHIPS_GATED_CONTENT_RULES);
     }
 
     private static function nullabelJsonArray(string $key)

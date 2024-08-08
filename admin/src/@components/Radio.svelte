@@ -4,7 +4,10 @@
     export let value: string;
     export let group: any;
 
-    let id = label.replace(/\s+/g, "").replace(/^\w/, (c) => c.toLowerCase());
+    let id =
+        name +
+        "-" +
+        label.replace(/\s+/g, "").replace(/^\w/, (c) => c.toLowerCase());
 </script>
 
 <div class="ht-radio-button">

@@ -3,6 +3,7 @@
     import SelectPageType from "../@components/SelectPageType/SelectPageType.svelte";
     import { options, optionsEditing, type SelectedPages } from "../store";
     import OptionSave from "../@components/OptionSave.svelte";
+    import Rules from "./Rules.svelte";
 
     function onMembershipPagesChange(e: CustomEvent<SelectedPages>) {
         $optionsEditing.memberships_pages = e.detail;
@@ -37,10 +38,15 @@
         >
             <SelectPageType
                 config={$optionsEditing.memberships_pages}
+                configOriginal={$options.memberships_pages}
                 on:change={onMembershipPagesChange}
             />
             <OptionSave key="memberships_pages" validate={validatePages} />
         </SplitControl>
+
+        <hr style="margin: 30px 0;" />
+
+        <Rules />
     {/if}
 </div>
 

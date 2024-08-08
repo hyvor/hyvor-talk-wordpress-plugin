@@ -1,10 +1,13 @@
 <script lang="ts">
     import Radio from "../Radio.svelte";
-    import { options, type PostType, type SelectedPages } from "../../store";
+    import { type PostType, type SelectedPages } from "../../store";
     import PageSearch from "./PageSearch.svelte";
     import { createEventDispatcher } from "svelte";
 
+    export let name = "page-type";
+
     export let config: SelectedPages;
+    export let configOriginal: SelectedPages | undefined = undefined;
 
     $: group = !config ? "all" : config.logic;
 
@@ -17,9 +20,7 @@
             config = {
                 logic: value,
                 types:
-                    $options.memberships_pages?.logic === value
-                        ? $options.memberships_pages.types
-                        : [],
+                    configOriginal?.logic === value ? configOriginal.types : [],
             };
         }
 
@@ -38,14 +39,14 @@
 
 <div class="ht-wrap">
     <Radio
-        name="page-type"
+        {name}
         label="All Pages"
         value="all"
         {group}
         on:change={() => onLogicChange("all")}
     />
     <Radio
-        name="page-type"
+        {name}
         label="Only on selected pages"
         value="include"
         {group}
@@ -55,7 +56,7 @@
         <PageSearch bind:types={config.types} on:change={onTypesChange} />
     {/if}
     <Radio
-        name="page-type"
+        {name}
         label="On all pages except selected pages"
         value="exclude"
         {group}
