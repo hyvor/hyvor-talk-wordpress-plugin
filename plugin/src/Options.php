@@ -25,6 +25,9 @@ class Options {
      */
     const ENCRYPTION_KEY = 'hyvor_talk_encryption_key';
 
+    // Webhook secret key
+    const WEBHOOK_SECRET_KEY = 'hyvor_talk_webhook_secret_key';
+
     /**
      * Instance of the Hyvor Talk
      */
@@ -55,6 +58,7 @@ class Options {
     const MEMBERSHIPS_PAGES = 'hyvor_talk_memberships_pages';
     const MEMBERSHIPS_GATED_CONTENT_RULES = 'hyvor_talk_memberships_gated_content_rules';
 
+
     public static function allKeys()
     {
         return [
@@ -62,6 +66,7 @@ class Options {
             self::CONSOLE_API_KEY,
             self::SSO_PRIVATE_KEY,
             self::ENCRYPTION_KEY,
+            self::WEBHOOK_SECRET_KEY,
             self::INSTANCE,
 
             // comments
@@ -153,6 +158,14 @@ class Options {
     public static function encryptionKey()
     {
         return self::nullableString(self::ENCRYPTION_KEY);
+    }
+
+    /**
+     * @return ?string
+     */
+    public static function webhookSecretKey()
+    {
+        return self::nullableString(self::WEBHOOK_SECRET_KEY);
     }
 
     /**

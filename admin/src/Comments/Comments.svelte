@@ -4,7 +4,6 @@
     import Shortcode from "../@components/Shortcode.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
-
 </script>
 
 <div class="ht-wrap">
@@ -14,17 +13,22 @@
         label="Enable Comments"
         caption="Enable or disable Hyvor Talk Comments on your site"
     >
-        <input type="checkbox" bind:checked={$optionsEditing.comments_enabled} />
+        <input
+            type="checkbox"
+            bind:checked={$optionsEditing.comments_enabled}
+        />
     </SplitControl>
     <OptionSave key="comments_enabled" />
 
     {#if $options.comments_enabled}
-
         <SplitControl
             label="Enable Comment Counts"
             caption="Enable or disable comment counts on your site"
         >
-            <input type="checkbox" bind:checked={$optionsEditing.comment_counts_enabled} />
+            <input
+                type="checkbox"
+                bind:checked={$optionsEditing.comment_counts_enabled}
+            />
         </SplitControl>
         <OptionSave key="comment_counts_enabled" />
 
@@ -32,23 +36,47 @@
             label="Loading Mode"
             caption="When to load the comments in the page"
         >
-        <div>
-            <Radio label="On Load" value="default" bind:group={$optionsEditing.loading_mode} />
-            <Radio label="On Scroll" value="scroll" bind:group={$optionsEditing.loading_mode} />
-            <Radio label="On Button Click" value="click" bind:group={$optionsEditing.loading_mode} />
-        </div>
+            <div>
+                <Radio
+                    label="On Load"
+                    value="default"
+                    bind:group={$optionsEditing.loading_mode}
+                />
+                <Radio
+                    label="On Scroll"
+                    value="scroll"
+                    bind:group={$optionsEditing.loading_mode}
+                />
+                <Radio
+                    label="On Button Click"
+                    value="click"
+                    bind:group={$optionsEditing.loading_mode}
+                />
+            </div>
         </SplitControl>
         <OptionSave key="loading_mode" />
-        
 
         <SplitControl
-            label="Default post-id"
-            caption="The default post-id to use when the post-id is not set"
-        >                                                                               <!-- double check the caption -->
+            label="Default page-id"
+            caption="The default page-id to use when the post-id is not set"
+        >
+            <!-- double check the caption -->
             <div>
-                <Radio label="Post ID" value="post_id" bind:group={$optionsEditing.default_page_id} />
-                <Radio label="URL" value="url" bind:group={$optionsEditing.default_page_id} />
-                <Radio label="Slug" value="slug" bind:group={$optionsEditing.default_page_id} />
+                <Radio
+                    label="Post ID"
+                    value="post_id"
+                    bind:group={$optionsEditing.default_page_id}
+                />
+                <Radio
+                    label="URL"
+                    value="url"
+                    bind:group={$optionsEditing.default_page_id}
+                />
+                <Radio
+                    label="Slug"
+                    value="slug"
+                    bind:group={$optionsEditing.default_page_id}
+                />
             </div>
         </SplitControl>
         <OptionSave key="default_page_id" />
@@ -109,7 +137,7 @@
     .ht-wrap {
         padding: 30px 35px;
     }
-   
+
     .ht-wrap label {
         vertical-align: unset;
     }
