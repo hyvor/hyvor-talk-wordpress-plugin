@@ -88,7 +88,7 @@
     <div class="ht-search-wrap">
         <input
             type="text"
-            placeholder="Search page type or taxonomy (e.g. post, category)"
+            placeholder="Search post type or taxonomy (e.g. post, category)"
             on:input={onInput}
             bind:value={search}
         />
