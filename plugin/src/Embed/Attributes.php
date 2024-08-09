@@ -18,7 +18,7 @@ class Attributes
      */
     public static function attributes(
         Context $context,
-        string $filter,
+        ?string $filter = null,
         array $defaults = [],
         array $extra = []
     )
@@ -46,7 +46,7 @@ class Attributes
             $attrs['language'] = apply_filters('hyvor_talk_language', null);
         }
 
-        if ($defaults['sso']) {
+        if (isset($defaults['sso']) && $defaults['sso']) {
 
             $user = self::getSsoUserData();
             $ssoPrivateKey = $options['sso_private_key'];
@@ -61,13 +61,11 @@ class Attributes
             }
         }
 
-        if ($defaults['loadingMode']) {
-            $attrs['loading'] = self::getLoadingMode();
-        }
-
         $attrs = array_merge($attrs, $extra);
 
-        $attrs = apply_filters($filter, $attrs);
+        if ($filter) {
+            $attrs = apply_filters($filter, $attrs);
+        }
 
         // remove null values
         return array_filter($attrs, function ($value) {
@@ -93,21 +91,5 @@ class Attributes
             'website_url' => get_author_posts_url($user->ID),
             'bio' => strip_tags(get_the_author_meta('description', $user->ID)),
         ];
-    }
-
-    private static function getLoadingMode()
-    {
-        $loadingMode = Options::loadingMode();
-
-        switch ($loadingMode) {
-            case 'default':
-                return 'default';
-            case 'scroll':
-                return 'lazy';
-            case 'click':
-                return 'manual';
-            default:
-                return null;
-        }
     }
 }

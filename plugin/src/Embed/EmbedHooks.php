@@ -20,19 +20,23 @@ class EmbedHooks
 
     public function init()
     {
-        if (!$this->context->websiteId)
+        if (!$this->context->options['website_id'])
             return;
 
         // comments
         if ($this->context->options['comments_enabled']) {
             add_filter('pre_render_block', [$this, 'commentsEmbedForBlock'], 10, 2);
             add_filter('comments_template', [$this, 'commentsEmbed']);
+
+            add_shortcode('hyvor-talk-comments', [$this, 'commentsShortcode']);
         }
 
         // comment counts
         if ($this->context->options['comments_enabled'] && $this->context->options['comment_counts_enabled']) {
             add_filter('comments_number', [$this, 'commentCounts']);
             add_action('wp_footer', [$this, 'addCommentCountsScript']);
+
+            add_shortcode('hyvor-talk-comments-count', [$this, 'commentsCountShortcode']);
         }
 
         // newsletters
@@ -66,20 +70,19 @@ class EmbedHooks
             'hyvor_talk_comments_attributes',
             [
                 'sso' => true,
-                'loadingMode' => true,
             ],
             [
+                'loading' => $this->getLoadingMode(),
                 'page-id' => $this->getIdentifier(),
                 'page-title' => $this->getTitle(),
                 'page-url' => $this->getUrl(),
             ]
         );
 
-        if ($attributes === null) {
+        if ($attributes === null)
             return;
-        }
 
-        RenderEmbed::render('comments', $attributes);
+        return RenderEmbed::render('comments', $attributes);
     }
 
     public function commentsEmbedForBlock($preRender, $parsedBlock)
@@ -88,6 +91,27 @@ class EmbedHooks
             return $this->commentsEmbed();
     }
 
+    public function commentsShortcode($attrs)
+    {
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_comments_attributes',
+            [
+                'sso' => true,
+            ],
+            [
+                'loading' => isset($attrs['loading']) ? $attrs['loading'] : $this->getLoadingMode(),
+                'page-id' => $this->getPageIdForShortcode($attrs),
+                'page-title' => isset($attrs['page-title']) ? $attrs['page-title'] : $this->getTitle(),
+                'page-url' => isset($attrs['page-url']) ? $attrs['page-url'] : $this->getUrl(),
+            ]
+        );
+        
+        if ($attributes === null)
+            return;
+    
+        return RenderEmbed::render('comments', $attributes);
+    }
     private function isCommentsEmbedLoadable()
     {
         global $post;
@@ -121,31 +145,21 @@ class EmbedHooks
         return true;
     }
 
-    // private function setEmbedVariables($isForCommentsEmbed, $identifier = null)
-    // {
-    //     if (!$this->context->websiteId)
-    //         $this->context->websiteId = Options::websiteId();
+    private static function getLoadingMode()
+    {
+        $loadingMode = Options::loadingMode();
 
-
-    //     if ($isForCommentsEmbed) {
-    //         $configVarJs = [
-    //             'identifier' => $identifier !== null ? $identifier : $this->getIdentifier(),
-    //             'title' => $this->getTitle(),
-    //             'url' => $this->getUrl(),
-    //             'loadingMode' => Options::loadingMode(),
-    //         ];
-
-    //         // SSO
-    //         $ssoPrivateKey = Options::ssoPrivateKey();
-	// 		if (!empty($ssoPrivateKey)) {
-    //             $configVarJs['sso'] = [
-    //                 'userData' => $this->getSsoUserData(),
-    //                 'privateKey' => $ssoPrivateKey,
-    //             ];
-    //         }
-    //         return $configVarJs;
-    //     }
-    // }
+        switch ($loadingMode) {
+            case 'default':
+                return 'default';
+            case 'scroll':
+                return 'lazy';
+            case 'click':
+                return 'manual';
+            default:
+                return null;
+        }
+    }
 
     private function getIdentifier()
     {
@@ -182,7 +196,18 @@ class EmbedHooks
     {
         global $post;
         return get_permalink($post);
-    }   
+    }
+
+    private function getPageIdForShortcode($attrs)
+    {
+        if (isset($attrs['id'])) {
+            return $attrs['id'];
+        } elseif (isset($attrs['page-id'])) {
+            return $attrs['page-id'];
+        } else {
+            return $this->getIdentifier();
+        }
+    }
 
     /************************************************************************************************************
      * COMMENT COUNTS
@@ -192,13 +217,19 @@ class EmbedHooks
         if (!$this->isEmbedLoadable())
             return;
 
-        // TODO: Use RenderEmbed class here!
-        $options = Options::withDefaults($this->context->options);
-        ob_start();
-        include($this->context->pluginDir . 'src/Embed/templates/comment-counts.template.php');
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_comment_counts_attributes',
+            [],
+            [
+                'page-id' => $this->getIdentifier(),
+            ]
+        );
+
+        if ($attributes === null)
+            return;
+            
+        return RenderEmbed::render('comment-counts', $attributes);
     }
 
     public function addCommentCountsScript()
@@ -206,14 +237,32 @@ class EmbedHooks
         if (!$this->isEmbedLoadable())
             return;
 
-        // TODO: Use RenderEmbed class here!
-        $options = Options::withDefaults($this->context->options);
-        // $configVarJs = $this->setEmbedVariables(false);
-        ob_start();
-        include($this->context->pluginDir . 'src/Embed/templates/comment-counts-script.template.php');
-        $content = ob_get_contents();
-        ob_end_clean();
-        echo $content;
+        $attributes = Attributes::attributes(
+            $this->context
+        );
+
+        if ($attributes === null)
+            return;
+
+        echo RenderEmbed::render('comment-counts-script', $attributes);
+    }
+
+    public function commentsCountShortcode($attrs)
+    {
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_comment_counts_attributes',
+            [],
+            [
+                'page-id' => $this->getPageIdForShortcode($attrs),
+                'mode' => isset($attrs['mode']) ? $attrs['mode'] : null,
+            ]
+        );
+
+        if ($attributes === null)
+            return;
+
+        return RenderEmbed::render('comment-counts', $attributes);
     }
     
     /************************************************************************************************************

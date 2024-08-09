@@ -23,13 +23,6 @@ class Context
 	 */
 	public $pluginUrl;
 
-
-	/**
-	 * The Hyvor Talk Website ID, if configured
-	 * @var ?int
-	 */
-	public $websiteId;
-
     /**
      * @var array<string, mixed>
      */
