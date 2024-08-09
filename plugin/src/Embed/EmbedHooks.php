@@ -20,7 +20,7 @@ class EmbedHooks
 
     public function init()
     {
-        if (!$this->isEmbedsLoadable())
+        if (!$this->context->websiteId)
             return;
 
         // comments
@@ -47,15 +47,9 @@ class EmbedHooks
         }
     }
 
-    private function isEmbedsLoadable()
+    private function isEmbedLoadable()
     {
-        if (!$this->context->websiteId)
-            return false;
-
-        if (is_feed())
-            return false;
-
-        return true;
+        return is_feed() ? false : true;
     }
 
     /************************************************************************************************************
@@ -64,16 +58,28 @@ class EmbedHooks
 
     public function commentsEmbed()
     {
-        if (!$this->isCommentsEmbedLoadable())
+        if (!$this->isEmbedLoadable() && !$this->isCommentsEmbedLoadable())
             return;
-        
-        $options = Options::withDefaults($this->context->options);
-        $configVarJs = $this->setEmbedVariables(true);
-        ob_start();
-        include($this->context->pluginDir . 'src/Embed/templates/comments.template.php');
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
+
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_comments_attributes',
+            [
+                'sso' => true,
+                'loadingMode' => true,
+            ],
+            [
+                'page-id' => $this->getIdentifier(),
+                'page-title' => $this->getTitle(),
+                'page-url' => $this->getUrl(),
+            ]
+        );
+
+        if ($attributes === null) {
+            return;
+        }
+
+        RenderEmbed::render('comments', $attributes);
     }
 
     public function commentsEmbedForBlock($preRender, $parsedBlock)
@@ -115,31 +121,31 @@ class EmbedHooks
         return true;
     }
 
-    private function setEmbedVariables($isForCommentsEmbed, $identifier = null)
-    {
-        if (!$this->context->websiteId)
-            $this->context->websiteId = Options::websiteId();
+    // private function setEmbedVariables($isForCommentsEmbed, $identifier = null)
+    // {
+    //     if (!$this->context->websiteId)
+    //         $this->context->websiteId = Options::websiteId();
 
 
-        if ($isForCommentsEmbed) {
-            $configVarJs = [
-                'identifier' => $identifier !== null ? $identifier : $this->getIdentifier(),
-                'title' => $this->getTitle(),
-                'url' => $this->getUrl(),
-                'loadingMode' => Options::loadingMode(),
-            ];
+    //     if ($isForCommentsEmbed) {
+    //         $configVarJs = [
+    //             'identifier' => $identifier !== null ? $identifier : $this->getIdentifier(),
+    //             'title' => $this->getTitle(),
+    //             'url' => $this->getUrl(),
+    //             'loadingMode' => Options::loadingMode(),
+    //         ];
 
-            // SSO
-            $ssoPrivateKey = Options::ssoPrivateKey();
-			if (!empty($ssoPrivateKey)) {
-                $configVarJs['sso'] = [
-                    'userData' => $this->getSsoUserData(),
-                    'privateKey' => $ssoPrivateKey,
-                ];
-            }
-            return $configVarJs;
-        }
-    }
+    //         // SSO
+    //         $ssoPrivateKey = Options::ssoPrivateKey();
+	// 		if (!empty($ssoPrivateKey)) {
+    //             $configVarJs['sso'] = [
+    //                 'userData' => $this->getSsoUserData(),
+    //                 'privateKey' => $ssoPrivateKey,
+    //             ];
+    //         }
+    //         return $configVarJs;
+    //     }
+    // }
 
     private function getIdentifier()
     {
@@ -176,31 +182,17 @@ class EmbedHooks
     {
         global $post;
         return get_permalink($post);
-    }
-
-    private function getSsoUserData()
-    {
-        $user = wp_get_current_user();
-
-        if ($user->ID === 0)
-            return [];
-
-        return [
-            'id' => $user->ID,
-            'name' => $user->display_name,
-            'email' => $user->user_email,
-            'picture' => get_avatar_url($user->ID),
-            'url' => get_author_posts_url($user->ID)
-        ];
-    }
-
-        
+    }   
 
     /************************************************************************************************************
      * COMMENT COUNTS
      */
     public function commentCounts()
     {
+        if (!$this->isEmbedLoadable())
+            return;
+
+        // TODO: Use RenderEmbed class here!
         $options = Options::withDefaults($this->context->options);
         ob_start();
         include($this->context->pluginDir . 'src/Embed/templates/comment-counts.template.php');
@@ -211,8 +203,12 @@ class EmbedHooks
 
     public function addCommentCountsScript()
     {
+        if (!$this->isEmbedLoadable())
+            return;
+
+        // TODO: Use RenderEmbed class here!
         $options = Options::withDefaults($this->context->options);
-        $configVarJs = $this->setEmbedVariables(false);
+        // $configVarJs = $this->setEmbedVariables(false);
         ob_start();
         include($this->context->pluginDir . 'src/Embed/templates/comment-counts-script.template.php');
         $content = ob_get_contents();
