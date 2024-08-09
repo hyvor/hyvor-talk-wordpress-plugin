@@ -33,7 +33,12 @@ class GatedContent
      * @param GatedContentRule $rule
      * @param string $key
      */
-    public static function calculateSecure($content, $rule, $key)
+    public static function calculateSecure(
+        $content,
+        $minimumPlan,
+        $gate,
+        $key
+    )
     {
 
         // source: https://github.com/hyvor/hyvor-talk-examples/blob/main/encryption/encryption.php
@@ -41,8 +46,8 @@ class GatedContent
         $data = [
             'timestamp' => time(),
             'content' => $content,
-            'minimum-plan' => $rule['minimum_plan'],
-            'gate' => $rule['gate'] ?? null,
+            'minimum-plan' => $minimumPlan,
+            'gate' => $gate ?? null,
         ];
 
         $data = json_encode($data);

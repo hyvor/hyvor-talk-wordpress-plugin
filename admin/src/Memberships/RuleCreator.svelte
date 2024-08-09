@@ -126,7 +126,7 @@
         >
             <textarea bind:value={gate} rows={5} />
             <p>
-                Enter a pre-configured gate name or custom HTML. Keep empty to
+                Enter a pre-configured gate key or custom HTML. Keep empty to
                 show the default gate.
             </p>
         </SplitControl>
