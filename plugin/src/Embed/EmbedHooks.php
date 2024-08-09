@@ -42,6 +42,8 @@ class EmbedHooks
         if ($this->context->options['memberships_enabled']) {
             add_action('wp_footer', [$this, 'addMembershipsScripts']);
             add_filter('the_content', [$this, 'gatedContent'], 99);
+
+            add_shortcode('hyvor-talk-gated-content', [$this, 'gatedContentShortcode']);
         }
     }
 
@@ -273,16 +275,27 @@ class EmbedHooks
             return $content;
         }
 
-        ob_start();
-        $options = Options::withDefaults($this->context->options);
-        $secure = GatedContent::calculateSecure($content, $matchedRule, $encryptionKey);
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_gated_content_attributes',
+            [],
+            [
+                'secure' => GatedContent::calculateSecure($content, $matchedRule, $encryptionKey)
+            ]
+        );
 
-        include($this->context->pluginDir . 'src/Embed/templates/gated-content.template.php');
-        $content = ob_get_contents();
+        if (!$attributes) {
+            return null;
+        }
 
-        ob_end_clean();
+        return RenderEmbed::render('gated-content', $attributes);
 
-        return $content;
+    }
+
+    public function gatedContentShortcode($attrs)
+    {
+
+
 
     }
 
