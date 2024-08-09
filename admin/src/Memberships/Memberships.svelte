@@ -4,6 +4,7 @@
     import { options, optionsEditing, type SelectedPages } from "../store";
     import OptionSave from "../@components/OptionSave.svelte";
     import Rules from "./Rules.svelte";
+    import Shortcode from "../@components/Shortcode.svelte";
 
     function onMembershipPagesChange(e: CustomEvent<SelectedPages>) {
         $optionsEditing.memberships_pages = e.detail;
@@ -47,6 +48,28 @@
         <hr style="margin: 30px 0;" />
 
         <Rules />
+
+        <hr style="margin: 30px 0;" />
+
+        <h3>Shortcodes</h3>
+
+        <Shortcode
+            title="Gated Content"
+            code={`[hyvor-talk-gated-content key="YOUR_KEY"]`}
+            href="https://talk.hyvor.com/docs/wordpress#shortcode-comments"
+        >
+            <ul>
+                <li>Use this shortcode to display gated content on a page.</li>
+                <li>
+                    Replace<code>YOUR_PAGE_ID</code>
+                    with a unique identifier for the page.
+                </li>
+                <li>
+                    Each value of
+                    <code>page-id</code> will have a separate comment thread.
+                </li>
+            </ul>
+        </Shortcode>
     {/if}
 </div>
 

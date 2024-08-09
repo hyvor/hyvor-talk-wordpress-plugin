@@ -1,5 +1,6 @@
 <script>
-    import { options } from "../store";
+    import Notice from "../@components/Notice.svelte";
+    import { options, section } from "../store";
     import RuleCreator from "./RuleCreator.svelte";
     import RuleRow from "./RuleRow.svelte";
 
@@ -9,7 +10,7 @@
 <h3>Gated Content Rules</h3>
 
 <p>
-    Gated content can be used to restrict access to certain content based on a
+    Gated content can be used to restrict access to certain content based on the
     user's membership status.
 </p>
 
@@ -28,3 +29,12 @@
 {#each $options.memberships_gated_content_rules as rule, i}
     <RuleRow {rule} index={i} />
 {/each}
+
+{#if $options.memberships_gated_content_rules.length && !$options.encryption_key}
+    <Notice type="warning">
+        Encryption key is required to use gated content rules.
+        <a on:click={() => ($section = "settings")} href="#encryption-key">
+            Set up encryption key
+        </a>
+    </Notice>
+{/if}

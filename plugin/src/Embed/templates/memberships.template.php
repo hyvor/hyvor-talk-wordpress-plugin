@@ -1,5 +1,6 @@
-<script async src="<?php echo $options['instance'] ?>/embed/memberships.js" type="module"></script>
+<script async src="<?php echo $attributes['instance'] ?>/embed/memberships.js" type="module"></script>
 <hyvor-talk-memberships
-    website-id="<?php echo $options['website_id'] ?>"
-    instance="<?php echo $options['instance'] ?>"
+    <?php foreach ($attributes as $key => $value): ?>
+        <?php echo $key ?>="<?php echo esc_attr($value) ?>"
+    <?php endforeach; ?>
 ></hyvor-talk-memberships>
