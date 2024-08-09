@@ -51,11 +51,6 @@ class EmbedHooks
         }
     }
 
-    private function isEmbedLoadable()
-    {
-        return is_feed() ? false : true;
-    }
-
     /************************************************************************************************************
      * COMMENTS
      */
@@ -73,7 +68,7 @@ class EmbedHooks
             ],
             [
                 'loading' => $this->getLoadingMode(),
-                'page-id' => $this->getIdentifier(),
+                'page-id' => $this->getPageId(),
                 'page-title' => $this->getTitle(),
                 'page-url' => $this->getUrl(),
             ]
@@ -112,102 +107,6 @@ class EmbedHooks
     
         return RenderEmbed::render('comments', $attributes);
     }
-    private function isCommentsEmbedLoadable()
-    {
-        global $post;
-
-        // if not a post
-        if (!isset($post))
-            return false;
-
-        // if not open for comments
-        if ($post->comment_status !== 'open')
-            return false;
-
-        // if not open for comments
-        if (!comments_open())
-            return false;
-
-        // if post is in any of the given statuses
-        if (in_array($post->post_status, [
-            'future',       // scheduled to be published in the future
-            'draft',        // drafts
-            'auto-draft',   // drafts
-            'pending',      // awaiting to be published by a user
-            'trash',        // trashed posts
-        ]))
-            return false;
-
-        // if not a single post
-        if (!is_singular())
-            return false;
-
-        return true;
-    }
-
-    private static function getLoadingMode()
-    {
-        $loadingMode = Options::loadingMode();
-
-        switch ($loadingMode) {
-            case 'default':
-                return 'default';
-            case 'scroll':
-                return 'lazy';
-            case 'click':
-                return 'manual';
-            default:
-                return null;
-        }
-    }
-
-    private function getIdentifier()
-    {
-        global $post;
-
-        if (get_post_type() !== 'post')
-				return false;
-
-        // new logic
-        // if ($this->context->websiteId > 4500) {
-            // TODO: New logic HERE!
-        // }
-
-        // old logic
-		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';
-
-		switch ($type) {
-			case 'url':
-				return $this->getUrl();
-			case 'id':
-				return $post->ID;
-			default:
-				return $post->ID . ':' . $post->guid;
-		}
-    }
-
-    private function getTitle()
-    {
-        global $post;
-        return trim(strip_tags(get_the_title($post)));
-    }
-
-    private function getUrl()
-    {
-        global $post;
-        return get_permalink($post);
-    }
-
-    private function getPageIdForShortcode($attrs)
-    {
-        if (isset($attrs['id'])) {
-            return $attrs['id'];
-        } elseif (isset($attrs['page-id'])) {
-            return $attrs['page-id'];
-        } else {
-            return $this->getIdentifier();
-        }
-    }
 
     /************************************************************************************************************
      * COMMENT COUNTS
@@ -222,7 +121,7 @@ class EmbedHooks
             'hyvor_talk_comment_counts_attributes',
             [],
             [
-                'page-id' => $this->getIdentifier(),
+                'page-id' => $this->getPageId(),
             ]
         );
 
@@ -344,4 +243,109 @@ class EmbedHooks
 
     }
 
+    /************************************************************************************************************
+     * HELPERS
+     */
+
+    private function isEmbedLoadable()
+    {
+        return is_feed() ? false : true;
+    }
+
+    private function isCommentsEmbedLoadable()
+    {
+        global $post;
+
+        // if not a post
+        if (!isset($post))
+            return false;
+
+        // if not open for comments
+        if ($post->comment_status !== 'open')
+            return false;
+
+        // if not open for comments
+        if (!comments_open())
+            return false;
+
+        // if post is in any of the given statuses
+        if (in_array($post->post_status, [
+            'future',       // scheduled to be published in the future
+            'draft',        // drafts
+            'auto-draft',   // drafts
+            'pending',      // awaiting to be published by a user
+            'trash',        // trashed posts
+        ]))
+            return false;
+
+        // if not a single post
+        if (!is_singular())
+            return false;
+
+        return true;
+    }
+
+    private static function getLoadingMode()
+    {
+        $loadingMode = Options::loadingMode();
+
+        switch ($loadingMode) {
+            case 'default':
+                return 'default';
+            case 'scroll':
+                return 'lazy';
+            case 'click':
+                return 'manual';
+            default:
+                return null;
+        }
+    }
+
+    private function getPageId()
+    {
+        global $post;
+
+        if (get_post_type() !== 'post')
+				return false;
+
+        // new logic
+        // if ($this->context->websiteId > 4500) {
+            // TODO: New logic HERE!
+        // }
+
+        // old logic
+		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';
+
+		switch ($type) {
+			case 'url':
+				return $this->getUrl();
+			case 'id':
+				return $post->ID;
+			default:
+				return $post->ID . ':' . $post->guid;
+		}
+    }
+
+    private function getTitle()
+    {
+        global $post;
+        return trim(strip_tags(get_the_title($post)));
+    }
+
+    private function getUrl()
+    {
+        global $post;
+        return get_permalink($post);
+    }
+
+    private function getPageIdForShortcode($attrs)
+    {
+        if (isset($attrs['id'])) {
+            return $attrs['id'];
+        } elseif (isset($attrs['page-id'])) {
+            return $attrs['page-id'];
+        } else {
+            return $this->getPageId();
+        }
+    }
 }
