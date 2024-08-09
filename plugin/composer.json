@@ -1,0 +1,14 @@
+{
+    "name": "hyvor/hyvor-talk-wordpress",
+    "autoload": {
+        "psr-4": {
+            "Hyvor\\HyvorTalkWP\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Supun Wimalasena",
+            "email": "supun@hyvor.com"
+        }
+    ]
+}

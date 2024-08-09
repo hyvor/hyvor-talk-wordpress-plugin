@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+set -e
+
+# Function to kill all background processes
+cleanup() {
+    echo "Cleaning up..."
+    jobs -p | xargs -r kill
+    exit 0
+}
+
+(
+    trap cleanup SIGINT SIGTERM;
+
+    wp server --host=127.0.0.1 --port=9393 --docroot=./wordpress &
+    cd admin && bun run build --watch &
+    cd admin && bun run sync.ts admin &
+    cd admin && bun run sync.ts plugin &
+
+    wait
+
+)

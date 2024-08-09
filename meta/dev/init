@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+
+set -e
+
+# Check if WP-CLI is installed
+if ! command -v wp &> /dev/null; then
+    echo "WP-CLI is not installed. Please install WP-CLI to continue."
+    exit 1
+fi
+
+# delete /wordpress
+echo "Deleting existing WordPress directory..."
+rm -rf ./wordpress
+
+# Download WordPress
+echo "Downloading WordPress..."
+wp core download --path=wordpress || { echo "Failed to download WordPress"; exit 1; }
+
+# Create wp-config.php
+echo "Configure WordPress..."
+read -p "Database Name (default: wordpress): " dbname
+dbname=${dbname:-wordpress}
+read -p "Database User (default: root): " dbuser
+dbuser=${dbuser:-root}
+read -s -p "Database Password (default:): " dbpass
+echo
+read -p "Database Host (default: 127.0.0.1): " dbhost
+dbhost=${dbhost:-'127.0.0.1'}
+
+wp config create --path=./wordpress --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpass --dbhost=$dbhost --dbprefix='wp_' || { echo "Failed to create wp-config.php"; exit 1; }
+
+# Install WordPress
+echo "Installing WordPress..."
+
+wp core install --path=./wordpress --url=http://127.0.0.1:9393 --title="WordPress" --admin_user=admin --admin_password=admin --admin_email=no-reply@hyvor.com || { echo "Failed to install WordPress"; exit 1; }
