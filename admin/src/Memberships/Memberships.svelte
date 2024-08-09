@@ -56,17 +56,13 @@
         <Shortcode
             title="Gated Content"
             code={`[hyvor-talk-gated-content key="YOUR_KEY"]`}
-            href="https://talk.hyvor.com/docs/wordpress#shortcode-comments"
+            href="https://talk.hyvor.com/docs/wordpress#shortcode-gated-content"
         >
             <ul>
                 <li>Use this shortcode to display gated content on a page.</li>
                 <li>
-                    Replace<code>YOUR_PAGE_ID</code>
-                    with a unique identifier for the page.
-                </li>
-                <li>
-                    Each value of
-                    <code>page-id</code> will have a separate comment thread.
+                    Replace<code>YOUR_KEY</code>
+                    with the key of the gated content block.
                 </li>
             </ul>
         </Shortcode>

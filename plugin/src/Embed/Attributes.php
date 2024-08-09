@@ -14,38 +14,46 @@ class Attributes
      *     website-id?: bool,
      *     language?: bool,
      *     sso?: bool,
-     * } $which
+     * } $defaults
      */
     public static function attributes(
         Context $context,
         string $filter,
-        array $which
+        array $defaults = [],
+        array $extra = []
     )
     {
 
-        $which = array_merge([
+        $defaults = array_merge([
             'instance' => true,
             'website-id' => true,
             'language' => true,
-        ], $which);
+        ], $defaults);
 
         $options = Options::withDefaults($context->options);
 
         $attrs = [];
 
-        if ($which['instance']) {
+        if ($defaults['instance']) {
             $attrs['instance'] = $options['instance'];
         }
 
-        if ($which['website-id']) {
+        if ($defaults['website-id']) {
             $attrs['website-id'] = $options['website_id'];
         }
 
-        if ($which['language']) {
+        if ($defaults['language']) {
             $attrs['language'] = apply_filters('hyvor_talk_language', null);
         }
 
-        return apply_filters($filter, $attrs);
+        $attrs = array_merge($attrs, $extra);
+
+        $attrs = apply_filters($filter, $attrs);
+
+        // remove null values
+        return array_filter($attrs, function ($value) {
+            return $value !== null;
+        });
 
     }
 
