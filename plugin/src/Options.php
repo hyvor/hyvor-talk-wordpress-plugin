@@ -47,7 +47,7 @@ class Options {
     /**
      * Default post ID for the comments embed
      */
-    const DEFAULT_POST_ID = 'hyvor_talk_default_post_id';
+    const DEFAULT_PAGE_ID = 'hyvor_talk_default_page_id';
 
 
     // Memberships
@@ -68,7 +68,7 @@ class Options {
             self::COMMENTS_ENABLED,
             self::COMMENT_COUNTS_ENABLED,
             self::LOADING_MODE,
-            self::DEFAULT_POST_ID,
+            self::DEFAULT_PAGE_ID,
 
             // memberships
             self::MEMBERSHIPS_ENABLED,
@@ -107,7 +107,7 @@ class Options {
             'comments_enabled' => self::commentsEnabled(),
             'comment_counts_enabled' => self::commentCountsEnabled(),
             'loading_mode' => self::loadingMode(),
-            'default_post_id' => self::defaultPostId(),
+            'default_page_id' => self::defaultPageId(),
 
             // memberships
             'memberships_enabled' => self::membershipsEnabled(),
@@ -190,9 +190,9 @@ class Options {
     /**
      * @return string
      */
-    public static function defaultPostId()
+    public static function defaultPageId()
     {
-        return get_option(self::DEFAULT_POST_ID, 'post_id');    // confirm the default value
+        return get_option(self::DEFAULT_PAGE_ID, 'post_id');    // confirm the default value
     }
 
     public static function membershipsEnabled()

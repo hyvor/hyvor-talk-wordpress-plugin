@@ -309,9 +309,19 @@ class EmbedHooks
 				return false;
 
         // new logic
-        // if ($this->context->websiteId > 4500) {
-            // TODO: New logic HERE!
-        // }
+        if ($this->context->options['website_id'] > 4500) {
+            // TODO: Review this logic @supun-io
+            switch ($this->context->options['default_page_id']) {
+                case 'post_id':
+                    return $post->ID;
+                case 'url':
+                    return $this->getUrl();
+                case 'slug':
+                    return $post->post_name;
+                // Default value for options['default_page_id'] is 'post_id'
+                // Hence the default case is omitted
+            }
+        }
 
         // old logic
 		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';

@@ -17,7 +17,7 @@ export interface Options {
     comments_enabled: boolean;
     comment_counts_enabled: boolean;
     loading_mode: 'default' | 'scroll' | 'click';
-    default_post_id: 'post_id' | 'url' | 'slug';
+    default_page_id: 'post_id' | 'url' | 'slug';
 
     // memberships
     memberships_enabled: boolean;
