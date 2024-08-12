@@ -182,7 +182,7 @@ class Options {
      */
     public static function instance()
     {
-        return self::nullableString(self::INSTANCE);
+        return self::nullableString(self::INSTANCE) ?? 'https://talk.hyvor.com';
     }
 
     /**

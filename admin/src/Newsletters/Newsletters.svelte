@@ -1,8 +1,9 @@
 <script>
+    import Notice from "../@components/Notice.svelte";
     import OptionSave from "../@components/OptionSave.svelte";
     import Shortcode from "../@components/Shortcode.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
-    import { optionsEditing } from "../store";
+    import { options, optionsEditing, section } from "../store";
 </script>
 
 <div class="ht-wrap">
@@ -17,6 +18,16 @@
             bind:checked={$optionsEditing.newsletters_auto_subscribe_on_signup}
         />
         <OptionSave key="newsletters_auto_subscribe_on_signup" />
+
+        {#if !$options.console_api_key}
+            <Notice type="warning">
+                You need to <a
+                    href="#console-api-key"
+                    on:click={() => ($section = "settings")}
+                    >set up the console API key</a
+                > to use this feature.
+            </Notice>
+        {/if}
     </SplitControl>
 
     <hr style="margin:20px 0;" />

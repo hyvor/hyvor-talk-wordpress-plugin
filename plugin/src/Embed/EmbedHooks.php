@@ -2,6 +2,7 @@
 
 namespace Hyvor\HyvorTalkWP\Embed;
 
+use Hyvor\HyvorTalkWP\ConsoleApi;
 use Hyvor\HyvorTalkWP\Context;
 use Hyvor\HyvorTalkWP\Options;
 
@@ -42,6 +43,9 @@ class EmbedHooks
         add_shortcode('hyvor-talk-comments-count', [$this, 'commentsCountShortcode']);
 
         // newsletters
+        if ($this->context->options['newsletters_auto_subscribe_on_signup']) {
+            add_action('user_register', [$this, 'newslettersAutoSubscribeOnSignup']);
+        }
         add_shortcode('hyvor-talk-newsletter', [$this, 'newslettersShortcode']);
 
         // memberships
@@ -169,6 +173,36 @@ class EmbedHooks
     /************************************************************************************************************
      * NEWSLETTERS
      */
+
+    public function newslettersAutoSubscribeOnSignup($userId)
+    {
+        $user = get_user_by('id', $userId);
+
+        if (!$user) {
+            return;
+        }
+
+        $email = $user->user_email;
+
+        if (!$email) {
+            return;
+        }
+
+        $consoleApi = new ConsoleApi($this->context);
+        if (!$consoleApi->canCall()) {
+            return;
+        }
+
+        $consoleApi->call(
+            'POST',
+            '/newsletter/subscribers',
+            [
+                'emails' => [$email],
+            ]
+        );
+
+    }
+
     public function newslettersShortcode($attrs)
     {
 
