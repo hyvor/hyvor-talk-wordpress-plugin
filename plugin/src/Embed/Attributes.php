@@ -28,6 +28,7 @@ class Attributes
             'instance' => true,
             'website-id' => true,
             'language' => true,
+            'sso' => false,
         ], $defaults);
 
         $options = Options::withDefaults($context->options);
@@ -46,7 +47,7 @@ class Attributes
             $attrs['language'] = apply_filters('hyvor_talk_language', null);
         }
 
-        if (isset($defaults['sso']) && $defaults['sso']) {
+        if ($defaults['sso']) {
 
             $user = self::getSsoUserData();
             $ssoPrivateKey = $options['sso_private_key'];

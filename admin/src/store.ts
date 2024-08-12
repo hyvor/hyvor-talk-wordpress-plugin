@@ -19,6 +19,9 @@ export interface Options {
     loading_mode: 'default' | 'scroll' | 'click';
     default_page_id: 'post_id' | 'url' | 'slug';
 
+    // newsletters
+    newsletters_auto_subscribe_on_signup: boolean;
+
     // memberships
     memberships_enabled: boolean;
     memberships_pages: SelectedPages;

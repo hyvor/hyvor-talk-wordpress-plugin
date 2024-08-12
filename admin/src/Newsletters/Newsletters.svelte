@@ -1,6 +1,8 @@
 <script>
+    import OptionSave from "../@components/OptionSave.svelte";
     import Shortcode from "../@components/Shortcode.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
+    import { optionsEditing } from "../store";
 </script>
 
 <div class="ht-wrap">
@@ -10,19 +12,11 @@
         label="Auto-subsribe on signup"
         caption="Subscribe users to the newsletter when they sign up"
     >
-        <input type="checkbox" value="1" />
-    </SplitControl>
-
-    <SplitControl
-        label="Auto-subsribe on comment"
-        caption="Subscribe users to the newsletter when they comment"
-    >
-        <input type="checkbox" value="1" />
-        <p>
-            This option is only for the WordPress comments. For Hyvor Talk
-            comments, visit Settings &rarr; Newsletter in the Hyvor Talk
-            Console.
-        </p>
+        <input
+            type="checkbox"
+            bind:checked={$optionsEditing.newsletters_auto_subscribe_on_signup}
+        />
+        <OptionSave key="newsletters_auto_subscribe_on_signup" />
     </SplitControl>
 
     <hr style="margin:20px 0;" />

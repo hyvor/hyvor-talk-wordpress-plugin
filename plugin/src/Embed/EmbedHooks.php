@@ -3,6 +3,7 @@
 namespace Hyvor\HyvorTalkWP\Embed;
 
 use Hyvor\HyvorTalkWP\Context;
+use Hyvor\HyvorTalkWP\Options;
 
 class EmbedHooks
 {
@@ -30,21 +31,18 @@ class EmbedHooks
         if ($this->context->options['comments_enabled']) {
             add_filter('pre_render_block', [$this, 'commentsEmbedForBlock'], 10, 2);
             add_filter('comments_template', [$this, 'commentsEmbed']);
-
-            add_shortcode('hyvor-talk-comments', [$this, 'commentsShortcode']);
         }
+        add_shortcode('hyvor-talk-comments', [$this, 'commentsShortcode']);
 
         // comment counts
         if ($this->context->options['comments_enabled'] && $this->context->options['comment_counts_enabled']) {
             add_filter('comments_number', [$this, 'commentCounts']);
             add_action('wp_footer', [$this, 'addCommentCountsScript']);
-
-            add_shortcode('hyvor-talk-comments-count', [$this, 'commentsCountShortcode']);
         }
+        add_shortcode('hyvor-talk-comments-count', [$this, 'commentsCountShortcode']);
 
         // newsletters
-        // TODO
-
+        add_shortcode('hyvor-talk-newsletter', [$this, 'newslettersShortcode']);
 
         // memberships
         if ($this->context->options['memberships_enabled']) {
@@ -105,10 +103,10 @@ class EmbedHooks
                 'page-url' => isset($attrs['page-url']) ? $attrs['page-url'] : $this->getUrl(),
             ]
         );
-        
+
         if ($attributes === null)
             return;
-    
+
         return RenderEmbed::render('comments', $attributes);
     }
 
@@ -131,7 +129,7 @@ class EmbedHooks
 
         if ($attributes === null)
             return;
-            
+
         return RenderEmbed::render('comment-counts', $attributes);
     }
 
@@ -167,11 +165,28 @@ class EmbedHooks
 
         return RenderEmbed::render('comment-counts', $attributes);
     }
-    
+
     /************************************************************************************************************
      * NEWSLETTERS
      */
-    // TODO
+    public function newslettersShortcode($attrs)
+    {
+
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_newsletter_attributes',
+            [
+                'sso' => true,
+            ],
+            $attrs
+        );
+
+        if ($attributes === null)
+            return;
+
+        return RenderEmbed::render('newsletter', $attributes);
+
+    }
 
     /************************************************************************************************************
      * MEMBERSHIPS

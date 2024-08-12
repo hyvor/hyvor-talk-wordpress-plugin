@@ -52,6 +52,9 @@ class Options {
      */
     const DEFAULT_PAGE_ID = 'hyvor_talk_default_page_id';
 
+    // Newsletters
+    const NEWSLETTERS_AUTO_SUBSCRIBE_ON_SIGNUP = 'hyvor_talk_newsletters_auto_subscribe_on_signup';
+
 
     // Memberships
     const MEMBERSHIPS_ENABLED = 'hyvor_talk_memberships_enabled';
@@ -74,6 +77,9 @@ class Options {
             self::COMMENT_COUNTS_ENABLED,
             self::LOADING_MODE,
             self::DEFAULT_PAGE_ID,
+
+            // newsletters
+            self::NEWSLETTERS_AUTO_SUBSCRIBE_ON_SIGNUP,
 
             // memberships
             self::MEMBERSHIPS_ENABLED,
@@ -113,6 +119,9 @@ class Options {
             'comment_counts_enabled' => self::commentCountsEnabled(),
             'loading_mode' => self::loadingMode(),
             'default_page_id' => self::defaultPageId(),
+
+            // newsletters
+            'newsletters_auto_subscribe_on_signup' => self::newslettersAutoSubscribeOnSignup(),
 
             // memberships
             'memberships_enabled' => self::membershipsEnabled(),
@@ -206,6 +215,11 @@ class Options {
     public static function defaultPageId()
     {
         return get_option(self::DEFAULT_PAGE_ID, 'post_id');    // confirm the default value
+    }
+
+    public static function newslettersAutoSubscribeOnSignup()
+    {
+        return boolval(get_option(self::NEWSLETTERS_AUTO_SUBSCRIBE_ON_SIGNUP));
     }
 
     public static function membershipsEnabled()
