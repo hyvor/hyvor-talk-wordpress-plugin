@@ -3,7 +3,6 @@
 namespace Hyvor\HyvorTalkWP\Embed;
 
 use Hyvor\HyvorTalkWP\Context;
-use Hyvor\HyvorTalkWP\Options;
 
 class EmbedHooks
 {
@@ -23,6 +22,10 @@ class EmbedHooks
         if (!$this->context->options['website_id'])
             return;
 
+        if (is_admin()) {
+            return;
+        }
+
         // comments
         if ($this->context->options['comments_enabled']) {
             add_filter('pre_render_block', [$this, 'commentsEmbedForBlock'], 10, 2);
@@ -41,6 +44,7 @@ class EmbedHooks
 
         // newsletters
         // TODO
+
 
         // memberships
         if ($this->context->options['memberships_enabled']) {
@@ -178,8 +182,6 @@ class EmbedHooks
             return;
         }
 
-        ob_start();
-
         $attributes = Attributes::attributes(
             $this->context,
             'hyvor_talk_memberships_attributes',
@@ -192,11 +194,7 @@ class EmbedHooks
             return;
         }
 
-        include($this->context->pluginDir . 'src/Embed/templates/memberships.template.php');
-        $content = ob_get_contents();
-        ob_end_clean();
-
-        echo $content;
+        echo RenderEmbed::render('memberships', $attributes);
     }
 
     public function gatedContent($content)
@@ -224,7 +222,12 @@ class EmbedHooks
             'hyvor_talk_gated_content_attributes',
             [],
             [
-                'secure' => GatedContent::calculateSecure($content, $matchedRule, $encryptionKey)
+                'secure' => GatedContent::calculateSecure(
+                    $content,
+                    $matchedRule['minimum_plan'],
+                    $matchedRule['gate'],
+                    $encryptionKey
+                )
             ]
         );
 
@@ -236,11 +239,46 @@ class EmbedHooks
 
     }
 
-    public function gatedContentShortcode($attrs)
+    public function gatedContentShortcode($attrs, $content)
     {
 
+        if ($content) {
 
+            $encryptionKey = $this->context->options['encryption_key'];
 
+            if (!$encryptionKey) {
+                return 'Encryption key not configured for gated content.';
+            }
+
+            $minimumPlan = $attrs['minimum-plan'] ?? null;
+            if (!$minimumPlan) {
+                return 'Minimum plan not set for gated content.';
+            }
+
+            $secure = GatedContent::calculateSecure(
+                $content,
+                $minimumPlan,
+                $attrs['gate'] ?? null,
+                $encryptionKey
+            );
+
+            $attrs['secure'] = $secure;
+
+        }
+
+        // directly pass attrs to the embed attributes
+        $attributes = Attributes::attributes(
+            $this->context,
+            'hyvor_talk_gated_content_attributes',
+            [],
+            $attrs
+        );
+
+        if (!$attributes) {
+            return null;
+        }
+
+        return RenderEmbed::render('gated-content', $attributes);
     }
 
     /************************************************************************************************************
