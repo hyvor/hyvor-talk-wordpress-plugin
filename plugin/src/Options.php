@@ -2,6 +2,8 @@
 
 namespace Hyvor\HyvorTalkWP;
 
+use Hyvor\HyvorTalkWP\Embed\Cloud;
+
 class Options {
 
 	/**
@@ -97,6 +99,13 @@ class Options {
         if ($value === null) {
             delete_option($key);
         } else {
+
+            if ($value === true) {
+                $value = 1;
+            } elseif ($value === false) {
+                $value = 0;
+            }
+
             update_option($key, $value);
         }
 
@@ -182,7 +191,7 @@ class Options {
      */
     public static function instance()
     {
-        return self::nullableString(self::INSTANCE) ?? 'https://talk.hyvor.com';
+        return self::nullableString(self::INSTANCE) ?? Cloud::CLOUD_URL;
     }
 
     /**
@@ -190,7 +199,7 @@ class Options {
      */
     public static function commentsEnabled()
     {
-        return boolval(get_option(self::COMMENTS_ENABLED));
+        return boolval(get_option(self::COMMENTS_ENABLED, true));
     }
 
     /**
@@ -198,7 +207,7 @@ class Options {
      */
     public static function commentCountsEnabled()
     {
-        return boolval(get_option(self::COMMENT_COUNTS_ENABLED));
+        return boolval(get_option(self::COMMENT_COUNTS_ENABLED, true));
     }
 
     /**
@@ -238,12 +247,13 @@ class Options {
     }
 
     /**
+     * @deprecated
      * @param array<string, mixed> $options
      */
     public static function withDefaults($options)
     {
         $defaults = [
-            'instance' => 'https://talk.hyvor.com',
+            'instance' => Cloud::CLOUD_URL
         ];
         foreach ($defaults as $key => $value) {
             if (!isset($options[$key])) {

@@ -4,7 +4,6 @@ namespace Hyvor\HyvorTalkWP\Embed;
 
 use Hyvor\HyvorTalkWP\ConsoleApi;
 use Hyvor\HyvorTalkWP\Context;
-use Hyvor\HyvorTalkWP\Options;
 
 class EmbedHooks
 {
@@ -31,7 +30,7 @@ class EmbedHooks
         // comments
         if ($this->context->options['comments_enabled']) {
             add_filter('pre_render_block', [$this, 'commentsEmbedForBlock'], 10, 2);
-            add_filter('comments_template', [$this, 'commentsEmbed']);
+            add_filter('comments_template', [$this, 'commentsEmbedTemplate'], 99);
         }
         add_shortcode('hyvor-talk-comments', [$this, 'commentsShortcode']);
 
@@ -61,10 +60,22 @@ class EmbedHooks
      * COMMENTS
      */
 
-    public function commentsEmbed()
+    public function commentsEmbedTemplate()
     {
-        if (!$this->isEmbedLoadable() && !$this->isCommentsEmbedLoadable())
-            return;
+        $templateAndAttrs = $this->commentsEmbedTemplateAndAttrs(true);
+
+        if (!$templateAndAttrs) {
+            return null;
+        }
+
+        return $templateAndAttrs['template'];
+    }
+
+    private function commentsEmbedTemplateAndAttrs($setGlobal = false)
+    {
+        if (!$this->isEmbedLoadable() && !$this->isCommentsEmbedLoadable()) {
+            return null;
+        }
 
         $attributes = Attributes::attributes(
             $this->context,
@@ -73,23 +84,40 @@ class EmbedHooks
                 'sso' => true,
             ],
             [
-                'loading' => $this->getLoadingMode(),
-                'page-id' => $this->getPageId(),
-                'page-title' => $this->getTitle(),
-                'page-url' => $this->getUrl(),
+                'loading' => Comments::getLoadingMode($this->context),
+                'page-id' => Comments::getPageId($this->context),
+                'page-title' => Comments::getTitle(),
+                'page-url' => Comments::getUrl(),
             ]
         );
 
-        if ($attributes === null)
-            return;
+        if ($attributes === null) {
+            return null;
+        }
 
-        return RenderEmbed::render('comments', $attributes);
+        if ($setGlobal) {
+            // set global to be used in the template
+            // when included outside of this function
+            $GLOBALS['hyvor_talk_comments_attributes'] = $attributes;
+        }
+
+        return [
+            'template' => __DIR__ . '/templates/comments.template.php',
+            'attributes' => $attributes,
+        ];
     }
 
     public function commentsEmbedForBlock($preRender, $parsedBlock)
     {
-        if ($parsedBlock['blockName'] === 'core/comments')
-            return $this->commentsEmbed();
+        if ($parsedBlock['blockName'] === 'core/comments') {
+            $data = $this->commentsEmbedTemplateAndAttrs();
+            if (!$data) {
+                return null;
+            }
+            return RenderEmbed::render('comments', $data['attributes']);
+        }
+
+        return null;
     }
 
     public function commentsShortcode($attrs)
@@ -101,15 +129,15 @@ class EmbedHooks
                 'sso' => true,
             ],
             [
-                'loading' => isset($attrs['loading']) ? $attrs['loading'] : $this->getLoadingMode(),
-                'page-id' => $this->getPageIdForShortcode($attrs),
-                'page-title' => isset($attrs['page-title']) ? $attrs['page-title'] : $this->getTitle(),
-                'page-url' => isset($attrs['page-url']) ? $attrs['page-url'] : $this->getUrl(),
+                'loading' => isset($attrs['loading']) ? $attrs['loading'] : Comments::getLoadingMode($this->context),
+                'page-id' => Comments::getPageIdForShortcode($attrs),
+                'page-title' => isset($attrs['page-title']) ? $attrs['page-title'] : Comments::getTitle(),
+                'page-url' => isset($attrs['page-url']) ? $attrs['page-url'] : Comments::getUrl(),
             ]
         );
 
         if ($attributes === null)
-            return;
+            return null;
 
         return RenderEmbed::render('comments', $attributes);
     }
@@ -120,19 +148,19 @@ class EmbedHooks
     public function commentCounts()
     {
         if (!$this->isEmbedLoadable())
-            return;
+            return null;
 
         $attributes = Attributes::attributes(
             $this->context,
             'hyvor_talk_comment_counts_attributes',
             [],
             [
-                'page-id' => $this->getPageId(),
+                'page-id' => Comments::getPageId($this->context),
             ]
         );
 
         if ($attributes === null)
-            return;
+            return null;
 
         return RenderEmbed::render('comment-counts', $attributes);
     }
@@ -159,13 +187,13 @@ class EmbedHooks
             'hyvor_talk_comment_counts_attributes',
             [],
             [
-                'page-id' => $this->getPageIdForShortcode($attrs),
+                'page-id' => Comments::getPageIdForShortcode($this->context, $attrs),
                 'mode' => isset($attrs['mode']) ? $attrs['mode'] : null,
             ]
         );
 
         if ($attributes === null)
-            return;
+            return null;
 
         return RenderEmbed::render('comment-counts', $attributes);
     }
@@ -216,7 +244,7 @@ class EmbedHooks
         );
 
         if ($attributes === null)
-            return;
+            return null;
 
         return RenderEmbed::render('newsletter', $attributes);
 
@@ -370,79 +398,5 @@ class EmbedHooks
             return false;
 
         return true;
-    }
-
-    private static function getLoadingMode()
-    {
-        $loadingMode = Options::loadingMode();
-
-        switch ($loadingMode) {
-            case 'default':
-                return 'default';
-            case 'scroll':
-                return 'lazy';
-            case 'click':
-                return 'manual';
-            default:
-                return null;
-        }
-    }
-
-    private function getPageId()
-    {
-        global $post;
-
-        if (get_post_type() !== 'post')
-				return false;
-
-        // new logic
-        if ($this->context->options['website_id'] > 4500) {
-            // TODO: Review this logic @supun-io
-            switch ($this->context->options['default_page_id']) {
-                case 'post_id':
-                    return $post->ID;
-                case 'url':
-                    return $this->getUrl();
-                case 'slug':
-                    return $post->post_name;
-                // Default value for options['default_page_id'] is 'post_id'
-                // Hence the default case is omitted
-            }
-        }
-
-        // old logic
-		$type = defined('HYVOR_TALK_ID_TYPE') ? HYVOR_TALK_ID_TYPE : 'default';
-
-		switch ($type) {
-			case 'url':
-				return $this->getUrl();
-			case 'id':
-				return $post->ID;
-			default:
-				return $post->ID . ':' . $post->guid;
-		}
-    }
-
-    private function getTitle()
-    {
-        global $post;
-        return trim(strip_tags(get_the_title($post)));
-    }
-
-    private function getUrl()
-    {
-        global $post;
-        return get_permalink($post);
-    }
-
-    private function getPageIdForShortcode($attrs)
-    {
-        if (isset($attrs['id'])) {
-            return $attrs['id'];
-        } elseif (isset($attrs['page-id'])) {
-            return $attrs['page-id'];
-        } else {
-            return $this->getPageId();
-        }
     }
 }

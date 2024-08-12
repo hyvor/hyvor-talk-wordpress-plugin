@@ -4,6 +4,7 @@ namespace Hyvor\HyvorTalkWP\Admin;
 
 use Hyvor\HyvorTalkWP\Admin\Rest\AdminRest;
 use Hyvor\HyvorTalkWP\Context;
+use Hyvor\HyvorTalkWP\Options;
 
 class AdminHooks
 {

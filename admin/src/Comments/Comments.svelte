@@ -11,26 +11,26 @@
 
     <SplitControl
         label="Enable Comments"
-        caption="Enable or disable Hyvor Talk Comments on your site"
+        caption="Enable or disable Hyvor Talk Comments on your site. This will replace the default WordPress comments."
     >
         <input
             type="checkbox"
             bind:checked={$optionsEditing.comments_enabled}
         />
+        <OptionSave key="comments_enabled" />
     </SplitControl>
-    <OptionSave key="comments_enabled" />
 
     {#if $options.comments_enabled}
         <SplitControl
             label="Enable Comment Counts"
-            caption="Enable or disable comment counts on your site"
+            caption="Enable or disable comment counts on your site (must be supported by the theme)."
         >
             <input
                 type="checkbox"
                 bind:checked={$optionsEditing.comment_counts_enabled}
             />
+            <OptionSave key="comment_counts_enabled" />
         </SplitControl>
-        <OptionSave key="comment_counts_enabled" />
 
         <SplitControl
             label="Loading Mode"
@@ -53,8 +53,8 @@
                     bind:group={$optionsEditing.loading_mode}
                 />
             </div>
+            <OptionSave key="loading_mode" />
         </SplitControl>
-        <OptionSave key="loading_mode" />
 
         <SplitControl
             label="Default page-id"
@@ -78,15 +78,15 @@
                     bind:group={$optionsEditing.default_page_id}
                 />
             </div>
+            <OptionSave key="default_page_id" />
         </SplitControl>
-        <OptionSave key="default_page_id" />
 
-        <SplitControl
+        <!-- <SplitControl
             label="Sync Comments"
             caption="Sync comments from Hyvor Talk to WordPress daily"
         >
-            <input type="checkbox" value="1" />
-        </SplitControl>
+            Coming soon
+        </SplitControl> -->
     {/if}
 
     <hr style="margin:20px 0;" />
@@ -136,9 +136,5 @@
 <style>
     .ht-wrap {
         padding: 30px 35px;
-    }
-
-    .ht-wrap label {
-        vertical-align: unset;
     }
 </style>
