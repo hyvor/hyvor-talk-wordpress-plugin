@@ -46,11 +46,12 @@
             caption="The default post-id to use when the post-id is not set"
         >                                                                               <!-- double check the caption -->
             <div>
-                <Radio label="Post ID" value="post_id" bind:group={$optionsEditing.default_post_id} />
-                <Radio label="URL" value="url" bind:group={$optionsEditing.default_post_id} />
-                <Radio label="Slug" value="slug" bind:group={$optionsEditing.default_post_id} />
+                <Radio label="Post ID" value="post_id" bind:group={$optionsEditing.default_page_id} />
+                <Radio label="URL" value="url" bind:group={$optionsEditing.default_page_id} />
+                <Radio label="Slug" value="slug" bind:group={$optionsEditing.default_page_id} />
             </div>
         </SplitControl>
+        <OptionSave key="default_page_id" />
 
         <SplitControl
             label="Sync Comments"
