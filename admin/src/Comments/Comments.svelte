@@ -1,4 +1,5 @@
 <script>
+    import Notice from "../@components/Notice.svelte";
     import OptionSave from "../@components/OptionSave.svelte";
     import Radio from "../@components/Radio.svelte";
     import Shortcode from "../@components/Shortcode.svelte";
@@ -78,6 +79,15 @@
                     bind:group={$optionsEditing.default_page_id}
                 />
             </div>
+
+            {#if $options.default_page_id !== $optionsEditing.default_page_id}
+                <Notice type="warning">
+                    <strong>Warning!</strong> Changing the page-id may cause old
+                    comments threads to dissapear. You can always revert back to
+                    the previous setting to get them back.
+                </Notice>
+            {/if}
+
             <OptionSave key="default_page_id" />
         </SplitControl>
 

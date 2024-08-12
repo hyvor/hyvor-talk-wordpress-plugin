@@ -17,6 +17,7 @@
     import Comments from "./Comments/Comments.svelte";
     import Newsletters from "./Newsletters/Newsletters.svelte";
     import Memberships from "./Memberships/Memberships.svelte";
+    import IconBoxArrowUpRight from "./@icons/IconBoxArrowUpRight.svelte";
 
     function setSection(newSection: SectionType) {
         $section = newSection;
@@ -84,6 +85,20 @@
             >
                 <IconPersonUp slot="start" />
                 Memberships
+            </NavLink>
+
+            <div style="height:1px;background:#eee;margin:20px 0;"></div>
+
+            <NavLink href={$options.instance + "/docs/wordpress"}>
+                <IconBoxArrowUpRight slot="start" size={12} />
+                Plugin Docs
+            </NavLink>
+
+            <NavLink
+                href="https://wordpress.org/support/plugin/hyvor-talk/reviews/#new-post"
+            >
+                <IconBoxArrowUpRight slot="start" size={12} />
+                Rate Us
             </NavLink>
         </div>
         <div class="ht-content ht-global-box">

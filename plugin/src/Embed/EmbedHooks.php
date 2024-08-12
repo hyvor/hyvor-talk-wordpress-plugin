@@ -62,16 +62,20 @@ class EmbedHooks
 
     public function commentsEmbedTemplate()
     {
-        $templateAndAttrs = $this->commentsEmbedTemplateAndAttrs(true);
+        $templateAndAttrs = $this->commentsEmbedTemplateAndAttrs();
 
         if (!$templateAndAttrs) {
             return null;
         }
 
+        // set global to be used in the template
+        // when included outside of this function
+        $GLOBALS['hyvor_talk_comments_attributes'] = $templateAndAttrs['attributes'];
+
         return $templateAndAttrs['template'];
     }
 
-    private function commentsEmbedTemplateAndAttrs($setGlobal = false)
+    private function commentsEmbedTemplateAndAttrs()
     {
         if (!$this->isEmbedLoadable() && !$this->isCommentsEmbedLoadable()) {
             return null;
@@ -93,12 +97,6 @@ class EmbedHooks
 
         if ($attributes === null) {
             return null;
-        }
-
-        if ($setGlobal) {
-            // set global to be used in the template
-            // when included outside of this function
-            $GLOBALS['hyvor_talk_comments_attributes'] = $attributes;
         }
 
         return [

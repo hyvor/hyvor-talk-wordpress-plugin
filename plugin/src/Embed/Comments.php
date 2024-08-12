@@ -3,7 +3,6 @@
 namespace Hyvor\HyvorTalkWP\Embed;
 
 use Hyvor\HyvorTalkWP\Context;
-use Hyvor\HyvorTalkWP\Options;
 
 class Comments
 {
@@ -27,9 +26,6 @@ class Comments
     public static function getPageId(Context $context)
     {
         $post = get_post();
-
-        if (get_post_type() !== 'post')
-            return false;
 
         $websiteId = $context->options['website_id'];
         $instance = $context->options['instance'];

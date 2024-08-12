@@ -3,9 +3,9 @@
  * @package HyvorTalk
  */
 /*
-Plugin Name: Hyvor Talk - Comments, Newsletters, Memberships
+Plugin Name: Hyvor Talk - Comments, Newsletters, Memberships & More
 Plugin URI: https://talk.hyvor.com
-Description: Hyvor Talk is a privacy-first, fully-featured platform for comments, reactions, ratings, newsletters, memberships, and more.
+Description: Hyvor Talk is a privacy-first, fully-featured platform for comments, reactions, ratings, newsletters, memberships, and more for your website.
 Version: 1.3.0
 Author: HYVOR
 Author URI: https://hyvor.com
@@ -38,7 +38,7 @@ if (!defined('ABSPATH'))
 	die;
 
 // composer autoload
-include_once  __DIR__ . '/vendor/autoload.php';
+include_once __DIR__ . '/vendor/autoload.php';
 
 $context = new Context(__FILE__);
 $context->init();
