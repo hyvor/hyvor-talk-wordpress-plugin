@@ -3,6 +3,7 @@
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
     import OptionSave from "../@components/OptionSave.svelte";
+    import SsoButton from "./SsoButton.svelte";
 
     let advanced = false;
 </script>
@@ -51,7 +52,7 @@
 
     <SplitControl
         label="SSO Private Key"
-        caption="To connect WordPress users with Hyvor Talk using Single Sign-On"
+        caption="Connect WordPress authentication with Hyvor Talk. Users will be able to login with their WordPress accounts."
         disabled={!$options.website_id}
     >
         <input
@@ -60,10 +61,7 @@
             bind:value={$optionsEditing.sso_private_key}
         />
         <OptionSave key="sso_private_key" />
-
-        {#if !$options.sso_private_key}
-            <button class="button"> Configure Automatically </button>
-        {/if}
+        <SsoButton />
     </SplitControl>
 
     <SplitControl

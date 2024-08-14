@@ -29,3 +29,34 @@ export function updateOption<T extends keyof Options>(
     );
 
 }
+
+type WebsiteConfigAction = 'sso_enable';
+
+export function setWebsiteConfig(
+    action: WebsiteConfigAction,
+    data: any,
+    onSuccess?: () => void,
+    onError?: (err: Error) => void,
+) {
+
+    callApi(
+        "POST",
+        "/website-config",
+        {
+            action,
+            data
+        },
+        (response) => {
+            setOptions(response.options);
+            if (onSuccess) {
+                onSuccess();
+            }
+        },
+        (err) => {
+            if (onError) {
+                onError(err);
+            }
+        },
+    );
+
+}

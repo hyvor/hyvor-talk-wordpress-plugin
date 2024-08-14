@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onMount, tick } from "svelte";
     import NavLink from "./@components/NavLink.svelte";
     import { options, section, setOptions, type SectionType } from "./store";
     import { callApi } from "./api";
@@ -38,7 +38,7 @@
                 "/website-config",
                 {},
                 (response) => {
-                    console.log(response);
+                    // console.log(response);
                 },
                 (err) => {
                     alert(err.message);
@@ -50,9 +50,8 @@
             "GET",
             "/init",
             {},
-            (response) => {
+            async (response) => {
                 setOptions(response.options);
-                loading = false;
 
                 const url = new URL(window.location.href);
                 const section = url.searchParams.get("section");
@@ -61,6 +60,9 @@
                 }
 
                 fetchWebsiteConfig();
+
+                await tick();
+                loading = false;
             },
             (err) => {
                 alert(err.message);

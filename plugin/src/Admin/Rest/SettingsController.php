@@ -44,7 +44,9 @@ class SettingsController {
 
     public static function setWebsiteConfig($request)
     {
-        $data = $request->get_json_params();
+        $params = $request->get_json_params();
+
+        $action = $params['action'] ?? null;
 
         $consoleApi = new ConsoleApi();
 
@@ -54,7 +56,24 @@ class SettingsController {
             ], 400);
         }
 
-        
+        if ($action === 'sso_enable') {
+            $loginUrl = wp_login_url('$URL_ENCODED');
+
+            $response = $consoleApi->call(
+                'PATCH',
+                '/website',
+                [
+                    'auth_type' => 'sso',
+                    'auth_sso_type' => 'stateless',
+                    'sso_stateless_private_key' => true,
+                    'sso_stateless_login_url' => $loginUrl
+                ]
+            );
+
+            Options::update(Options::SSO_PRIVATE_KEY, $response['sso_stateless_private_key']);
+        }
+
+
     }
 
     /**
