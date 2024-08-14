@@ -40,7 +40,26 @@ class WebhookController
 
     public static function handleWebhookAction($data)
     {
-        // Handle the webhook action here
-        Options::update(Options::ENCRYPTION_KEY, $data);
+        if ($data['event'] === 'memberships.subscription.created' || $data['event'] === 'memberships.subscription.updated') {
+            self::updateUserMetadata($data);
+        }
+
+        elseif ($data['event'] === 'memberships.subscription.deleted') {
+            self::updateUserMetadata($data, true);
+        }
+    }
+
+    public static function updateUserMetadata($data, bool $isDelete = false)
+    {
+        $userId = $data['data']['user']['sso_id'];
+
+        if (!$userId)
+            return;
+
+        if (!$isDelete) {
+            update_metadata('user', $userId, 'hyvor_talk_membership_plan', $data['data']['plan']['name']);
+        } else {
+            delete_metadata('user', $userId, 'hyvor_talk_membership_plan');
+        }     
     }
 }
