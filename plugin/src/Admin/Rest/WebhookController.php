@@ -35,29 +35,29 @@ class WebhookController
 
         $data = json_decode($requestBody, true);
         Options::update(Options::WEBHOOK_LAST_DELIVERED_AT, time());
-        do_action('hyvor_talk_webhook_action', $data);
+        do_action('hyvor_talk_webhook_action', $data['event'], $data['data']);
     }
 
-    public static function handleWebhookAction($data)
+    public static function handleWebhookAction($event, $data)
     {
-        if ($data['event'] === 'memberships.subscription.created' || $data['event'] === 'memberships.subscription.updated') {
+        if ($event === 'memberships.subscription.created' || $event === 'memberships.subscription.updated') {
             self::updateUserMetadata($data);
         }
 
-        elseif ($data['event'] === 'memberships.subscription.deleted') {
+        elseif ($event === 'memberships.subscription.deleted') {
             self::updateUserMetadata($data, true);
         }
     }
 
-    public static function updateUserMetadata($data, bool $isDelete = false)
+    private static function updateUserMetadata($data, bool $isDelete = false)
     {
-        $userId = $data['data']['user']['sso_id'];
+        $userId = $data['subscription']['user']['sso_id'];
 
         if (!$userId)
             return;
 
         if (!$isDelete) {
-            update_metadata('user', $userId, 'hyvor_talk_membership_plan', $data['data']['plan']['name']);
+            update_metadata('user', $userId, 'hyvor_talk_membership_plan', $data['subscription']['plan']['name']);
         } else {
             delete_metadata('user', $userId, 'hyvor_talk_membership_plan');
         }     

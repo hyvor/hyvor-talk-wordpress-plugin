@@ -31,7 +31,7 @@ class AdminHooks
 
 		add_action('admin_menu', [$this, 'createMenu']);
 		add_action('rest_api_init', [$this, 'registerRestRoutes']);
-		add_action('hyvor_talk_webhook_action', [WebhookController::class, 'handleWebhookAction'], 10, 1);
+		add_action('hyvor_talk_webhook_action', [WebhookController::class, 'handleWebhookAction'], 10, 2);
 
 	}
 
