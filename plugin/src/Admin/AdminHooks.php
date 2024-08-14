@@ -48,7 +48,7 @@ class AdminHooks
 
 			$links[] =
 				'<a href="' . esc_url(get_admin_url(null, 'admin.template.php?page=hyvor-talk')) . '">' .
-				($this->context->websiteId === null ?
+				($this->context->options['website_id'] === null ?
 					__('Install', 'hyvor-talk') :
 					__('Configure', 'hyvor-talk')) .
 				'</a>';
