@@ -44,6 +44,11 @@ class Options {
      * Comment counts enabled
      */
     const COMMENT_COUNTS_ENABLED = 'hyvor_talk_comment_counts_enabled';
+
+    /**
+     * Pages where comments are enabled
+     */
+    const COMMENTS_PAGES = 'hyvor_talk_comments_pages';
     /**
      * Loading mode of the comments embed
      */
@@ -77,6 +82,7 @@ class Options {
             // comments
             self::COMMENTS_ENABLED,
             self::COMMENT_COUNTS_ENABLED,
+            self::COMMENTS_PAGES,
             self::LOADING_MODE,
             self::DEFAULT_PAGE_ID,
 
@@ -126,6 +132,7 @@ class Options {
             // comments
             'comments_enabled' => self::commentsEnabled(),
             'comment_counts_enabled' => self::commentCountsEnabled(),
+            'comments_pages' => self::commentsPages(),
             'loading_mode' => self::loadingMode(),
             'default_page_id' => self::defaultPageId(),
 
@@ -210,6 +217,13 @@ class Options {
         return boolval(get_option(self::COMMENT_COUNTS_ENABLED, true));
     }
 
+    /**
+     * @return array<string>|null
+     */
+    public static function commentsPages()
+    {
+        return self::nullableArray(self::COMMENTS_PAGES);
+    }
     /**
      * @return string
      */
