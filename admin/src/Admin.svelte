@@ -1,13 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import NavLink from "./@components/NavLink.svelte";
-    import {
-        options,
-        optionsEditing,
-        section,
-        setOptions,
-        type SectionType,
-    } from "./store";
+    import { options, section, setOptions, type SectionType } from "./store";
     import { callApi } from "./api";
     import Settings from "./Settings/Settings.svelte";
     import IconGear from "./@icons/IconGear.svelte";
@@ -17,6 +11,7 @@
     import Comments from "./Comments/Comments.svelte";
     import Newsletters from "./Newsletters/Newsletters.svelte";
     import Memberships from "./Memberships/Memberships.svelte";
+    import IconBoxArrowUpRight from "./@icons/IconBoxArrowUpRight.svelte";
 
     function setSection(newSection: SectionType) {
         $section = newSection;
@@ -33,6 +28,24 @@
     let loading = true;
 
     onMount(() => {
+        function fetchWebsiteConfig() {
+            if (!$options.website_id || !$options.console_api_key) {
+                return;
+            }
+
+            callApi(
+                "GET",
+                "/website-config",
+                {},
+                (response) => {
+                    console.log(response);
+                },
+                (err) => {
+                    alert(err.message);
+                },
+            );
+        }
+
         callApi(
             "GET",
             "/init",
@@ -46,6 +59,8 @@
                 if (section) {
                     setSection(section as SectionType);
                 }
+
+                fetchWebsiteConfig();
             },
             (err) => {
                 alert(err.message);
@@ -84,6 +99,20 @@
             >
                 <IconPersonUp slot="start" />
                 Memberships
+            </NavLink>
+
+            <div style="height:1px;background:#eee;margin:20px 0;"></div>
+
+            <NavLink href={$options.instance + "/docs/wordpress"}>
+                <IconBoxArrowUpRight slot="start" size={12} />
+                Plugin Docs
+            </NavLink>
+
+            <NavLink
+                href="https://wordpress.org/support/plugin/hyvor-talk/reviews/#new-post"
+            >
+                <IconBoxArrowUpRight slot="start" size={12} />
+                Rate Us
             </NavLink>
         </div>
         <div class="ht-content ht-global-box">

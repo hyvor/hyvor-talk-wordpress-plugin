@@ -60,6 +60,10 @@
             bind:value={$optionsEditing.sso_private_key}
         />
         <OptionSave key="sso_private_key" />
+
+        {#if !$options.sso_private_key}
+            <button class="button"> Configure Automatically </button>
+        {/if}
     </SplitControl>
 
     <SplitControl

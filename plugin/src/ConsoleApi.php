@@ -5,20 +5,17 @@ namespace Hyvor\HyvorTalkWP;
 class ConsoleApi
 {
 
-    /**
-     * @var Context
-     */
-    private $context;
+    private $options;
 
-    public function __construct(Context  $context)
+    public function __construct(Context  $context = null)
     {
-        $this->context = $context;
+        $this->options = $context ? $context->options : Options::all();
     }
 
     public function canCall()
     {
-        return $this->context->options['website_id'] &&
-            $this->context->options['console_api_key'];
+        return $this->options['website_id'] &&
+            $this->options['console_api_key'];
     }
 
     /**
@@ -36,7 +33,7 @@ class ConsoleApi
 
         $endpoint = ltrim($endpoint, '/');
 
-        $url = $this->context->options['instance'] . '/api/console/v1/' . $this->context->options['website_id'] . '/' . $endpoint;
+        $url = $this->options['instance'] . '/api/console/v1/' . $this->options['website_id'] . '/' . $endpoint;
 
         $isGet = $method === 'GET';
         if ($isGet) {
@@ -45,7 +42,7 @@ class ConsoleApi
 
         $headers = [
             'Content-Type' => 'application/json',
-            'X-Api-Key' => $this->context->options['console_api_key'],
+            'X-Api-Key' => $this->options['console_api_key'],
         ];
 
         $response = wp_remote_request(

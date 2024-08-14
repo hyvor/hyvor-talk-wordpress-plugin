@@ -1,11 +1,12 @@
 <script lang="ts">
+    export let href: string | undefined = undefined;
     export let active = false;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-missing-attribute -->
-<a on:click class:active>
+<a on:click class:active {href} target="_blank">
     <span class="ht-start">
         <slot name="start" />
     </span>
@@ -23,6 +24,7 @@
         cursor: pointer;
         align-items: center;
         gap: 6px;
+        text-decoration: none;
     }
     a:hover {
         background-color: var(--ht-hover);
