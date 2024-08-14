@@ -18,7 +18,6 @@
     let minimumPlan = rule?.minimum_plan ?? "";
     let postTypes = rule?.post_types ?? null;
     let gate = rule?.gate ?? "";
-    let showExcerpt = rule?.show_excerpt ?? false;
 
     function cancel() {
         disptach("cancel");
@@ -56,8 +55,7 @@
                     ? {
                           minimum_plan: minimumPlan,
                           post_types: postTypes,
-                          gate,
-                          show_excerpt: showExcerpt,
+                          gate
                       }
                     : r,
             );
@@ -67,8 +65,7 @@
                 {
                     minimum_plan: minimumPlan,
                     post_types: postTypes,
-                    gate,
-                    show_excerpt: showExcerpt,
+                    gate
                 },
             ];
         }
@@ -129,13 +126,6 @@
                 Enter a pre-configured gate key or custom HTML. Keep empty to
                 show the default gate.
             </p>
-        </SplitControl>
-
-        <SplitControl
-            label="Show Excerpt"
-            caption="Show an excerpt of the content when possible."
-        >
-            <input type="checkbox" bind:checked={showExcerpt} />
         </SplitControl>
     </div>
 

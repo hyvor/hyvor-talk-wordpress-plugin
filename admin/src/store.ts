@@ -51,8 +51,6 @@ export interface GatedContentRule {
     minimum_plan: string;
     post_types: SelectedPages;
     gate: string;
-    show_excerpt: boolean;
-
 }
 
 export const options = writable<Options>({} as Options);
