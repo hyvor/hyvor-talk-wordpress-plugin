@@ -3,6 +3,7 @@
 namespace Hyvor\HyvorTalkWP\Admin;
 
 use Hyvor\HyvorTalkWP\Admin\Rest\AdminRest;
+use Hyvor\HyvorTalkWP\Admin\Rest\WebhookController;
 use Hyvor\HyvorTalkWP\Context;
 use Hyvor\HyvorTalkWP\Options;
 
@@ -30,6 +31,7 @@ class AdminHooks
 
 		add_action('admin_menu', [$this, 'createMenu']);
 		add_action('rest_api_init', [$this, 'registerRestRoutes']);
+		add_action('hyvor_talk_webhook_action', [WebhookController::class, 'handleWebhookAction'], 10, 2);
 
 	}
 
@@ -46,7 +48,7 @@ class AdminHooks
 
 			$links[] =
 				'<a href="' . esc_url(get_admin_url(null, 'admin.template.php?page=hyvor-talk')) . '">' .
-				($this->context->websiteId === null ?
+				($this->context->options['website_id'] === null ?
 					__('Install', 'hyvor-talk') :
 					__('Configure', 'hyvor-talk')) .
 				'</a>';
