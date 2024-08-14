@@ -3,6 +3,13 @@
     import { setWebsiteConfig } from "../actions";
     import { options } from "../store";
 
+    export let buttonText: string;
+    export let loadingText: string;
+    export let note: string;
+    export let successText: string;
+
+    export let option: "sso_private_key" | "encryption_key";
+
     let loading = false;
     let success = false;
 
@@ -27,24 +34,23 @@
     }
 </script>
 
-{#if !$options.sso_private_key}
+{#if !$options[option]}
     <div class="ht-wrap">
         <button
             class="button"
             on:click={handleCreateSso}
             disabled={!$options.console_api_key || loading}
         >
-            Configure & Enable SSO
+            {buttonText}
         </button>
 
         <div class="ht-note">
             {#if loading}
-                Configuring SSO...
+                {loadingText}
             {:else}
                 &larr;
                 {#if $options.console_api_key}
-                    Click to automatically configure and enable SSO using the
-                    Console API Key.
+                    {note}
                 {:else}
                     You need to configure the Console API Key first.
                 {/if}
@@ -53,7 +59,7 @@
     </div>
 
     {#if success}
-        <Notice type="success">SSO has been configured and enabled.</Notice>
+        <Notice type="success">{successText}</Notice>
     {/if}
 {/if}
 
