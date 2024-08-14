@@ -6,16 +6,17 @@ use Hyvor\HyvorTalkWP\Admin\Helpers\PostTypeObject;
 use Hyvor\HyvorTalkWP\ConsoleApi;
 use Hyvor\HyvorTalkWP\Options;
 
-class SettingsController {
+class SettingsController
+{
 
-	public static function init()
-	{
+    public static function init()
+    {
         $options = Options::all();
 
-		return new \WP_REST_Response([
+        return new \WP_REST_Response([
             'options' => $options,
         ], 200);
-	}
+    }
 
     /**
      * Website config fetched via the ConsoleAPI
@@ -57,7 +58,8 @@ class SettingsController {
         }
 
         if ($action === 'sso_enable') {
-            $loginUrl = wp_login_url('$URL_ENCODED');
+            $loginUrl = wp_login_url();
+            $loginUrl = add_query_arg('redirect_to', '$URL_ENCODED', $loginUrl);
 
             $response = $consoleApi->call(
                 'PATCH',
@@ -72,6 +74,13 @@ class SettingsController {
 
             Options::update(Options::SSO_PRIVATE_KEY, $response['sso_stateless_private_key']);
         }
+
+
+        $options = Options::all();
+
+        return new \WP_REST_Response([
+            'options' => $options,
+        ], 200);
 
 
     }

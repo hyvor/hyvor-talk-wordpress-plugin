@@ -1,10 +1,29 @@
 <script lang="ts">
+    import Notice from "../@components/Notice.svelte";
     import { setWebsiteConfig } from "../actions";
     import { options } from "../store";
 
+    let loading = false;
+    let success = false;
+
     function handleCreateSso() {
-        //
-        setWebsiteConfig("sso_enable", null, () => {});
+        loading = true;
+        setWebsiteConfig(
+            "sso_enable",
+            null,
+            () => {
+                loading = false;
+                success = true;
+
+                setTimeout(() => {
+                    success = false;
+                }, 5000);
+            },
+            () => {
+                loading = false;
+                alert("Failed to configure SSO.");
+            },
+        );
     }
 </script>
 
@@ -13,20 +32,29 @@
         <button
             class="button"
             on:click={handleCreateSso}
-            disabled={!$options.console_api_key}
+            disabled={!$options.console_api_key || loading}
         >
-            Configure SSO Automatically
+            Configure & Enable SSO
         </button>
 
         <div class="ht-note">
-            &larr;
-            {#if $options.console_api_key}
-                Click to automatically configure SSO using the Console API Key.
+            {#if loading}
+                Configuring SSO...
             {:else}
-                You need to configure the Console API Key first.
+                &larr;
+                {#if $options.console_api_key}
+                    Click to automatically configure and enable SSO using the
+                    Console API Key.
+                {:else}
+                    You need to configure the Console API Key first.
+                {/if}
             {/if}
         </div>
     </div>
+
+    {#if success}
+        <Notice type="success">SSO has been configured and enabled.</Notice>
+    {/if}
 {/if}
 
 <style>

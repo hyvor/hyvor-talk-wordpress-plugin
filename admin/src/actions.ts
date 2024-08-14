@@ -30,6 +30,22 @@ export function updateOption<T extends keyof Options>(
 
 }
 
+export function getWebsiteConfig() {
+
+    callApi(
+        "GET",
+        "/website-config",
+        {},
+        (response) => {
+            // console.log(response);
+        },
+        (err) => {
+            alert(err.message);
+        },
+    );
+
+}
+
 type WebsiteConfigAction = 'sso_enable';
 
 export function setWebsiteConfig(

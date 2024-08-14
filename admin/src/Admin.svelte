@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount, tick } from "svelte";
+    import { onMount } from "svelte";
     import NavLink from "./@components/NavLink.svelte";
     import { options, section, setOptions, type SectionType } from "./store";
     import { callApi } from "./api";
@@ -12,6 +12,7 @@
     import Newsletters from "./Newsletters/Newsletters.svelte";
     import Memberships from "./Memberships/Memberships.svelte";
     import IconBoxArrowUpRight from "./@icons/IconBoxArrowUpRight.svelte";
+    import { getWebsiteConfig } from "./actions";
 
     function setSection(newSection: SectionType) {
         $section = newSection;
@@ -28,29 +29,11 @@
     let loading = true;
 
     onMount(() => {
-        function fetchWebsiteConfig() {
-            if (!$options.website_id || !$options.console_api_key) {
-                return;
-            }
-
-            callApi(
-                "GET",
-                "/website-config",
-                {},
-                (response) => {
-                    // console.log(response);
-                },
-                (err) => {
-                    alert(err.message);
-                },
-            );
-        }
-
         callApi(
             "GET",
             "/init",
             {},
-            async (response) => {
+            (response) => {
                 setOptions(response.options);
 
                 const url = new URL(window.location.href);
@@ -59,9 +42,12 @@
                     setSection(section as SectionType);
                 }
 
-                fetchWebsiteConfig();
-
-                await tick();
+                if (
+                    response.options.website_id &&
+                    response.options.console_api_key
+                ) {
+                    getWebsiteConfig();
+                }
                 loading = false;
             },
             (err) => {
