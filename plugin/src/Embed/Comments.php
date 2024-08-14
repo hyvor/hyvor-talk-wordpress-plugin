@@ -6,8 +6,12 @@ use Hyvor\HyvorTalkWP\Context;
 
 class Comments
 {
-    public static function isCommentsEmbedLoadable()
+    public static function isCommentsEmbedLoadable(Context $context)
     {
+        if (!SelectedPagesValidator::isSelected($context->options['comments_pages'])) {
+            return;
+        }
+
         $post = get_post();
 
         // if not a post

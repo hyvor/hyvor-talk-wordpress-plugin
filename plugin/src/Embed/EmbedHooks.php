@@ -77,7 +77,7 @@ class EmbedHooks
 
     private function commentsEmbedTemplateAndAttrs()
     {
-        if (!Comments::isCommentsEmbedLoadable()) {
+        if (!Comments::isCommentsEmbedLoadable($this->context)) {
             return null;
         }
 

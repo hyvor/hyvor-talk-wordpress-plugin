@@ -91,7 +91,7 @@ class AdminHooks
 
 	public function registerRestRoutes()
 	{
-		AdminRest::registerRestRoutes($this->context);
+		AdminRest::registerRestRoutes();
 	}
 
 }
