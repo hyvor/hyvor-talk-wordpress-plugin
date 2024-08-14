@@ -61,7 +61,13 @@
             bind:value={$optionsEditing.sso_private_key}
         />
         <OptionSave key="sso_private_key" />
-        <SsoButton />
+        <SsoButton
+            buttonText="Configure & Enable SSO"
+            loadingText="Configuring SSO..."
+            note="Click to automatically configure and enable SSO using the Console API Key."
+            successText="SSO has been configured and enabled."
+            option="sso_private_key"
+        />
     </SplitControl>
 
     <SplitControl
