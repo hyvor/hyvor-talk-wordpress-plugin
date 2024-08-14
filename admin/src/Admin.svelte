@@ -12,6 +12,7 @@
     import Newsletters from "./Newsletters/Newsletters.svelte";
     import Memberships from "./Memberships/Memberships.svelte";
     import IconBoxArrowUpRight from "./@icons/IconBoxArrowUpRight.svelte";
+    import { getWebsiteConfig } from "./actions";
 
     function setSection(newSection: SectionType) {
         $section = newSection;
@@ -28,31 +29,12 @@
     let loading = true;
 
     onMount(() => {
-        function fetchWebsiteConfig() {
-            if (!$options.website_id || !$options.console_api_key) {
-                return;
-            }
-
-            callApi(
-                "GET",
-                "/website-config",
-                {},
-                (response) => {
-                    console.log(response);
-                },
-                (err) => {
-                    alert(err.message);
-                },
-            );
-        }
-
         callApi(
             "GET",
             "/init",
             {},
             (response) => {
                 setOptions(response.options);
-                loading = false;
 
                 const url = new URL(window.location.href);
                 const section = url.searchParams.get("section");
@@ -60,7 +42,13 @@
                     setSection(section as SectionType);
                 }
 
-                fetchWebsiteConfig();
+                if (
+                    response.options.website_id &&
+                    response.options.console_api_key
+                ) {
+                    getWebsiteConfig();
+                }
+                loading = false;
             },
             (err) => {
                 alert(err.message);
