@@ -1,10 +1,22 @@
-<script>
+<script lang="ts">
     import Notice from "../@components/Notice.svelte";
     import OptionSave from "../@components/OptionSave.svelte";
     import Radio from "../@components/Radio.svelte";
+    import SelectPageType from "../@components/SelectPageType/SelectPageType.svelte";
     import Shortcode from "../@components/Shortcode.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
-    import { options, optionsEditing } from "../store";
+    import { options, optionsEditing, type SelectedPages } from "../store";
+
+    function onCommentsPagesChange(e: CustomEvent<SelectedPages>) {
+        $optionsEditing.comments_pages = e.detail;
+    }
+
+    function validatePages(p: SelectedPages) {
+        if (p && p.types.length === 0) {
+            return "Please select at least one page type";
+        }
+        return true;
+    }
 </script>
 
 <div class="ht-wrap">
@@ -34,21 +46,36 @@
         </SplitControl>
 
         <SplitControl
+            label="Comemnts available on"
+            caption="On which pages Hyvor Comments should be loaded"
+        >
+            <SelectPageType
+                config={$optionsEditing.comments_pages}
+                configOriginal={$options.comments_pages}
+                on:change={onCommentsPagesChange}
+            />
+            <OptionSave key="comments_pages" validate={validatePages} />
+        </SplitControl>
+
+        <SplitControl
             label="Loading Mode"
             caption="When to load the comments in the page"
         >
             <div>
                 <Radio
+                    name="loading-mode"
                     label="On Load"
                     value="default"
                     bind:group={$optionsEditing.loading_mode}
                 />
                 <Radio
+                    name="loading-mode"
                     label="On Scroll"
                     value="scroll"
                     bind:group={$optionsEditing.loading_mode}
                 />
                 <Radio
+                    name="loading-mode"
                     label="On Button Click"
                     value="click"
                     bind:group={$optionsEditing.loading_mode}
@@ -64,16 +91,19 @@
             <!-- double check the caption -->
             <div>
                 <Radio
+                    name="default-page-id"
                     label="Post ID"
                     value="post_id"
                     bind:group={$optionsEditing.default_page_id}
                 />
                 <Radio
+                    name="default-page-id"
                     label="URL"
                     value="url"
                     bind:group={$optionsEditing.default_page_id}
                 />
                 <Radio
+                    name="default-page-id"
                     label="Slug"
                     value="slug"
                     bind:group={$optionsEditing.default_page_id}

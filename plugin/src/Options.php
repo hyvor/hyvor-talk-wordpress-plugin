@@ -28,7 +28,7 @@ class Options {
     const ENCRYPTION_KEY = 'hyvor_talk_encryption_key';
 
     // Webhook secret key
-    const WEBHOOK_SECRET_KEY = 'hyvor_talk_webhook_secret_key';
+    const WEBHOOK_SECRET = 'hyvor_talk_webhook_secret';
 
     /**
      * Instance of the Hyvor Talk
@@ -44,6 +44,11 @@ class Options {
      * Comment counts enabled
      */
     const COMMENT_COUNTS_ENABLED = 'hyvor_talk_comment_counts_enabled';
+
+    /**
+     * Pages where comments are enabled
+     */
+    const COMMENTS_PAGES = 'hyvor_talk_comments_pages';
     /**
      * Loading mode of the comments embed
      */
@@ -71,12 +76,13 @@ class Options {
             self::CONSOLE_API_KEY,
             self::SSO_PRIVATE_KEY,
             self::ENCRYPTION_KEY,
-            self::WEBHOOK_SECRET_KEY,
+            self::WEBHOOK_SECRET,
             self::INSTANCE,
 
             // comments
             self::COMMENTS_ENABLED,
             self::COMMENT_COUNTS_ENABLED,
+            self::COMMENTS_PAGES,
             self::LOADING_MODE,
             self::DEFAULT_PAGE_ID,
 
@@ -121,11 +127,13 @@ class Options {
             'console_api_key' => self::consoleApiKey(),
             'sso_private_key' => self::ssoPrivateKey(),
             'encryption_key' => self::encryptionKey(),
+            'webhook_secret' => self::webhookSecret(),
             'instance' => self::instance(),
 
             // comments
             'comments_enabled' => self::commentsEnabled(),
             'comment_counts_enabled' => self::commentCountsEnabled(),
+            'comments_pages' => self::commentsPages(),
             'loading_mode' => self::loadingMode(),
             'default_page_id' => self::defaultPageId(),
 
@@ -181,9 +189,9 @@ class Options {
     /**
      * @return ?string
      */
-    public static function webhookSecretKey()
+    public static function webhookSecret()
     {
-        return self::nullableString(self::WEBHOOK_SECRET_KEY);
+        return self::nullableString(self::WEBHOOK_SECRET);
     }
 
     /**
@@ -210,6 +218,13 @@ class Options {
         return boolval(get_option(self::COMMENT_COUNTS_ENABLED, true));
     }
 
+    /**
+     * @return array<string>|null
+     */
+    public static function commentsPages()
+    {
+        return self::nullableArray(self::COMMENTS_PAGES);
+    }
     /**
      * @return string
      */

@@ -46,7 +46,7 @@ export function getWebsiteConfig() {
 
 }
 
-type WebsiteConfigAction = 'sso_enable';
+type WebsiteConfigAction = 'sso_enable' | 'webhooks_enable';
 
 export function setWebsiteConfig(
     action: WebsiteConfigAction,

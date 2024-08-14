@@ -77,7 +77,7 @@ class EmbedHooks
 
     private function commentsEmbedTemplateAndAttrs()
     {
-        if (!$this->isEmbedLoadable() && !$this->isCommentsEmbedLoadable()) {
+        if (!Comments::isCommentsEmbedLoadable($this->context)) {
             return null;
         }
 
@@ -128,7 +128,7 @@ class EmbedHooks
             ],
             [
                 'loading' => isset($attrs['loading']) ? $attrs['loading'] : Comments::getLoadingMode($this->context),
-                'page-id' => Comments::getPageIdForShortcode($attrs),
+                'page-id' => Comments::getPageIdForShortcode($this->context, $attrs),
                 'page-title' => isset($attrs['page-title']) ? $attrs['page-title'] : Comments::getTitle(),
                 'page-url' => isset($attrs['page-url']) ? $attrs['page-url'] : Comments::getUrl(),
             ]
@@ -145,9 +145,6 @@ class EmbedHooks
      */
     public function commentCounts()
     {
-        if (!$this->isEmbedLoadable())
-            return null;
-
         $attributes = Attributes::attributes(
             $this->context,
             'hyvor_talk_comment_counts_attributes',
@@ -165,9 +162,6 @@ class EmbedHooks
 
     public function addCommentCountsScript()
     {
-        if (!$this->isEmbedLoadable())
-            return;
-
         $attributes = Attributes::attributes(
             $this->context
         );
@@ -354,51 +348,5 @@ class EmbedHooks
         }
 
         return RenderEmbed::render('gated-content', $attributes);
-    }
-
-    /************************************************************************************************************
-     * HELPERS
-     */
-
-    // remove this
-    private function isEmbedLoadable()
-    {
-        return is_feed() ? false : true;
-    }
-
-    // move to Comments
-    private function isCommentsEmbedLoadable()
-    {
-        global $post;
-
-        // if not a post
-        if (!isset($post))
-            return false;
-
-        // if not open for comments
-        if ($post->comment_status !== 'open')
-            return false;
-
-        // if not open for comments
-        if (!comments_open())
-            return false;
-
-        // if post is in any of the given statuses
-        if (
-            in_array($post->post_status, [
-                'future',       // scheduled to be published in the future
-                'draft',        // drafts
-                'auto-draft',   // drafts
-                'pending',      // awaiting to be published by a user
-                'trash',        // trashed posts
-            ])
-        )
-            return false;
-
-        // if not a single post
-        if (!is_singular())
-            return false;
-
-        return true;
     }
 }

@@ -4,6 +4,7 @@
     import { options, optionsEditing } from "../store";
     import OptionSave from "../@components/OptionSave.svelte";
     import SsoButton from "./SsoButton.svelte";
+    import WebhookButton from "./WebhookButton.svelte";
 
     let advanced = false;
 </script>
@@ -81,6 +82,20 @@
             bind:value={$optionsEditing.encryption_key}
         />
         <OptionSave key="encryption_key" />
+    </SplitControl>
+
+    <SplitControl
+        label="Webhook Secret"
+        caption="Required to configure webhooks (For developers)"
+        disabled={!$options.website_id}
+    >
+        <input
+            type="password"
+            name="hyvor-talk-webhook-secret"
+            bind:value={$optionsEditing.webhook_secret}
+        />
+        <OptionSave key="webhook_secret" />
+        <WebhookButton />
     </SplitControl>
 
     <div class="ht-advanced">

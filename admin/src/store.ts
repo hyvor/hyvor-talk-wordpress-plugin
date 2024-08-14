@@ -11,11 +11,13 @@ export interface Options {
     console_api_key: string;
     sso_private_key: string;
     encryption_key: string;
+    webhook_secret: string;
     instance: string;
 
     // comments
     comments_enabled: boolean;
     comment_counts_enabled: boolean;
+    comments_pages: SelectedPages;
     loading_mode: 'default' | 'scroll' | 'click';
     default_page_id: 'post_id' | 'url' | 'slug';
 
