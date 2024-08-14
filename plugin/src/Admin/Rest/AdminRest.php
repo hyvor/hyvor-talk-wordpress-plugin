@@ -10,6 +10,11 @@ class AdminRest {
 			'callback' => [SettingsController::class, 'init'],
 			'permission_callback' => [self::class, 'adminPermissions'],
 		]);
+        register_rest_route('hyvor-talk/v1', '/website-config', [
+            'methods' => 'GET',
+            'callback' => [SettingsController::class, 'websiteConfig'],
+            'permission_callback' => [self::class, 'adminPermissions'],
+        ]);
         register_rest_route('hyvor-talk/v1', '/option', [
             'methods' => 'PATCH',
             'callback' => [SettingsController::class, 'updateOption'],

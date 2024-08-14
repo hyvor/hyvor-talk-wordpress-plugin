@@ -3,6 +3,7 @@
 namespace Hyvor\HyvorTalkWP\Admin\Rest;
 
 use Hyvor\HyvorTalkWP\Admin\Helpers\PostTypeObject;
+use Hyvor\HyvorTalkWP\ConsoleApi;
 use Hyvor\HyvorTalkWP\Options;
 
 class SettingsController {
@@ -15,6 +16,24 @@ class SettingsController {
             'options' => $options,
         ], 200);
 	}
+
+    /**
+     * Website config fetched via the ConsoleAPI
+     */
+    public static function websiteConfig()
+    {
+
+        $consoleApi = new ConsoleApi();
+
+        if (!$consoleApi->canCall()) {
+            return new \WP_REST_Response([
+                'message' => 'Website ID or Console API Key is missing',
+            ], 400);
+        }
+
+        $website = $consoleApi->call('GET', '/website');
+
+    }
 
     /**
      * @param \WP_REST_Request $request
