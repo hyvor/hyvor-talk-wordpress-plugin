@@ -80,7 +80,7 @@ class SettingsController
                 'POST',
                 '/webhook',
                 [
-                    'webhooks_url' => rest_url('hyvor-talk/v1/webhook'),
+                    'url' => rest_url('hyvor-talk/v1/webhook'),
                     'events' => ['comment.create', 'comment.update', 'comment.delete',
                     'newsletter.subscriber.created', 'newsletter.subscriber.updated',
                     'newsletter.subscriber.deleted', 'memberships.subscription.created',

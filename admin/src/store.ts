@@ -12,6 +12,7 @@ export interface Options {
     sso_private_key: string;
     encryption_key: string;
     webhook_secret: string;
+    last_webhook_delivered_at: number;
     instance: string;
 
     // comments

@@ -30,6 +30,8 @@ class Options {
     // Webhook secret key
     const WEBHOOK_SECRET = 'hyvor_talk_webhook_secret';
 
+    // Last delivered webhook time
+    const WEBHOOK_LAST_DELIVERED_AT = 'hyvor_talk_last_webhook_delivered_at';
     /**
      * Instance of the Hyvor Talk
      */
@@ -77,6 +79,7 @@ class Options {
             self::SSO_PRIVATE_KEY,
             self::ENCRYPTION_KEY,
             self::WEBHOOK_SECRET,
+            self::WEBHOOK_LAST_DELIVERED_AT,
             self::INSTANCE,
 
             // comments
@@ -128,6 +131,7 @@ class Options {
             'sso_private_key' => self::ssoPrivateKey(),
             'encryption_key' => self::encryptionKey(),
             'webhook_secret' => self::webhookSecret(),
+            'last_webhook_delivered_at' => self::lastWebhookDeliveredAt(),
             'instance' => self::instance(),
 
             // comments
@@ -192,6 +196,14 @@ class Options {
     public static function webhookSecret()
     {
         return self::nullableString(self::WEBHOOK_SECRET);
+    }
+
+    /**
+     * @return ?string
+     */
+    public static function lastWebhookDeliveredAt()
+    {
+        return self::nullableString(self::WEBHOOK_LAST_DELIVERED_AT);
     }
 
     /**

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Notice from "../@components/Notice.svelte";
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
@@ -7,6 +7,10 @@
     import WebhookButton from "./WebhookButton.svelte";
 
     let advanced = false;
+
+    function getTimestamp($timestamp: number) {
+        return new Date($timestamp * 1000).toLocaleString();
+    }
 </script>
 
 <div class="ht-settings-wrap">
@@ -90,6 +94,11 @@
         />
         <OptionSave key="webhook_secret" />
         <WebhookButton />
+        {#if $options.last_webhook_delivered_at}
+            <div class="ht-note">
+                Last webhook delivered at: {getTimestamp($options.last_webhook_delivered_at)}
+            </div>
+        {/if}
     </SplitControl>
 
     <div class="ht-advanced">
@@ -129,5 +138,10 @@
         font-size: 14px;
         color: var(--ht-link);
         text-decoration: underline;
+    }
+    .ht-note {
+        margin-top: 6px;
+        font-size: 13px;
+        color: var(--ht-text-light);
     }
 </style>

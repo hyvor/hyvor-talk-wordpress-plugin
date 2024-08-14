@@ -13,7 +13,7 @@ class WebhookController
     public static function handle()
     {
 
-        $secretKey = Options::webhookSecretKey();
+        $secretKey = Options::webhookSecret();
 
         if (!$secretKey) {
             return new \WP_REST_Response([
@@ -34,9 +34,13 @@ class WebhookController
         }
 
         $data = json_decode($requestBody, true);
-
-
-
+        Options::update(Options::WEBHOOK_LAST_DELIVERED_AT, time());
+        do_action('hyvor_talk_webhook_action', $data);
     }
 
+    public static function handleWebhookAction($data)
+    {
+        // Handle the webhook action here
+        Options::update(Options::ENCRYPTION_KEY, $data);
+    }
 }
