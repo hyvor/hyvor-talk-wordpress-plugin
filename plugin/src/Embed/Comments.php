@@ -6,6 +6,40 @@ use Hyvor\HyvorTalkWP\Context;
 
 class Comments
 {
+    public static function isCommentsEmbedLoadable()
+    {
+        $post = get_post();
+
+        // if not a post
+        if (!isset($post))
+            return false;
+
+        // if not open for comments
+        if ($post->comment_status !== 'open')
+            return false;
+
+        // if not open for comments
+        if (!comments_open())
+            return false;
+
+        // if post is in any of the given statuses
+        if (
+            in_array($post->post_status, [
+                'future',       // scheduled to be published in the future
+                'draft',        // drafts
+                'auto-draft',   // drafts
+                'pending',      // awaiting to be published by a user
+                'trash',        // trashed posts
+            ])
+        )
+            return false;
+
+        // if not a single post
+        if (!is_singular())
+            return false;
+
+        return true;
+    }
 
     public static function getLoadingMode(Context $context)
     {
@@ -77,7 +111,7 @@ class Comments
         } elseif (isset($attrs['page-id'])) {
             return $attrs['page-id'];
         } else {
-            return self::getPageId();
+            return self::getPageId($context);
         }
     }
 
