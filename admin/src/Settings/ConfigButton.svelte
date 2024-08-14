@@ -1,22 +1,36 @@
 <script lang="ts">
     import Notice from "../@components/Notice.svelte";
-    import { setWebsiteConfig } from "../actions";
+    import { setWebsiteConfig, type WebsiteConfigAction } from "../actions";
     import { options } from "../store";
 
     export let buttonText: string;
     export let loadingText: string;
     export let note: string;
     export let successText: string;
+    export let failureText: string;
 
-    export let option: "sso_private_key" | "encryption_key";
+    export let option: "sso_private_key" | "encryption_key" | "webhook_secret";
+
+    let websiteConfigAction: WebsiteConfigAction;
+    switch (option) {
+        case "sso_private_key":
+            websiteConfigAction = "sso_enable";
+            break;
+        case "encryption_key":
+            websiteConfigAction = "encryption_enable";
+            break;
+        case "webhook_secret":
+            websiteConfigAction = "webhooks_enable";
+            break;            
+    }
 
     let loading = false;
     let success = false;
 
-    function handleCreateSso() {
+    function handleClick() {
         loading = true;
         setWebsiteConfig(
-            "sso_enable",
+            websiteConfigAction,
             null,
             () => {
                 loading = false;
@@ -28,7 +42,7 @@
             },
             () => {
                 loading = false;
-                alert("Failed to configure SSO.");
+                alert(failureText);
             },
         );
     }
@@ -38,8 +52,8 @@
     <div class="ht-wrap">
         <button
             class="button"
-            on:click={handleCreateSso}
-            disabled={!$options.console_api_key || loading}
+            on:click={handleClick}
+            disabled={$options[option] !== null || loading}
         >
             {buttonText}
         </button>
