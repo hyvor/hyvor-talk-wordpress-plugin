@@ -80,10 +80,14 @@ class SettingsController
                 'POST',
                 '/webhook',
                 [
-                    'webhooks_enabled' => true,
                     'webhooks_url' => rest_url('hyvor-talk/v1/webhook'),
+                    'events' => ['comment.create', 'comment.update', 'comment.delete',
+                    'newsletter.subscriber.created', 'newsletter.subscriber.updated',
+                    'newsletter.subscriber.deleted', 'memberships.subscription.created',
+                    'memberships.subscription.updated', 'memberships.subscription.deleted']
                 ]
             );
+            Options::update(Options::WEBHOOK_SECRET, $response['secret']);
         }
 
         $options = Options::all();
