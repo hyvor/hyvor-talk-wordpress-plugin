@@ -360,11 +360,13 @@ class EmbedHooks
      * HELPERS
      */
 
+    // remove this
     private function isEmbedLoadable()
     {
         return is_feed() ? false : true;
     }
 
+    // move to Comments
     private function isCommentsEmbedLoadable()
     {
         global $post;
@@ -382,13 +384,15 @@ class EmbedHooks
             return false;
 
         // if post is in any of the given statuses
-        if (in_array($post->post_status, [
-            'future',       // scheduled to be published in the future
-            'draft',        // drafts
-            'auto-draft',   // drafts
-            'pending',      // awaiting to be published by a user
-            'trash',        // trashed posts
-        ]))
+        if (
+            in_array($post->post_status, [
+                'future',       // scheduled to be published in the future
+                'draft',        // drafts
+                'auto-draft',   // drafts
+                'pending',      // awaiting to be published by a user
+                'trash',        // trashed posts
+            ])
+        )
             return false;
 
         // if not a single post

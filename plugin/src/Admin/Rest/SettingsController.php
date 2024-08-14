@@ -20,7 +20,7 @@ class SettingsController {
     /**
      * Website config fetched via the ConsoleAPI
      */
-    public static function websiteConfig()
+    public static function getWebsiteConfig()
     {
 
         $consoleApi = new ConsoleApi();
@@ -33,6 +33,28 @@ class SettingsController {
 
         $website = $consoleApi->call('GET', '/website');
 
+        if ($website === null) {
+            return new \WP_REST_Response([
+                'message' => 'Failed to fetch website config',
+            ], 500);
+        }
+
+        return new \WP_REST_Response($website, 200);
+    }
+
+    public static function setWebsiteConfig($request)
+    {
+        $data = $request->get_json_params();
+
+        $consoleApi = new ConsoleApi();
+
+        if (!$consoleApi->canCall()) {
+            return new \WP_REST_Response([
+                'message' => 'Website ID or Console API Key is missing',
+            ], 400);
+        }
+
+        
     }
 
     /**

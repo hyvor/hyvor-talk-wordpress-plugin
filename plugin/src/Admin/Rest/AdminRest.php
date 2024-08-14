@@ -12,7 +12,12 @@ class AdminRest {
 		]);
         register_rest_route('hyvor-talk/v1', '/website-config', [
             'methods' => 'GET',
-            'callback' => [SettingsController::class, 'websiteConfig'],
+            'callback' => [SettingsController::class, 'getWebsiteConfig'],
+            'permission_callback' => [self::class, 'adminPermissions'],
+        ]);
+        register_rest_route('hyvor-talk/v1', '/website-config', [
+            'methods' => 'POST',
+            'callback' => [SettingsController::class, 'setWebsiteConfig'],
             'permission_callback' => [self::class, 'adminPermissions'],
         ]);
         register_rest_route('hyvor-talk/v1', '/option', [

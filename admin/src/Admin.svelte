@@ -1,13 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import NavLink from "./@components/NavLink.svelte";
-    import {
-        options,
-        optionsEditing,
-        section,
-        setOptions,
-        type SectionType,
-    } from "./store";
+    import { options, section, setOptions, type SectionType } from "./store";
     import { callApi } from "./api";
     import Settings from "./Settings/Settings.svelte";
     import IconGear from "./@icons/IconGear.svelte";
@@ -34,6 +28,24 @@
     let loading = true;
 
     onMount(() => {
+        function fetchWebsiteConfig() {
+            if (!$options.website_id || !$options.console_api_key) {
+                return;
+            }
+
+            callApi(
+                "GET",
+                "/website-config",
+                {},
+                (response) => {
+                    console.log(response);
+                },
+                (err) => {
+                    alert(err.message);
+                },
+            );
+        }
+
         callApi(
             "GET",
             "/init",
@@ -47,6 +59,8 @@
                 if (section) {
                     setSection(section as SectionType);
                 }
+
+                fetchWebsiteConfig();
             },
             (err) => {
                 alert(err.message);
