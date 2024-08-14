@@ -11,6 +11,7 @@ export interface Options {
     console_api_key: string;
     sso_private_key: string;
     encryption_key: string;
+    webhook_secret: string;
     instance: string;
 
     // comments
