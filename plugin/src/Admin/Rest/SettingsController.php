@@ -75,6 +75,17 @@ class SettingsController
             Options::update(Options::SSO_PRIVATE_KEY, $response['sso_stateless_private_key']);
         }
 
+        elseif ($action === 'encryption_enable') {
+            $response = $consoleApi->call(
+                'PATCH',
+                '/website',
+                [
+                    'encryption_key' => true
+                ]
+            );
+            Options::update(Options::ENCRYPTION_KEY, $response['encryption_key']);
+        }
+
         elseif ($action === 'webhooks_enable') {
             $response = $consoleApi->call(
                 'POST',

@@ -3,7 +3,7 @@
     import SplitControl from "../@components/SplitControl.svelte";
     import { options, optionsEditing } from "../store";
     import OptionSave from "../@components/OptionSave.svelte";
-    import SsoButton from "./SsoButton.svelte";
+    import ConfigButton from "./ConfigButton.svelte";
     import WebhookButton from "./WebhookButton.svelte";
 
     let advanced = false;
@@ -66,11 +66,12 @@
             bind:value={$optionsEditing.sso_private_key}
         />
         <OptionSave key="sso_private_key" />
-        <SsoButton
+        <ConfigButton
             buttonText="Configure & Enable SSO"
             loadingText="Configuring SSO..."
             note="Click to automatically configure and enable SSO using the Console API Key."
             successText="SSO has been configured and enabled."
+            failureText="Failed to configure SSO."
             option="sso_private_key"
         />
     </SplitControl>
@@ -86,6 +87,14 @@
             bind:value={$optionsEditing.encryption_key}
         />
         <OptionSave key="encryption_key" />
+        <ConfigButton
+            buttonText="Configure Encryption Key"
+            loadingText="Configuring Encryption Key..."
+            note="Click to automatically configure encryption key using the Console API Key."
+            successText="Encryption key has been configured."
+            failureText="Failed to configure encryption key."
+            option="encryption_key"
+        />
     </SplitControl>
 
     <SplitControl
@@ -99,10 +108,21 @@
             bind:value={$optionsEditing.webhook_secret}
         />
         <OptionSave key="webhook_secret" />
-        <WebhookButton />
-        {#if $options.last_webhook_delivered_at}
+        <ConfigButton
+            buttonText="Configure & Enable Webhooks"
+            loadingText="Configuring Webhooks..."
+            note="Click to automatically configure and enable webhooks using the Console API Key."
+            successText="Webhooks has been configured and enabled."
+            failureText="Failed to configure webhooks."
+            option="webhook_secret"
+        />
+        {#if $options.webhook_secret}
             <div class="ht-note">
-                Last webhook delivered at: {getTimestamp($options.last_webhook_delivered_at)}
+                You can update your webhook and subscribed events <a href="{$options.instance}/console/{$options.website_id}/settings/webhooks" target="_blank">here</a>!
+                {#if $options.last_webhook_delivered_at}
+                    <br />
+                    Last webhook delivered at: {getTimestamp($options.last_webhook_delivered_at)}
+                {/if}
             </div>
         {/if}
     </SplitControl>

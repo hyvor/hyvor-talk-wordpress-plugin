@@ -7,8 +7,7 @@ namespace Hyvor\HyvorTalkWP\Embed;
  * @phpstan-type GatedContentRule array{
  *      minimum_plan: string,
  *      post_types: SelectedPages[]
- *      gate: string | null,
- *      show_excerpt: bool,
+ *      gate: string | null
  *  }
  */
 class GatedContent
