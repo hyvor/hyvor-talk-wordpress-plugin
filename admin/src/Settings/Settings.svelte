@@ -4,7 +4,6 @@
     import { options, optionsEditing } from "../store";
     import OptionSave from "../@components/OptionSave.svelte";
     import ConfigButton from "./ConfigButton.svelte";
-    import WebhookButton from "./WebhookButton.svelte";
 
     let advanced = false;
 
