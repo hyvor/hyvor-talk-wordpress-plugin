@@ -17,7 +17,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Setup Node
+            - name: Setup Bun
               uses: oven-sh/setup-bun@v2
 
             - name: Admin Validation
