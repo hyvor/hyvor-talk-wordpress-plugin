@@ -22,6 +22,6 @@ jobs:
               with:
                   node-version: 18
 
-            - name: Admin
+            - name: Admin Validation
               working-directory: admin
               run: npm install && npm run check
