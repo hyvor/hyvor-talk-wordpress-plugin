@@ -19,4 +19,4 @@ jobs:
 
             - name: Admin
               working-directory: admin
-              run: npm run check
+              run: npm install && npm run check
