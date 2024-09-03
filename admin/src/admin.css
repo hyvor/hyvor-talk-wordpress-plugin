@@ -1,0 +1,37 @@
+:root {
+    --ht-accent: #ffd969;
+    --ht-accent-light: #fff1cb;
+    --ht-accent-lightest: #fffaec;
+    --ht-hover: #fafafa;
+    --ht-text-light: #777;
+    --ht-input: #f3f3f3;
+    --ht-input-hover: #ccc;
+
+    /* wp colors */
+    --ht-link: #2271b1;
+    --ht-green: #007017;
+    --ht-red: #b32d2e;
+}
+
+.ht-global-box {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #0000000d;
+}
+
+
+.ht-main-wrap {
+    font-family: 'Readex Pro', sans-serif;
+}
+.ht-main-wrap svg {
+    vertical-align: middle;
+}
+.ht-main-wrap button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}

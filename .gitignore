@@ -1,4 +1,7 @@
 wordpress
 .idea
-svn/.svn
+plugin/.svn
+plugin/static/admin/*
+plugin/vendor
 .DS_Store
+build/

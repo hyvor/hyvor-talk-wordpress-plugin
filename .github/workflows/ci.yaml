@@ -1,0 +1,25 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - "main"
+
+jobs:
+    tests:
+        name: TypeScript Validation
+        runs-on: ubuntu-22.04
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Setup Bun
+              uses: oven-sh/setup-bun@v2
+
+            - name: Admin Validation
+              working-directory: admin
+              run: bun install && bun run check
