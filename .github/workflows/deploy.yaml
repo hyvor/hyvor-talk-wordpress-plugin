@@ -1,0 +1,29 @@
+name: Deploy
+
+on: 
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: "Deploy atg"
+                required: false
+                default: "latest"
+
+jobs:
+    deploy:
+        name: Deploy to SVN
+        runs-on: ubuntu-22.04
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Run the script
+              run: ./build.sh --tag=${{ github.event.inputs.tag }}
+
+            - name: Deploy to SVN
+              uses: 10up/action-wordpress-plugin-deploy@stable
+              env:
+                SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+              with:
+                asset-dir: build/
