@@ -2,6 +2,8 @@
 
 set -e
 
+rm -rf build
+
 echo "moving the plugin folder..."
 mkdir -p build/trunk/
 cp -r plugin/* build/trunk/
