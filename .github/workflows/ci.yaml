@@ -17,9 +17,11 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Setup Bun
-              uses: oven-sh/setup-bun@v2
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
 
             - name: Admin Validation
               working-directory: admin
-              run: bun install && bun run check
+              run: npm install && npm run check
