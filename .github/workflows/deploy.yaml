@@ -25,6 +25,6 @@ jobs:
               env:
                   SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
                   SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-              with:
-                  SLUG: hyvor-talk
-                  BUILD_DIR: build/
+                  SLUG: "hyvor-talk"
+                  BUILD_DIR: /build/
+                  ASSETS_DIR: /assets/
