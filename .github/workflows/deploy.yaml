@@ -1,6 +1,6 @@
 name: Deploy
 
-on: 
+on:
     workflow_dispatch:
         inputs:
             tag:
@@ -23,7 +23,8 @@ jobs:
             - name: Deploy to SVN
               uses: 10up/action-wordpress-plugin-deploy@stable
               env:
-                SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-                SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+                  SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                  SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
               with:
-                build_dir: build/
+                  SLUG: hyvor-talk
+                  BUILD_DIR: build/
