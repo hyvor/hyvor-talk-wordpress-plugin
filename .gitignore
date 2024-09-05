@@ -2,6 +2,7 @@ wordpress
 .idea
 plugin/.svn
 plugin/static/admin/*
+!plugin/static/admin/.gitkeep
 plugin/vendor
 .DS_Store
 build/
