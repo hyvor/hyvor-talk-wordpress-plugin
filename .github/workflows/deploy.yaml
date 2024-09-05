@@ -28,3 +28,4 @@ jobs:
                   SLUG: "hyvor-talk"
                   BUILD_DIR: build
                   ASSETS_DIR: assets
+                  VERSION: ${{ github.event.inputs.tag }}
