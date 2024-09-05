@@ -47,7 +47,7 @@ class AdminHooks
 		if ($file === Context::PLUGIN_IDENTIFIER . '/' . Context::PLUGIN_IDENTIFIER . '.php') {
 
 			$links[] =
-				'<a href="' . esc_url(get_admin_url(null, 'admin.template.php?page=hyvor-talk')) . '">' .
+				'<a href="' . esc_url(get_admin_url(null, 'admin.php?page=hyvor-talk')) . '">' .
 				($this->context->options['website_id'] === null ?
 					__('Install', 'hyvor-talk') :
 					__('Configure', 'hyvor-talk')) .

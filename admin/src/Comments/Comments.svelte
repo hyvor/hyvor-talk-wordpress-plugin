@@ -46,8 +46,8 @@
         </SplitControl>
 
         <SplitControl
-            label="Comemnts available on"
-            caption="On which pages Hyvor Comments should be loaded"
+            label="Comments available on"
+            caption="On which pages the comments should be loaded"
         >
             <SelectPageType
                 config={$optionsEditing.comments_pages}

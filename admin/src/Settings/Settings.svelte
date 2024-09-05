@@ -98,7 +98,7 @@
 
     <SplitControl
         label="Webhook Secret"
-        caption="Required to configure webhooks (For developers)"
+        caption="Required to configure webhooks (for developers)"
         disabled={!$options.website_id}
     >
         <input
@@ -117,10 +117,15 @@
         />
         {#if $options.webhook_secret}
             <div class="ht-note">
-                You can update your webhook and subscribed events <a href="{$options.instance}/console/{$options.website_id}/settings/webhooks" target="_blank">here</a>!
+                You can update your webhook and subscribed events <a
+                    href="{$options.instance}/console/{$options.website_id}/settings/webhooks"
+                    target="_blank">here</a
+                >.
                 {#if $options.last_webhook_delivered_at}
                     <br />
-                    Last webhook delivered at: {getTimestamp($options.last_webhook_delivered_at)}
+                    Last webhook delivered at: {getTimestamp(
+                        $options.last_webhook_delivered_at,
+                    )}
                 {/if}
             </div>
         {/if}

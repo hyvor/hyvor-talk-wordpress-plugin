@@ -2,7 +2,7 @@
 Contributors: hyvor, supunkavinda, nadil
 Tags: comments, commenting system, commenting platform, commenting plugin
 Requires at least: 4.6
-Tested up to: 6.5.3
+Tested up to: 6.6.1
 Stable tag: 1.2.16
 Requires PHP: 7.4
 License: GPLv2
@@ -23,7 +23,7 @@ Add comments to WordPress sites using Hyvor Talk.
 * Supports [24+ languages](https://talk.hyvor.com/docs/language#supportedlanguages)
 * SEO-friendly
 * Powerful [moderation tools](https://talk.hyvor.com/docs/moderating-comments) (banning, shadow banning, etc.)
-* User badges 
+* User badges
 * Automatic spam detection
 * Comment analytics
 * Upload images, post GIFs, and markdown support
@@ -33,7 +33,7 @@ Add comments to WordPress sites using Hyvor Talk.
 = WordPress User Login =
 You can turn on [Single Sign-on (Stateless)](https://talk.hyvor.com/docs/sso) to allow your WordPress users to comment without having a Hyvor account.
 
-= Importing Comments from WordPress = 
+= Importing Comments from WordPress =
 You can import your WordPress comments to Hyvor Talk easily. Follow [this guide](https://talk.hyvor.com/docs/import-wordpress) for more details. If you have previously used Disqus, you can [import Disqus comments](https://talk.hyvor.com/docs/import-disqus) too.
 
 = Shortcodes =
@@ -51,7 +51,7 @@ See how to use shortcodes [here](https://talk.hyvor.com/docs/wordpress#shortcode
 
 == FAQ ==
 
-= Does Hyvor Talk show ads on my website? = 
+= Does Hyvor Talk show ads on my website? =
 
 No. Hyvor Talk is ad-free and privacy-focused. We do not place any ads on your website. We do not track your users. We do not sell your data to any third-party. Privacy by design!
 
@@ -59,10 +59,10 @@ No. Hyvor Talk is ad-free and privacy-focused. We do not place any ads on your w
 
 Comments are saved on our databases. You can export comments anytime. However, syncing comments with your WordPress database is not yet available.
 
-= What happens if I deactivate Hyvor Talk plugin on my website? = 
+= What happens if I deactivate Hyvor Talk plugin on my website? =
 You won't see comments plugin anymore on your website. But, you can add it anytime again. Then, you will see your earlier comments.
 
-= Can I manually install Hyvor Talk on WordPress? = 
+= Can I manually install Hyvor Talk on WordPress? =
 
 Yes, you can use [shortcodes](https://talk.hyvor.com/docs/wordpress#shortcodes) to install Hyvor Talk manually on your theme.
 
@@ -80,7 +80,7 @@ In the WordPress admin panel,
 6. Go to Hyvor Talk plugin
 7. Add your website ID and click **Change**. (*You can find your website ID at the [console](https://talk.hyvor.com/console/general?action=choose-website).*)
 
-== Screenshots == 
+== Screenshots ==
 
 1. Hyvor Talk Console
 2. Comments Embed - Light
@@ -125,7 +125,7 @@ In the WordPress admin panel,
 * Bug fixed in comment count
 * Multi language support added (Beta)
 
-= 1.1.1 = 
+= 1.1.1 =
 * Bug Fixed in the page
 
 = 1.1 =

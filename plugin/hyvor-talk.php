@@ -3,7 +3,7 @@
  * @package HyvorTalk
  */
 /*
-Plugin Name: Hyvor Talk - Comments, Newsletters, Memberships & More
+Plugin Name: Hyvor Talk - Comments, Newsletters, & Memberships
 Plugin URI: https://talk.hyvor.com
 Description: Hyvor Talk is a privacy-first, fully-featured platform for comments, reactions, ratings, newsletters, memberships, and more for your website.
 Version: 1.3.0
