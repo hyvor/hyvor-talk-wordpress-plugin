@@ -56,6 +56,9 @@ echo "Adding new files to SVN..."
 cd $SVN_DIR
 svn add --force * --auto-props --parents --depth infinity -q
 
+# Delete any deleted files
+svn status | grep '^\!' | awk '{print $2}' | xargs svn delete
+
 # Commit changes
 echo "Committing changes to SVN..."
 svn commit -m "Deploy version $VERSION" --username $SVN_USERNAME --password $SVN_PASSWORD
