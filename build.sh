@@ -27,11 +27,8 @@ composer install --no-dev --working-dir=build/trunk/
 
 # optionally, tag
 echo "Creating the tag folder..."
-if [[ $1 == --tag=* ]]; then
-    tag="${1#--tag=}"
-    echo "Syncing the directory of the tag: $tag"
-    mkdir -p build/tags/$tag/
-    cp -r  build/trunk/* build/tags/$tag/
-fi
+VERSION=$(grep -i "Version:" "plugin/hyvor-talk.php" | awk '{print $2}')
+mkdir -p build/tags/$VERSION/
+cp -r build/trunk/* build/tags/$VERSION/
 
 echo "Build completed!"
