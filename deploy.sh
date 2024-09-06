@@ -57,7 +57,10 @@ cd $SVN_DIR
 svn add --force * --auto-props --parents --depth infinity -q
 
 # Delete any deleted files
-svn status | grep '^\!' | awk '{print $2}' | xargs svn delete
+DELETE_FILES=$(svn status | grep '^\!' | awk '{print $2}')
+if [ -n "$DELETE_FILES" ]; then
+    svn delete $DELETE_FILES
+fi
 
 # Commit changes
 echo "Committing changes to SVN..."
