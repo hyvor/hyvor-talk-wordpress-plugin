@@ -1,4 +1,4 @@
-=== Comments by Hyvor Talk ===
+=== Hyvor Talk - Comments, Newsletters, & Memberships ===
 Contributors: hyvor, supunkavinda, nadil
 Tags: comments, newsletter, memberships
 Requires at least: 4.6
