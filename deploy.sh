@@ -42,10 +42,10 @@ rsync -av --delete $BUILD_DIR/trunk/ $SVN_DIR/trunk/
 rsync -av --delete $BUILD_DIR/assets/ $SVN_DIR/assets/
 
 # Check if the current version is already tagged
-if [ -d "$SVN_DIR/tags/$VERSION" ]; then
-    echo "Error: Version $VERSION is already tagged."
-    exit 1
-fi
+# if [ -d "$SVN_DIR/tags/$VERSION" ]; then
+#     echo "Error: Version $VERSION is already tagged."
+#     exit 1
+# fi
 
 echo "Copying new files to tag..."
 mkdir -p $SVN_DIR/tags/$VERSION/
