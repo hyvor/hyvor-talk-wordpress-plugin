@@ -2,11 +2,6 @@ name: Deploy
 
 on:
     workflow_dispatch:
-        inputs:
-            tag:
-                description: "Deploy tag"
-                required: false
-                default: "latest"
 
 jobs:
     deploy:
@@ -17,15 +12,11 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Run the script
-              run: ./build.sh --tag=${{ github.event.inputs.tag }}
+            - name: Build
+              run: ./build.sh
 
             - name: Deploy to SVN
-              uses: 10up/action-wordpress-plugin-deploy@stable
               env:
                   SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
                   SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-                  SLUG: "hyvor-talk"
-                  BUILD_DIR: build
-                  ASSETS_DIR: assets
-                  VERSION: ${{ github.event.inputs.tag }}
+              run: ./deploy.sh
