@@ -8,11 +8,11 @@ Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Add comments to WordPress sites using Hyvor Talk.
+Add comments, newsletters and memberships to WordPress sites using Hyvor Talk.
 
 == Description ==
 
-[Hyvor Talk](https://talk.hyvor.com) is a privacy-first, fully-featured commenting system for websites.
+[Hyvor Talk](https://talk.hyvor.com) is a privacy-first, fully-featured commenting, newsletters and memberships system for websites.
 
 = Features =
 
@@ -29,6 +29,14 @@ Add comments to WordPress sites using Hyvor Talk.
 * Upload images, post GIFs, and markdown support
 * Emojis
 * Auto code highlighting.
+* Newsletter form
+* Auto-subscribe on signup
+* Memberships and Gated Content
+* Gated Content Rules
+* Custom page selection for comments and memberships embeds
+* Defaul page-id selection
+* Webhooks
+* Filters for advanced customization
 
 = WordPress User Login =
 You can turn on [Single Sign-on (Stateless)](https://talk.hyvor.com/docs/sso) to allow your WordPress users to comment without having a Hyvor account.
@@ -39,6 +47,8 @@ You can import your WordPress comments to Hyvor Talk easily. Follow [this guide]
 = Shortcodes =
 * `[hyvor-talk-comments]` - Comments embed
 * `[hyvor-talk-comments-count]` - Comments count
+* `[hyvor-talk-newsletter]` - Newsletter embed
+* `[hyvor-talk-gated-content]` - Gated content embed
 
 See how to use shortcodes [here](https://talk.hyvor.com/docs/wordpress#shortcodes).
 
@@ -83,10 +93,23 @@ In the WordPress admin panel,
 == Screenshots ==
 
 1. Hyvor Talk Console
-2. Comments Embed - Light
-3. Comments Embed - Dark
+2. Comments & Reactions Embed
+3. Comments & Ratings Embed
+4. Newsletter Form Embed
+5. Memberships Embed
 
 == Change Log ==
+
+= 1.3.0 =
+* Introduced Newsletters and Memberships
+* Introduced Gated Content and Gated Content Rules
+* Introduced a filter option to select which pages to load Comments Embed
+* Introduced an option to change default page-id
+* Introduced auto-subscribe on signup for Newsletter
+* Introduced a filter option to select which pages to load Memberships Embed
+* Introduced hyvor-talk-newsletter and hyvor-talk-gated-content shortcodes
+* Introduced auto-configuration for admin secrets with Console API Key
+* Introduced Webhooks
 
 = 1.2.15 =
 * Minor bug fix for hyvor-talk-comments-count
