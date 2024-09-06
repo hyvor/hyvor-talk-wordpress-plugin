@@ -3,7 +3,7 @@ Contributors: hyvor, supunkavinda, nadil
 Tags: comments, newsletter, memberships
 Requires at least: 4.6
 Tested up to: 6.6.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -144,6 +144,9 @@ In the WordPress admin panel,
 5. Memberships Embed
 
 == Change Log ==
+
+= 1.3.1 =
+* Minor bug fixes
 
 = 1.3.0 =
 * Introduced Newsletters and Memberships

@@ -9,7 +9,7 @@ class Context
 {
 
 	const PLUGIN_IDENTIFIER = 'hyvor-talk';
-	const PLUGIN_VERSION = '1.3.0';
+	const PLUGIN_VERSION = '1.3.1';
 
     /**
      * The absolute path of the plugin directory (/var/www/.../wp-content/plugins/hyvor-talk/)
