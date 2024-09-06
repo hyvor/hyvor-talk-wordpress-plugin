@@ -1,6 +1,6 @@
 === Comments by Hyvor Talk ===
 Contributors: hyvor, supunkavinda, nadil
-Tags: comments, commenting system, commenting platform, commenting plugin
+Tags: comments, newsletter, memberships
 Requires at least: 4.6
 Tested up to: 6.6.1
 Stable tag: 1.2.16
@@ -8,41 +8,77 @@ Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Add comments, newsletters and memberships to WordPress sites using Hyvor Talk.
+Add comments, newsletters, and memberships to WordPress sites using Hyvor Talk.
 
 == Description ==
 
-[Hyvor Talk](https://talk.hyvor.com) is a privacy-first, fully-featured commenting, newsletters and memberships system for websites.
+[Hyvor Talk](https://talk.hyvor.com) is a privacy-first, fully-featured comments, newsletter, and memberships platform.
 
 = Features =
 
+== Comments ==
+
+Hyvor Talk comes with a fully-featured, real-time commenting system that can replace the default WordPress commenting system.
+
 * Real-time comments
-* Upvotes and downvotes
-* Reactions
-* Fully customizable (colors, ui, and texts)
-* Supports [24+ languages](https://talk.hyvor.com/docs/language#supportedlanguages)
-* SEO-friendly
-* Powerful [moderation tools](https://talk.hyvor.com/docs/moderating-comments) (banning, shadow banning, etc.)
+* Upvotes & downvotes
+* Reactions & ratings
 * User badges
-* Automatic spam detection
-* Comment analytics
-* Upload images, post GIFs, and markdown support
-* Emojis
-* Auto code highlighting.
-* Newsletter form
-* Auto-subscribe on signup
-* Memberships and Gated Content
-* Gated Content Rules
-* Custom page selection for comments and memberships embeds
-* Defaul page-id selection
-* Webhooks
-* Filters for advanced customization
+* Top-notch moderation tools
+* In-build spam detection
+* Upload images, GIFs
+* Embed links, social media posts (Youtube, Facebook, X, etc.)
+* Syntax highlighting
+* Math (KaTeX) support
+
+== Newsletter ==
+
+You can use our Newsletter feature to easily add a newsletter subscription form to your website, collect emails,
+and send newsletters to your subscribers.
+
+* Newsletter subscription form with shortcode
+* Send newsletters to your subscribers
+* Track email opens and clicks
+* Send emails from your own domain
+* Customizable email templates
+* Auto-subscribe users when signing up to WordPress
+
+== Memberships ==
+
+You can use our Memberships feature to convert your WordPress website into a memberships website.
+
+* Create membership plans
+* Set up Gated Content Rules to restrict content based on post types, categories, tags, and custom post types
+* Restrict content based on membership plans
+* In-website payments
+
+== Developer-Friendly ==
+
+Hyvor Talk is can be easily integrated into any website.
+
+* [Console API](https://talk.hyvor.com/docs/api-console) for automation
+* [Data API](https://talk.hyvor.com/docs/api-data) for public data access
+* [Webhooks](https://talk.hyvor.com/docs/webhooks) for automation
+
+WordPress-specific features:
+
+* [Shortcodes](https://talk.hyvor.com/docs/wordpress#shortcodes)
+* [Hooks](https://talk.hyvor.com/docs/wordpress#hooks) for customizing the plugin
+
+== Other Features ==
+
+* Fully customizable (colors, ui, and texts)
+* Supports [30+ languages](https://talk.hyvor.com/docs/language#supported-languages)
+* Usage analytics
+* SEO-friendly
+* GDPR compliant
 
 = WordPress User Login =
-You can turn on [Single Sign-on (Stateless)](https://talk.hyvor.com/docs/sso) to allow your WordPress users to comment without having a Hyvor account.
+
+You can turn on [Single Sign-on](https://talk.hyvor.com/docs/wordpress#sso) to connect WordPress authentication with Hyvor Talk. This will allow your users to use the embeds (comments, newsletter, memberships) using their account on your WordPress website.
 
 = Importing Comments from WordPress =
-You can import your WordPress comments to Hyvor Talk easily. Follow [this guide](https://talk.hyvor.com/docs/import-wordpress) for more details. If you have previously used Disqus, you can [import Disqus comments](https://talk.hyvor.com/docs/import-disqus) too.
+You can import your WordPress comments to Hyvor Talk easily. Follow [this guide](https://talk.hyvor.com/docs/import) for more details. If you have previously used Disqus, you can also import comments from Disqus.
 
 = Shortcodes =
 * `[hyvor-talk-comments]` - Comments embed
@@ -54,27 +90,36 @@ See how to use shortcodes [here](https://talk.hyvor.com/docs/wordpress#shortcode
 
 = Useful Links =
 
-* [**Hyvor Talk Console**](https://talk.hyvor.com/console)
-* [**Plans & Pricing**](https://talk.hyvor.com/plans)
+* [**WordPress Plugin Docs**](https://talk.hyvor.com/docs/wordpress)
+* [**Hyvor Talk Console**](https://talk.hyvor.com/console) - This is where you manage your website.
+* [**Pricing**](https://talk.hyvor.com/pricing)
 * [**Docs**](https://talk.hyvor.com/docs)
-* [**WordPress Plugin Guide in Docs**](https://talk.hyvor.com/docs/wordpress)
+* [**WordPress plugin on Github**](https://github.com/hyvor/hyvor-talk-wordpress-plugin)
 
 == FAQ ==
 
-= Does Hyvor Talk show ads on my website? =
+= Is Hyvor Talk free? =
 
-No. Hyvor Talk is ad-free and privacy-focused. We do not place any ads on your website. We do not track your users. We do not sell your data to any third-party. Privacy by design!
+Hyvor Talk is a **paid service** with generous tiers for small websites. The WordPress plugin is free to install. After installing, connect it to your Hyvor Talk website, which you can create at [Hyvor Talk Console](https://talk.hyvor.com/console). See our [pricing](https://talk.hyvor.com/pricing) for more details. We offer a 14-day free trial.
 
-= Where are comments saved? =
+= How can I get support? =
 
-Comments are saved on our databases. You can export comments anytime. However, syncing comments with your WordPress database is not yet available.
+You can contact us via live chat on our website (https://talk.hyvor.com) or email us at [talk.support@hyvor.com](mailto:talk.support@hyvor.com). If you have an issue with the WordPress plugin, you can create an issue on [GitHub](https://github.com/hyvor/hyvor-talk-wordpress-plugin).
+
+= What does "privacy-focused" mean? =
+
+Integrating third-party JavaScript snippets into websites is common but can impact privacy by giving these services access to user data, which is often sold to advertisers. Our privacy-first approach is different: we don’t track, profile, or sell user data. We only collect minimal data needed for our service and charge a transparent fee, avoiding reliance on ads or data monetization.
+
+= Where is data saved? =
+
+Your website's data (comments, etc.) is saved in our secure servers located in Germany.
 
 = What happens if I deactivate Hyvor Talk plugin on my website? =
-You won't see comments plugin anymore on your website. But, you can add it anytime again. Then, you will see your earlier comments.
+You will no longer see the embeds on your website. You can reactivate the plugin at any time to get them back without losing any data.
 
-= Can I manually install Hyvor Talk on WordPress? =
+= How can I customize the plugin? =
 
-Yes, you can use [shortcodes](https://talk.hyvor.com/docs/wordpress#shortcodes) to install Hyvor Talk manually on your theme.
+Our plugin itself is pluggable. It exposes multiple hooks that you can use to customize it. See [hooks docs](https://talk.hyvor.com/docs/wordpress#hooks) for more details.
 
 == Installation ==
 
