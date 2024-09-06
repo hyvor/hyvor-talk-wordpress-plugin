@@ -41,6 +41,12 @@ echo "Copying new files to trunk..."
 rsync -av --delete $BUILD_DIR/trunk/ $SVN_DIR/trunk/
 rsync -av --delete $BUILD_DIR/assets/ $SVN_DIR/assets/
 
+# Check if the current version is already tagged
+if [ -d "$SVN_DIR/tags/$VERSION" ]; then
+    echo "Error: Version $VERSION is already tagged."
+    exit 1
+fi
+
 echo "Copying new files to tag..."
 mkdir -p $SVN_DIR/tags/$VERSION/
 rsync -av --delete $BUILD_DIR/tags/$VERSION/ $SVN_DIR/tags/$VERSION/
@@ -51,5 +57,10 @@ cd $SVN_DIR
 svn add --force * --auto-props --parents --depth infinity -q
 
 # Commit changes
-#
+echo "Committing changes to SVN..."
+svn commit -m "Deploy version $VERSION" --username $SVN_USERNAME --password $SVN_PASSWORD
 
+# Remove temporary directory
+rm -rf $SVN_DIR
+
+echo "Plugin version $VERSION deployed!"
