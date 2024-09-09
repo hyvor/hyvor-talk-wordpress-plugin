@@ -6,4 +6,4 @@
 <link rel="stylesheet" href="<?php echo $pluginUrl ?>static/admin/admin.css?v=<?php echo $pluginVersion ?>">
 <link rel="preload" href="https://fonts.bunny.net/css?family=readex-pro:400,600" as="style"
     onload="this.onload=null;this.rel='stylesheet'">
-<script src="<?php echo $pluginUrl ?>static/admin/admin.js?v=<?php echo $pluginVersion ?>"></script>
+<script type="module" src="<?php echo $pluginUrl ?>static/admin/admin.js?v=<?php echo $pluginVersion ?>"></script>

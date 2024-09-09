@@ -147,6 +147,7 @@ In the WordPress admin panel,
 
 = 1.3.2 =
 * Renamed `hyvor_talk_comment_counts_attributes` filter to `hyvor_talk_comment_count_attributes` for consistency
+* Fixed the svelte styles conflicting issue
 
 = 1.3.1 =
 * Minor bug fixes

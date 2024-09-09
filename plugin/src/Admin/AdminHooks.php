@@ -31,7 +31,7 @@ class AdminHooks
 
 		add_action('admin_menu', [$this, 'createMenu']);
 		add_action('rest_api_init', [$this, 'registerRestRoutes']);
-		add_action('hyvor_talk_webhook_action', [WebhookController::class, 'handleWebhookAction'], 10, 2);
+		add_action('hyvor_talk_webhook_receive', [WebhookController::class, 'handleWebhookAction'], 10, 2);
 
 	}
 
@@ -87,7 +87,7 @@ class AdminHooks
 	public function renderAdminPage()
 	{
 		$pluginUrl = $this->context->pluginUrl;
-		$pluginVersion = Context::PLUGIN_VERSION;
+		$pluginVersion = $this->context->pluginVersion();
 		require_once $this->context->pluginDir . 'src/Admin/admin.template.php';
 	}
 
