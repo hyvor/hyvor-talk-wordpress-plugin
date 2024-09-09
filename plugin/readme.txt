@@ -148,6 +148,9 @@ In the WordPress admin panel,
 = 1.3.2 =
 * Renamed `hyvor_talk_comment_counts_attributes` filter to `hyvor_talk_comment_count_attributes` for consistency
 
+= 1.3.1 =
+* Minor bug fixes
+
 = 1.3.0 =
 * Introduced Newsletters and Memberships
 * Introduced Gated Content and Gated Content Rules
