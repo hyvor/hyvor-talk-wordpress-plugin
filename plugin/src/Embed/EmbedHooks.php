@@ -147,7 +147,7 @@ class EmbedHooks
     {
         $attributes = Attributes::attributes(
             $this->context,
-            'hyvor_talk_comment_counts_attributes',
+            'hyvor_talk_comment_count_attributes',
             [],
             [
                 'page-id' => Comments::getPageId($this->context),
@@ -176,7 +176,7 @@ class EmbedHooks
     {
         $attributes = Attributes::attributes(
             $this->context,
-            'hyvor_talk_comment_counts_attributes',
+            'hyvor_talk_comment_count_attributes',
             [],
             [
                 'page-id' => Comments::getPageIdForShortcode($this->context, $attrs),
