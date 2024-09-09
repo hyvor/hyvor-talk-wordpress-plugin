@@ -35,16 +35,14 @@ class WebhookController
 
         $data = json_decode($requestBody, true);
         Options::update(Options::WEBHOOK_LAST_DELIVERED_AT, time());
-        do_action('hyvor_talk_webhook_action', $data['event'], $data['data']);
+        do_action('hyvor_talk_webhook_receive', $data['event'], $data['data']);
     }
 
     public static function handleWebhookAction($event, $data)
     {
         if ($event === 'memberships.subscription.created' || $event === 'memberships.subscription.updated') {
             self::updateUserMetadata($data);
-        }
-
-        elseif ($event === 'memberships.subscription.deleted') {
+        } elseif ($event === 'memberships.subscription.deleted') {
             self::updateUserMetadata($data, true);
         }
     }
@@ -60,6 +58,6 @@ class WebhookController
             update_metadata('user', $userId, 'hyvor_talk_membership_plan', $data['subscription']['plan']['name']);
         } else {
             delete_metadata('user', $userId, 'hyvor_talk_membership_plan');
-        }     
+        }
     }
 }
