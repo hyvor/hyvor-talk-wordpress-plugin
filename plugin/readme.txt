@@ -3,7 +3,7 @@ Contributors: hyvor, supunkavinda, nadil
 Tags: comments, newsletter, memberships
 Requires at least: 4.6
 Tested up to: 6.6.1
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -96,6 +96,11 @@ See how to use shortcodes [here](https://talk.hyvor.com/docs/wordpress#shortcode
 * [**Docs**](https://talk.hyvor.com/docs)
 * [**WordPress plugin on Github**](https://github.com/hyvor/hyvor-talk-wordpress-plugin)
 
+= Blog Tutorials =
+
+* [Add Paid Memberships and Gated Content to WordPress](https://hyvor.com/blog/wordpress-memberships)
+* [Add a Newsletter Signup Form to WordPress](https://hyvor.com/blog/wordpress-newsletter-form)
+
 == FAQ ==
 
 = Is Hyvor Talk free? =
@@ -144,6 +149,9 @@ In the WordPress admin panel,
 5. Memberships Embed
 
 == Change Log ==
+
+= 1.3.3 =
+* Added `type="module"` to comment count script to avoid conflicts with other scripts
 
 = 1.3.2 =
 * Renamed `hyvor_talk_comment_counts_attributes` filter to `hyvor_talk_comment_count_attributes` for consistency
