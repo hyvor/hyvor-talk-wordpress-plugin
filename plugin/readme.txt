@@ -151,7 +151,7 @@ In the WordPress admin panel,
 == Change Log ==
 
 = 1.3.4 =
-* WordPress 6.8 support
+* WordPress 6.8 compatibility
 
 = 1.3.3 =
 * Added `type="module"` to comment count script to avoid conflicts with other scripts
