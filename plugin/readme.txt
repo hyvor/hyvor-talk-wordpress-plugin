@@ -2,7 +2,7 @@
 Contributors: hyvor, supunkavinda, nadil
 Tags: comments, newsletter, memberships
 Requires at least: 4.6
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 1.3.3
 Requires PHP: 7.4
 License: GPLv2
